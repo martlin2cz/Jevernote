@@ -20,18 +20,18 @@ public class _Testing {
 
 		try {
 			EvernoteWrapper evernote = new EvernoteWrapper(token);
-
+/*
 			// create package
 			String name1 = "Můj třetí noteboočík";
 			Package pack1 = new Package(null, name1);
 			evernote.createPackage(pack1);
 			System.out.println("Created pack: " + pack1);
-
+*/
 			// list packages
 			List<Package> packs2 = evernote.listPackages();
 			System.out.println("List packs: " + packs2);
 			Package p2 = packs2.get(0);
-
+/*
 			// create item
 			String name3 = "Moje třetí poznámka";
 			String content3 = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" //
@@ -42,12 +42,12 @@ public class _Testing {
 			Item item3 = new Item(null, name3, content3);
 			evernote.createItem(p2, item3);
 			System.out.println("Created item: " + item3);
-
+*/
 			
 			// list items
 			List<Item> items4 = evernote.listItems(p2);
 			System.out.println("List items: " + items4);
-
+/*
 			// update package
 			String name5 = "Můj fakt třetí notebočík";
 			pack1.setName(name5);
@@ -67,7 +67,7 @@ public class _Testing {
 			// remove package
 			//evernote.removePackage(pack1);
 			System.out.println("Removed package. (not implemented!)");
-			
+	*/
 		} catch (JevernoteException e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,9 @@ import com.evernote.clients.ClientFactory;
 import com.evernote.clients.NoteStoreClient;
 import com.evernote.clients.UserStoreClient;
 import com.evernote.edam.notestore.NoteFilter;
-import com.evernote.edam.notestore.NoteList;
+import com.evernote.edam.notestore.NoteMetadata;
+import com.evernote.edam.notestore.NotesMetadataList;
+import com.evernote.edam.notestore.NotesMetadataResultSpec;
 import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 
@@ -101,18 +103,29 @@ public class EvernoteWrapper {
 		NoteFilter filter = new NoteFilter();
 		filter.setNotebookGuid(pack.getId());
 
-		List<Note> notes;
-
+		NotesMetadataResultSpec resultSpec = new NotesMetadataResultSpec();
+		// TODO FIXME
+		List<NoteMetadata> metadatas;
 		try {
-			NoteList notesList = cli.findNotes(filter, 0, Integer.MAX_VALUE);
-			notes = notesList.getNotes();
+			NotesMetadataList notesMetadataList = cli.findNotesMetadata(filter, 0, Integer.MAX_VALUE, resultSpec);
+			metadatas = notesMetadataList.getNotes();
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot load items", e);
 		}
 
-		List<Item> items = new ArrayList<>(notes.size());
+		List<Item> items = new ArrayList<>(metadatas.size());
 
-		notes.forEach((n) -> items.add(noteToItem(n)));
+		for (NoteMetadata metadata : metadatas) {
+			String guid = metadata.getGuid();
+			Note note;
+			try {
+				note = cli.getNote(guid, true, false, false, false);
+			} catch (Exception e) {
+				throw new JevernoteException("Cannot load item");
+			}
+			Item item = noteToItem(note);
+			items.add(item);
+		}
 
 		return items;
 	}
@@ -208,7 +221,7 @@ public class EvernoteWrapper {
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot remove package", e);
 		}
-		
+
 	}
 
 	/**
@@ -225,11 +238,10 @@ public class EvernoteWrapper {
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot remove item", e);
 		}
-		
+
 		item.setId(null);
 	}
 
-	
 	///////////////////////////////////////////////////////////////////////////////
 
 	/**
@@ -253,7 +265,7 @@ public class EvernoteWrapper {
 		System.out.println(note);
 		String id = note.getGuid();
 		String name = note.getTitle();
-		String content = note.getContent(); // TODO
+		String content = note.getContent();
 
 		return new Item(id, name, content);
 	}
