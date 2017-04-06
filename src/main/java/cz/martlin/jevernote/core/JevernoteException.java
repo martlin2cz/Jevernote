@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impl;
+package cz.martlin.jevernote.core;
 
 public class JevernoteException extends Exception {
 

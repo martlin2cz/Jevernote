@@ -2,10 +2,11 @@ package cz.martlin.jevernote.test;
 
 import java.util.List;
 
+import cz.martlin.jevernote.core.BaseStorage;
+import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
-import cz.martlin.jevernote.impl.EvernoteWrapper;
-import cz.martlin.jevernote.impl.JevernoteException;
+import cz.martlin.jevernote.impls.EvernoteStorage;
 
 public class _Testing {
 
@@ -16,10 +17,10 @@ public class _Testing {
 	}
 
 	private static void testEvernote() {
-		final String token = "xxxx";
+		final String token = "xxxxx";
 
 		try {
-			EvernoteWrapper evernote = new EvernoteWrapper(token);
+			BaseStorage evernote = new EvernoteStorage(token);
 /*
 			// create package
 			String name1 = "Můj třetí noteboočík";

@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impl;
+package cz.martlin.jevernote.impls;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,17 +17,26 @@ import com.evernote.edam.notestore.NotesMetadataResultSpec;
 import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 
+import cz.martlin.jevernote.core.BaseStorage;
+import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
 
-public class EvernoteWrapper {
+public class EvernoteStorage implements BaseStorage {
 
 	private final NoteStoreClient cli;
 
-	public EvernoteWrapper(String token) throws JevernoteException {
+	public EvernoteStorage(String token) throws JevernoteException {
 		this.cli = createNoteStore(token);
 	}
 
+	/**
+	 * Connects to the evernote using given auth token.
+	 * 
+	 * @param token
+	 * @return
+	 * @throws JevernoteException
+	 */
 	private NoteStoreClient createNoteStore(String token) throws JevernoteException {
 		try {
 			// https://github.com/evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java
@@ -53,11 +62,7 @@ public class EvernoteWrapper {
 
 	///////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * 
-	 * @return
-	 * @throws JevernoteException
-	 */
+	@Override
 	public Map<Package, List<Item>> list() throws JevernoteException {
 		Map<Package, List<Item>> result = new HashMap<>();
 
@@ -71,11 +76,7 @@ public class EvernoteWrapper {
 
 	}
 
-	/**
-	 * 
-	 * @return
-	 * @throws JevernoteException
-	 */
+	@Override
 	public List<Package> listPackages() throws JevernoteException {
 
 		List<Notebook> notebooks;
@@ -92,12 +93,7 @@ public class EvernoteWrapper {
 		return packages;
 	}
 
-	/**
-	 * 
-	 * @param pack
-	 * @return
-	 * @throws JevernoteException
-	 */
+	@Override
 	public List<Item> listItems(Package pack) throws JevernoteException {
 
 		NoteFilter filter = new NoteFilter();
@@ -132,12 +128,7 @@ public class EvernoteWrapper {
 
 	///////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * 
-	 * @param pack
-	 *
-	 * @throws JevernoteException
-	 */
+	@Override
 	public void createPackage(Package pack) throws JevernoteException {
 		Notebook notebook = packageToNotebook(pack);
 
@@ -151,12 +142,7 @@ public class EvernoteWrapper {
 		pack.setId(id);
 	}
 
-	/**
-	 * 
-	 * @param item
-	 * 
-	 * @throws JevernoteException
-	 */
+	@Override
 	public void createItem(Package pack, Item item) throws JevernoteException {
 		Note note = itemToNote(item);
 
@@ -175,11 +161,7 @@ public class EvernoteWrapper {
 
 	///////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * 
-	 * @param pack
-	 * @throws JevernoteException
-	 */
+	@Override
 	public void updatePackage(Package pack) throws JevernoteException {
 		Notebook notebook = packageToNotebook(pack);
 
@@ -190,13 +172,15 @@ public class EvernoteWrapper {
 		}
 	}
 
-	/**
-	 * 
-	 * @param item
-	 * @throws JevernoteException
-	 */
-	public void updateItem(Item item) throws JevernoteException {
+	@Override
+	public void updateItem(Item item, Package pack) throws JevernoteException {
 		Note note = itemToNote(item);
+
+		if (pack != null) {
+			Notebook notebook = packageToNotebook(pack);
+			String nid = notebook.getGuid();
+			note.setNotebookGuid(nid);
+		}
 
 		try {
 			cli.updateNote(note);
@@ -207,11 +191,7 @@ public class EvernoteWrapper {
 
 	///////////////////////////////////////////////////////////////////////////////
 
-	/**
-	 * 
-	 * @param pack
-	 * @throws JevernoteException
-	 */
+	@Override
 	public void removePackage(Package pack) throws JevernoteException {
 		@SuppressWarnings("unused")
 		Notebook notebook = packageToNotebook(pack);
@@ -224,11 +204,7 @@ public class EvernoteWrapper {
 
 	}
 
-	/**
-	 * 
-	 * @param item
-	 * @throws JevernoteException
-	 */
+	@Override
 	public void removeItem(Item item) throws JevernoteException {
 		Note note = itemToNote(item);
 
@@ -245,6 +221,7 @@ public class EvernoteWrapper {
 	///////////////////////////////////////////////////////////////////////////////
 
 	/**
+	 * Converts the notebook into package.
 	 * 
 	 * @param notebook
 	 * @return
@@ -257,6 +234,7 @@ public class EvernoteWrapper {
 	}
 
 	/**
+	 * Converts the note to item.
 	 * 
 	 * @param note
 	 * @return
@@ -271,6 +249,7 @@ public class EvernoteWrapper {
 	}
 
 	/**
+	 * Converts package into notebook.
 	 * 
 	 * @param pack
 	 * @return
@@ -288,6 +267,7 @@ public class EvernoteWrapper {
 	}
 
 	/**
+	 * Converts item to note.
 	 * 
 	 * @param item
 	 * @return
