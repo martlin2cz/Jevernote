@@ -21,6 +21,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 	
 	public void initialize(Map<Package, List<Item>> data) {
+		this.storage.clear();
 		this.storage.putAll(data);
 	}
 

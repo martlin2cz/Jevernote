@@ -27,9 +27,11 @@ import cz.martlin.jevernote.dataobj.Package;
 public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	private final NoteStoreClient cli;
+	private final boolean removePreable;
 
-	public EvernoteStorage(String token) throws JevernoteException {
+	public EvernoteStorage(String token, boolean removePreamble) throws JevernoteException {
 		this.cli = createNoteStore(token);
+		this.removePreable = removePreamble;
 	}
 
 	/**
@@ -91,6 +93,8 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		return notes;
 	}
 
+	///////////////////////////////////////////////////////////////////////////
+
 	@Override
 	protected void createPackageNative(Package pack, Notebook notebook)
 			throws EDAMUserException, EDAMSystemException, TException {
@@ -147,6 +151,8 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		item.setId(null);
 	}
 
+	///////////////////////////////////////////////////////////////////////////
+
 	@Override
 	protected Note itemToNative(Item item) {
 		Note note = new Note();
@@ -157,7 +163,7 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		String id = item.getId();
 		note.setGuid(id);
 
-		String content = item.getContent();
+		String content = contentToNative(item.getContent());
 		note.setContent(content);
 
 		return note;
@@ -165,18 +171,15 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	@Override
 	protected Item nativeToItem(Package pack, Note note) {
-		System.out.println(note);
 		String id = note.getGuid();
 		String name = note.getTitle();
-		String content = note.getContent();
+		String content = nativeToContent(note.getContent());
 
 		Calendar lastModifiedAt = toCalendar(note.getUpdated());
 
 		return new Item(pack, id, name, content, lastModifiedAt);
 
 	}
-
-	
 
 	@Override
 	protected Notebook packageToNative(Package pack) {
@@ -197,6 +200,39 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		String name = notebook.getName();
 
 		return new Package(id, name);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private String contentToNative(String content) {
+		if (!removePreable) {
+			return content;
+		} else {
+			return //
+			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" //
+					+ "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">" //
+					+ "<en-note>" //
+					+ content //
+					+ "</en-note>"; //
+		}
+
+	}
+
+	private String nativeToContent(String nativ) {
+		if (!removePreable) {
+			return nativ;
+		} else {
+			final String noteStartTag = "<en-note>";
+			final String noteEndTag = "</en-note>";
+			
+			int startIndex = nativ.indexOf(noteStartTag);
+			int startCut = startIndex + noteStartTag.length();
+			
+			int endIndex = nativ.lastIndexOf(noteEndTag);
+			int endCut = endIndex;
+			
+			return nativ.substring(startCut, endCut);
+		}
 	}
 
 }

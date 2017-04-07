@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
 
-public class BaseFileSystemStorage extends CommonStorage<File, File> {
+public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 	protected final File basePath;
-
+	
 	public BaseFileSystemStorage(File basePath) {
 		super();
 		this.basePath = basePath;
@@ -28,7 +28,7 @@ public class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 		return Arrays.stream(names).//
 				map((n) -> nameToPackageFile(n)).//
-				filter((f) -> f.isFile()). //
+				filter((f) -> f.isDirectory()). //
 				collect(Collectors.toList());
 	}
 
@@ -37,17 +37,15 @@ public class BaseFileSystemStorage extends CommonStorage<File, File> {
 		String[] names = dir.list();
 
 		return Arrays.stream(names).//
-				map((n) -> nameToPackageFile(n)).//
+				map((n) -> nameToItemFile(pack, n)).//
 				filter((f) -> !f.isDirectory()). // //TODO crash if folder?
 				collect(Collectors.toList());
 
 	}
 
-	protected void createPackageNative(Package pack, File nativ) throws IOException {
-		boolean succ = nativ.mkdir();
-		if (!succ) {
-			throw new IOException("Cannot create directory");
-		}
+
+	protected void createPackageNative(Package pack, File dir) throws IOException {
+		Files.createDirectory(dir.toPath());
 	}
 
 	protected void createNativeItem(Item item, File nativ) throws IOException {
@@ -55,51 +53,67 @@ public class BaseFileSystemStorage extends CommonStorage<File, File> {
 		writeToFile(nativ, content);
 	}
 
-	protected void updatePackageNative(Package pack, File nativ) {
-		// TODO Auto-generated method stub
+	protected void updatePackageNative(Package pack, File dir) throws IOException {
+		String id = pack.getId();
+		File originalDir = findPackageDirById(id);
+		// TODO if not found
 
-		// TODO FIXME .... infer original pckg(from cfg), compare if renamed (!=
-		// title) or what
-
-	}
-
-	protected void updateNativeItem(Item item, File nativ) throws IOException {
-		// TODO FIXME .... infer original file (from cfg), compare if renamed
-		// (!= title) or just content
-
-		String content = item.getContent();
-		// TODO ...
-		// TODO if moved to other pack ...
-		writeToFile(nativ, content);
-
-	}
-
-	protected void removePackageNative(Package pack, File nativ) throws IOException {
-		boolean succ = nativ.delete();
-		if (!succ) {
-			throw new IOException("Cannot delete directory");
+		if (!originalDir.equals(dir)) {
+			Files.move(originalDir.toPath(), dir.toPath());
 		}
+
+	}
+/*
+	protected Package findPackageById(String id) throws IOException {
+		File dir = findPackageDirById(id);
+		return nativeToPackage(dir);
+	}
+*/
+	protected abstract File findPackageDirById(String id) throws IOException;
+
+	protected void updateNativeItem(Item item, File file) throws IOException {
+		String id = item.getId();
+		File originalFile = findItemFileById(id);
+		// TODO if not found
+
+		if (!originalFile.equals(file)) {
+			Files.move(originalFile.toPath(), file.toPath());
+		}
+
+	
+		//if (!original.getContent().equals(item.getContent())) {
+			String content = item.getContent();
+			writeToFile(file, content);
+		//}
+	}
+/*
+	protected Item findItemById(Package pack, String id) throws IOException {
+		File file = findItemFileById(id);
+		return nativeToItem(pack, file);
+	}
+*/
+	protected abstract File findItemFileById(String id) throws IOException;
+
+	protected void removePackageNative(Package pack, File dir) throws IOException {
+		Files.delete(dir.toPath());
 	}
 
-	protected void removeNativeItem(Item item, File nativ) throws IOException {
-		boolean succ = nativ.delete();
-		if (!succ) {
-			throw new IOException("Cannot delete file");
-		}
+	protected void removeNativeItem(Item item, File file) throws IOException {
+		Files.delete(file.toPath());
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
 	protected File itemToNative(Item item) {
-		String dir = item.getPack().getName();
-		String file = item.getName();
+		Package pack = item.getPack();
+		String name = item.getName();
 
-		return new File(new File(basePath, dir), file);
-		// TOOD FIXME cant make it more beautifull
+		File dir = packageToNative(pack);
+		return new File(dir, name);
 	}
 
 	protected Item nativeToItem(Package pack, File file) throws IOException {
-		String id = null; // TODO FIXME
+		String id = findIdOfItem(file);
 		String name = file.getName();
 		String content = readFile(file);
 
@@ -109,22 +123,31 @@ public class BaseFileSystemStorage extends CommonStorage<File, File> {
 		return new Item(pack, id, name, content, lastModifiedAt);
 	}
 
+	protected abstract String findIdOfItem(File file) throws IOException;
+
 	protected File packageToNative(Package pack) {
 		String name = pack.getName();
 		return new File(basePath, name);
 	}
 
-	protected Package nativeToPackage(File dir) {
+	protected Package nativeToPackage(File dir) throws IOException {
 		String name = dir.getName();
-		String id = null; // TODO FIXME
+		String id = findIdOfPack(dir);
 
 		return new Package(id, name);
 	}
 
-	private File nameToPackageFile(String name) {
+	protected abstract String findIdOfPack(File dir) throws IOException;
+
+	protected File nameToPackageFile(String name) {
 		return new File(basePath, name);
 	}
 
+
+	protected File nameToItemFile(Package pack, String name) {
+		return new File(nameToPackageFile(pack.getName()), name);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static void writeToFile(File file, String content) throws IOException {
@@ -142,10 +165,6 @@ public class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 		return new String(bytes);
 
-	}
-
-	protected static File file(File dir, File file) {
-		return new File(dir.getAbsolutePath(), file.getName());
 	}
 
 }
