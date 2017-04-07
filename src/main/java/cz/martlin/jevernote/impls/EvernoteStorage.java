@@ -2,28 +2,29 @@ package cz.martlin.jevernote.impls;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;
 import com.evernote.clients.ClientFactory;
 import com.evernote.clients.NoteStoreClient;
 import com.evernote.clients.UserStoreClient;
+import com.evernote.edam.error.EDAMNotFoundException;
+import com.evernote.edam.error.EDAMSystemException;
+import com.evernote.edam.error.EDAMUserException;
 import com.evernote.edam.notestore.NoteFilter;
 import com.evernote.edam.notestore.NoteMetadata;
 import com.evernote.edam.notestore.NotesMetadataList;
 import com.evernote.edam.notestore.NotesMetadataResultSpec;
 import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
+import com.evernote.thrift.TException;
 
-import cz.martlin.jevernote.core.BaseStorage;
 import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
 
-public class EvernoteStorage implements BaseStorage {
+public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	private final NoteStoreClient cli;
 
@@ -61,221 +62,93 @@ public class EvernoteStorage implements BaseStorage {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public Map<Package, List<Item>> list() throws JevernoteException {
-		Map<Package, List<Item>> result = new HashMap<>();
+	protected List<Notebook> listNativePackages() throws EDAMUserException, EDAMSystemException, TException {
+		List<Notebook> notebooks = cli.listNotebooks();
 
-		List<Package> packages = listPackages();
-		for (Package pack : packages) {
-			List<Item> items = listItems(pack);
-			result.put(pack, items);
-		}
-
-		return result;
-
+		return notebooks;
 	}
 
 	@Override
-	public List<Package> listPackages() throws JevernoteException {
-
-		List<Notebook> notebooks;
-		try {
-			notebooks = cli.listNotebooks();
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot load packages", e);
-		}
-
-		List<Package> packages = new ArrayList<>(notebooks.size());
-
-		notebooks.forEach((n) -> packages.add(notebookToPackage(n)));
-
-		return packages;
-	}
-
-	@Override
-	public List<Item> listItems(Package pack) throws JevernoteException {
-
+	protected List<Note> listNativeItems(Package pack)
+			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 		NoteFilter filter = new NoteFilter();
 		filter.setNotebookGuid(pack.getId());
 
 		NotesMetadataResultSpec resultSpec = new NotesMetadataResultSpec();
-		List<NoteMetadata> metadatas;
-		try {
-			NotesMetadataList notesMetadataList = cli.findNotesMetadata(filter, 0, Integer.MAX_VALUE, resultSpec);
-			metadatas = notesMetadataList.getNotes();
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot load items", e);
-		}
+		NotesMetadataList notesMetadataList = cli.findNotesMetadata(filter, 0, Integer.MAX_VALUE, resultSpec);
+		List<NoteMetadata> metadatas = notesMetadataList.getNotes();
 
-		List<Item> items = new ArrayList<>(metadatas.size());
-
+		List<Note> notes = new ArrayList<>(metadatas.size());
 		for (NoteMetadata metadata : metadatas) {
 			String guid = metadata.getGuid();
-			Note note;
-			try {
-				note = cli.getNote(guid, true, false, false, false);
-			} catch (Exception e) {
-				throw new JevernoteException("Cannot load item");
-			}
-			Item item = noteToItem(pack, note);
-			items.add(item);
+			Note note = cli.getNote(guid, true, false, false, false);
+			notes.add(note);
 		}
 
-		return items;
+		return notes;
 	}
 
-	///////////////////////////////////////////////////////////////////////////////
-
 	@Override
-	public void createPackage(Package pack) throws JevernoteException {
-		Notebook notebook = packageToNotebook(pack);
-
-		try {
-			notebook = cli.createNotebook(notebook);
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot create package", e);
-		}
+	protected void createPackageNative(Package pack, Notebook notebook)
+			throws EDAMUserException, EDAMSystemException, TException {
+		notebook = cli.createNotebook(notebook);
 
 		String id = notebook.getGuid();
 		pack.setId(id);
 	}
 
 	@Override
-	public void createItem(Item item) throws JevernoteException {
-		Note note = itemToNote(item);
-
+	protected void createNativeItem(Item item, Note note)
+			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 		String pid = item.getPack().getId();
 		note.setNotebookGuid(pid);
 
-		try {
-			note = cli.createNote(note);
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot create item", e);
-		}
+		note = cli.createNote(note);
 
 		String id = note.getGuid();
 		item.setId(id);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////
-
 	@Override
-	public void updatePackage(Package pack) throws JevernoteException {
-		Notebook notebook = packageToNotebook(pack);
+	protected void updatePackageNative(Package pack, Notebook notebook)
+			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 
-		try {
-			cli.updateNotebook(notebook);
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot update package", e);
-		}
+		cli.updateNotebook(notebook);
 	}
 
 	@Override
-	public void updateItem(Item item) throws JevernoteException {
-		Note note = itemToNote(item);
+	protected void updateNativeItem(Item item, Note note)
+			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 
-		//if (pack != null) {
-			Notebook notebook = packageToNotebook(item.getPack());
-			String nid = notebook.getGuid();
-			note.setNotebookGuid(nid);
-		//}
+		// if (pack != null) {
+		Notebook notebook = packageToNative(item.getPack());
+		String nid = notebook.getGuid();
+		note.setNotebookGuid(nid);
+		// }
 
-		try {
-			cli.updateNote(note);
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot update item", e);
-		}
-	}
-
-	///////////////////////////////////////////////////////////////////////////////
-
-	@Override
-	public void removePackage(Package pack) throws JevernoteException {
-		@SuppressWarnings("unused")
-		Notebook notebook = packageToNotebook(pack);
-
-		try {
-			throw new UnsupportedOperationException("remove notebook");
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot remove package", e);
-		}
-
+		cli.updateNote(note);
 	}
 
 	@Override
-	public void removeItem(Item item) throws JevernoteException {
-		Note note = itemToNote(item);
+	protected void removePackageNative(Package pack, Notebook notebook) {
+		throw new UnsupportedOperationException("remove notebook");
+	}
 
-		try {
-			String id = note.getGuid();
-			cli.deleteNote(id);
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot remove item", e);
-		}
+	@Override
+	protected void removeNativeItem(Item item, Note note)
+			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
+		String id = note.getGuid();
+
+		cli.deleteNote(id);
 
 		item.setId(null);
 	}
 
-	///////////////////////////////////////////////////////////////////////////////
-
-	/**
-	 * Converts the notebook into package.
-	 * 
-	 * @param notebook
-	 * @return
-	 */
-	private Package notebookToPackage(Notebook notebook) {
-		String id = notebook.getGuid();
-		String name = notebook.getName();
-
-		return new Package(id, name);
-	}
-
-	/**
-	 * Converts the note to item.
-	 * 
-	 * @param note
-	 * @return
-	 */
-	private Item noteToItem(Package pack, Note note) {
-		System.out.println(note);
-		String id = note.getGuid();
-		String name = note.getTitle();
-		String content = note.getContent();
-
-		Calendar lastModifiedAt= Calendar.getInstance();
-		lastModifiedAt.setTimeInMillis(note.getUpdated());
-		
-		return new Item(pack, id, name, content, lastModifiedAt);
-	}
-
-	/**
-	 * Converts package into notebook.
-	 * 
-	 * @param pack
-	 * @return
-	 */
-	private Notebook packageToNotebook(Package pack) {
-		Notebook notebook = new Notebook();
-
-		String name = pack.getName();
-		notebook.setName(name);
-
-		String id = pack.getId();
-		notebook.setGuid(id);
-
-		return notebook;
-	}
-
-	/**
-	 * Converts item to note.
-	 * 
-	 * @param item
-	 * @return
-	 */
-	private Note itemToNote(Item item) {
+	@Override
+	protected Note itemToNative(Item item) {
 		Note note = new Note();
 
 		String name = item.getName();
@@ -288,6 +161,42 @@ public class EvernoteStorage implements BaseStorage {
 		note.setContent(content);
 
 		return note;
+	}
+
+	@Override
+	protected Item nativeToItem(Package pack, Note note) {
+		System.out.println(note);
+		String id = note.getGuid();
+		String name = note.getTitle();
+		String content = note.getContent();
+
+		Calendar lastModifiedAt = toCalendar(note.getUpdated());
+
+		return new Item(pack, id, name, content, lastModifiedAt);
+
+	}
+
+	
+
+	@Override
+	protected Notebook packageToNative(Package pack) {
+		Notebook notebook = new Notebook();
+
+		String name = pack.getName();
+		notebook.setName(name);
+
+		String id = pack.getId();
+		notebook.setGuid(id);
+
+		return notebook;
+	}
+
+	@Override
+	protected Package nativeToPackage(Notebook notebook) {
+		String id = notebook.getGuid();
+		String name = notebook.getName();
+
+		return new Package(id, name);
 	}
 
 }

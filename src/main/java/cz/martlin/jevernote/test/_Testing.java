@@ -15,25 +15,51 @@ public class _Testing {
 
 	public static void main(String[] args) {
 		// TODO
-		// testEvernote();
-		testFileSystem();
+		 //testEvernote();
+		 //testFileSystem();
+		testInMemory();
 
+	}
+
+	private static void testInMemory() {
+		InMemoryStorage storage = new InMemoryStorage();
+
+		try {
+			Package pack1 = new Package("Whatever #1", "foo");
+			storage.createPackage(pack1);
+			Item item1 = //
+					new Item(pack1, "Whatever #2", "Lorem", "Příliš žluťoučký kůň úpěl ďáelské ódy",
+							Calendar.getInstance());
+			storage.createItem(item1);
+		} catch (JevernoteException e) {
+			e.printStackTrace();
+			return;
+		}
+
+		testStorage(storage);
+
+		storage.print(System.out);
 	}
 
 	private static void testFileSystem() {
 		File base = new File("/xxx/tmp/jevernote/");
-		testStorage(new FileSystemStorage(base));
+		FileSystemStorage storage = new FileSystemStorage(base);
+
+		testStorage(storage);
 	}
 
 	private static void testEvernote() {
 		final String token = "";
 
+		EvernoteStorage storage;
 		try {
-			testStorage(new EvernoteStorage(token));
+			storage = new EvernoteStorage(token);
 		} catch (JevernoteException e) {
 			e.printStackTrace();
+			return;
 		}
 
+		testStorage(storage);
 	}
 
 	private static void testStorage(BaseStorage storage) {
@@ -42,11 +68,9 @@ public class _Testing {
 			// create package
 			String name1 = "Můj třetí noteboočík";
 			Package pack1 = new Package(null, name1);
-			//storage.createPackage(pack1);
-			//System.out.println("Created pack: " + pack1);
+			// storage.createPackage(pack1);
+			// System.out.println("Created pack: " + pack1);
 
-			
-			
 			// list packages
 			List<Package> packs2 = storage.listPackages();
 			System.out.println("List packs: " + packs2);
