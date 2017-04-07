@@ -1,6 +1,7 @@
 package cz.martlin.jevernote.impls;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +101,6 @@ public class EvernoteStorage implements BaseStorage {
 		filter.setNotebookGuid(pack.getId());
 
 		NotesMetadataResultSpec resultSpec = new NotesMetadataResultSpec();
-		// TODO FIXME
 		List<NoteMetadata> metadatas;
 		try {
 			NotesMetadataList notesMetadataList = cli.findNotesMetadata(filter, 0, Integer.MAX_VALUE, resultSpec);
@@ -245,7 +245,10 @@ public class EvernoteStorage implements BaseStorage {
 		String name = note.getTitle();
 		String content = note.getContent();
 
-		return new Item(id, name, content);
+		Calendar lastModifiedAt= Calendar.getInstance();
+		lastModifiedAt.setTimeInMillis(note.getUpdated());
+		
+		return new Item(id, name, content, lastModifiedAt);
 	}
 
 	/**
