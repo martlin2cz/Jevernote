@@ -69,7 +69,7 @@ public class FileSystemStorage implements BaseStorage {
 			}
 			Item item;
 			try {
-				item = fileToItem(file);
+				item = fileToItem(pack, file);
 			} catch (IOException e) {
 				throw new JevernoteException("Cannot read item", e);
 			}
@@ -96,8 +96,8 @@ public class FileSystemStorage implements BaseStorage {
 	}
 
 	@Override
-	public void createItem(Package pack, Item item) throws JevernoteException {
-		File file = itemToFile(pack, item);
+	public void createItem(Item item) throws JevernoteException {
+		File file = itemToFile(item);
 
 		try {
 			String content = item.getContent();
@@ -115,9 +115,9 @@ public class FileSystemStorage implements BaseStorage {
 	}
 
 	@Override
-	public void updateItem(Item item, Package pack) throws JevernoteException {
+	public void updateItem(Item item) throws JevernoteException {
 		//TODO FIXME .... infer original file (from cfg), compare if renamed (!= title) or just content
-		File file = itemToFile(pack, item);
+		File file = itemToFile(item);
 
 		try {
 			String content = item.getContent();
@@ -146,7 +146,7 @@ public class FileSystemStorage implements BaseStorage {
 	@Override
 	public void removeItem(Item item) throws JevernoteException {
 		Package pack = null;	//TODO ... where the fok is the fokin item?
-		File file = itemToFile(pack, item);	
+		File file = itemToFile(item);	
 
 		try {
 			boolean succ = file.delete();
@@ -182,7 +182,7 @@ public class FileSystemStorage implements BaseStorage {
 		return new File(basePath, name);
 	}
 
-	private Item fileToItem(File file) throws IOException {
+	private Item fileToItem(Package pack, File file) throws IOException {
 		String id = null; // TODO FIXME
 		String name = file.getName();
 		String content = readFile(file);
@@ -190,11 +190,11 @@ public class FileSystemStorage implements BaseStorage {
 		Calendar lastModifiedAt = Calendar.getInstance();
 		lastModifiedAt.setTime(new Date(file.lastModified()));
 
-		return new Item(id, name, content, lastModifiedAt);
+		return new Item(pack, id, name, content, lastModifiedAt);
 	}
 
-	private File itemToFile(Package pack, Item item) {
-		String dir = pack.getName();
+	private File itemToFile(Item item) {
+		String dir = item.getPack().getName();
 		String file = item.getName();
 
 		return new File(new File(basePath, dir), file);

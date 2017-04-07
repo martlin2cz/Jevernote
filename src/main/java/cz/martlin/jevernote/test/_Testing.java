@@ -26,7 +26,7 @@ public class _Testing {
 	}
 
 	private static void testEvernote() {
-		final String token = "xxx";
+		final String token = "";
 
 		try {
 			testStorage(new EvernoteStorage(token));
@@ -61,8 +61,8 @@ public class _Testing {
 					//
 					+ "</en-note>"; //
 			Calendar lastModifiedAt3 = Calendar.getInstance();
-			Item item3 = new Item(null, name3, content3, lastModifiedAt3);
-			storage.createItem(pack2, item3);
+			Item item3 = new Item(pack2, null, name3, content3, lastModifiedAt3);
+			storage.createItem(item3);
 			System.out.println("Created item: " + item3);
 
 			// list items
@@ -78,7 +78,7 @@ public class _Testing {
 			// update item
 			String name6 = "Moje fakt opravdu třetí poznámka";
 			item3.setName(name6);
-			storage.updateItem(item3, pack1);
+			storage.updateItem(item3);
 			System.out.println("Updated item: " + item3);
 
 			// remove item

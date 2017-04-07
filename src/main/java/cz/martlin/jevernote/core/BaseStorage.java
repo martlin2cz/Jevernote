@@ -56,7 +56,7 @@ public interface BaseStorage {
 	 * 
 	 * @throws JevernoteException
 	 */
-	void createItem(Package pack, Item item) throws JevernoteException;
+	void createItem(Item item) throws JevernoteException;
 
 	/**
 	 * Updates package.
@@ -74,7 +74,7 @@ public interface BaseStorage {
 	 *            TODO
 	 * @throws JevernoteException
 	 */
-	void updateItem(Item item, Package pack) throws JevernoteException;
+	void updateItem(Item item) throws JevernoteException;
 
 	/**
 	 * Removes package.

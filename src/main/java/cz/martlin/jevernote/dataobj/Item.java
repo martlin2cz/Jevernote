@@ -4,17 +4,27 @@ import java.util.Calendar;
 
 public class Item {
 
+	private Package pack;
 	private String id;
 	private String name;
 	private String content;
 	private Calendar lastModifiedAt;
 
-	public Item(String id, String name, String content, Calendar lastModifiedAt) {
+	public Item(Package pack, String id, String name, String content, Calendar lastModifiedAt) {
 		super();
+		this.pack = pack;
 		this.id = id;
 		this.name = name;
 		this.content = content;
 		this.lastModifiedAt = lastModifiedAt;
+	}
+
+	public Package getPack() {
+		return pack;
+	}
+
+	public void setPack(Package pack) {
+		this.pack = pack;
 	}
 
 	public String getId() {
@@ -49,6 +59,8 @@ public class Item {
 		this.lastModifiedAt = lastModifiedAt;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,7 +89,7 @@ public class Item {
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", content=" + content + ", lastModifiedAt="
-				+ (lastModifiedAt != null ? lastModifiedAt.getTime() : "-") + "]";
+				+ (lastModifiedAt != null ? lastModifiedAt.getTime() : "-") + ", pack=" + pack + "]";
 	}
 
 }

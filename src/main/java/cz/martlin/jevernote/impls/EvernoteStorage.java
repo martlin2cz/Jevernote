@@ -119,7 +119,7 @@ public class EvernoteStorage implements BaseStorage {
 			} catch (Exception e) {
 				throw new JevernoteException("Cannot load item");
 			}
-			Item item = noteToItem(note);
+			Item item = noteToItem(pack, note);
 			items.add(item);
 		}
 
@@ -143,10 +143,10 @@ public class EvernoteStorage implements BaseStorage {
 	}
 
 	@Override
-	public void createItem(Package pack, Item item) throws JevernoteException {
+	public void createItem(Item item) throws JevernoteException {
 		Note note = itemToNote(item);
 
-		String pid = pack.getId();
+		String pid = item.getPack().getId();
 		note.setNotebookGuid(pid);
 
 		try {
@@ -173,14 +173,14 @@ public class EvernoteStorage implements BaseStorage {
 	}
 
 	@Override
-	public void updateItem(Item item, Package pack) throws JevernoteException {
+	public void updateItem(Item item) throws JevernoteException {
 		Note note = itemToNote(item);
 
-		if (pack != null) {
-			Notebook notebook = packageToNotebook(pack);
+		//if (pack != null) {
+			Notebook notebook = packageToNotebook(item.getPack());
 			String nid = notebook.getGuid();
 			note.setNotebookGuid(nid);
-		}
+		//}
 
 		try {
 			cli.updateNote(note);
@@ -239,7 +239,7 @@ public class EvernoteStorage implements BaseStorage {
 	 * @param note
 	 * @return
 	 */
-	private Item noteToItem(Note note) {
+	private Item noteToItem(Package pack, Note note) {
 		System.out.println(note);
 		String id = note.getGuid();
 		String name = note.getTitle();
@@ -248,7 +248,7 @@ public class EvernoteStorage implements BaseStorage {
 		Calendar lastModifiedAt= Calendar.getInstance();
 		lastModifiedAt.setTimeInMillis(note.getUpdated());
 		
-		return new Item(id, name, content, lastModifiedAt);
+		return new Item(pack, id, name, content, lastModifiedAt);
 	}
 
 	/**
