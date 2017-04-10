@@ -11,6 +11,11 @@ public class Log {
 	public static void warn(String what) {
 		System.err.println(what);
 	}
+
+
+	public static void write(String what) {
+		System.out.println(what);
+	}
 	
 	
 	

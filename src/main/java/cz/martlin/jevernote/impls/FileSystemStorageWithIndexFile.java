@@ -20,28 +20,31 @@ import cz.martlin.jevernote.misc.Log;
 public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
 	public static final String INDEX_FILE_NAME = ".index.properties";
-	private static final String COMMENT = "Jevernote index file listing mapping betweeen names and ids of packages and items";
+	private static final String COMMENT = "Jevernote index file (mapping betweeen names and ids of packages and items)";
 
 	private final Map<String, File> bindings;
+	private boolean changed;
 
-	public FileSystemStorageWithIndexFile(File basePath, boolean loadIndex) throws JevernoteException {
+	public FileSystemStorageWithIndexFile(File basePath) throws JevernoteException {
 		super(basePath);
 
-		if (loadIndex) {
-			this.bindings = loadBindings();
-		} else {
-			this.bindings = new HashMap<>();
-		}
+		this.bindings = loadBindings();
 	}
 
+	protected Map<String, File> getBindings() {
+		return bindings;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+
+	
 	@Override
 	protected String findIdOfItem(File file) {
 		String id = findKey(file, bindings);
 		if (id != null) {
 			return id;
 		} else {
-			Log.warn("No record for item " + file.getAbsolutePath() + " in index file");
-			// TODO absolutePath -> dir/file
+			Log.warn("No record for item " + packOrItemToPath(file) + " in index file");
 			return createId();
 		}
 	}
@@ -52,7 +55,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		if (id != null) {
 			return id;
 		} else {
-			Log.warn("No record for package " + dir.getAbsolutePath() + " in index file");
+			Log.warn("No record for package " + packOrItemToPath(dir) + " in index file");
 			return createId();
 		}
 	}
@@ -112,7 +115,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		File dir = packageToNative(pack);
 		bindings.put(id, dir);
 
-		saveBindings();
+		markChanged();
 	}
 
 	@Override
@@ -128,7 +131,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		File file = itemToNative(item);
 		bindings.put(id, file);
 
-		saveBindings();
+		markChanged();
 	}
 
 	@Override
@@ -139,13 +142,13 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		File dir = packageToNative(pack);
 		File oldDir = bindings.get(id);
 		bindings.put(id, dir);
-		
-		renamePackageOfItems(oldDir, pack);//FIXME refactorme!
 
-		saveBindings();
+		renamePackageOfItems(oldDir, dir, pack);
+		
+		markChanged();
 	}
 
-	private void renamePackageOfItems(File oldDir, Package pack) {
+	private void renamePackageOfItems(File oldDir, File newDir, Package pack) {
 		String oldName = oldDir.getName();
 
 		bindings.forEach((id, file) -> {
@@ -167,7 +170,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		File file = itemToNative(item);
 		bindings.put(id, file);
 
-		saveBindings();
+		markChanged();
 	}
 
 	@Override
@@ -177,7 +180,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		String id = pack.getId();
 		bindings.remove(id);
 
-		saveBindings();
+		markChanged();
 	}
 
 	@Override
@@ -187,11 +190,62 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		String id = item.getId();
 		bindings.remove(id);
 
+		markChanged();
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+
+
+	private void markChanged() {
+		this.changed = true;
+	}
+
+
+	public void checkAndSaveChanges() throws JevernoteException {
+		if (this.changed) {
+			saveChangesInIndex();
+		}
+	}
+
+
+	private void saveChangesInIndex() throws JevernoteException {
 		saveBindings();
+	}
+
+	public void reloadChangesInIndex() throws JevernoteException {
+		Map<String, File> loaded = loadBindings();
+		
+		this.bindings.clear();
+		this.bindings.putAll(loaded);
+		this.changed = false;
+	}
+	
+	///////////////////////////////////////////////////////////////////////////
+
+	public static boolean hasIndexFile(File basePath) {
+		File file = indexFile(basePath);
+		return file.exists() && file.isFile();
+	}
+
+	
+	
+	public static void createIndexFile(File basePath) throws JevernoteException {
+		File file = indexFile(basePath);
+		
+		try {
+			file.createNewFile();	//TODO make it with some content
+		} catch (IOException e) {
+			throw new JevernoteException("Cannot create file", e);
+		}
+	}
+	
+	private static File indexFile(File basePath) {
+		return new File(basePath, INDEX_FILE_NAME);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
+	
 	protected Map<String, File> loadBindings() throws JevernoteException {
 		Properties props = loadProperties();
 		Map<String, File> map = toMap(props);
@@ -213,7 +267,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	}
 
 	private Properties loadProperties() throws JevernoteException {
-		File file = new File(basePath, INDEX_FILE_NAME);
+		File file = indexFile(basePath);
 
 		Properties props = new Properties();
 
@@ -231,7 +285,8 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-	public void saveBindings() throws JevernoteException {
+	
+	protected void saveBindings() throws JevernoteException {
 		Properties props = toProperties();
 		saveProperties(props);
 
@@ -241,7 +296,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 		Properties props = new Properties();
 
 		bindings.forEach((id, file) -> {
-			String path = toPath(file);
+			String path = packOrItemToPath(file);
 			if (path != null) {
 				props.put(id, path);
 			}
@@ -251,7 +306,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	}
 
 	private void saveProperties(Properties props) throws JevernoteException {
-		File file = new File(basePath, INDEX_FILE_NAME);
+		File file = indexFile(basePath);
 
 		Writer w = null;
 		try {
@@ -268,22 +323,6 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
 	private String createId() {
 		return "Undefined-identifier-" + System.currentTimeMillis() + "-" + System.nanoTime();
-	}
-
-	private String toPath(File file) {
-		if (file.isDirectory()) {
-			return file.getName();
-
-		} else if (file.isFile()) {
-			String dirname = file.getParentFile().getName();
-			String filename = file.getName();
-
-			return dirname + File.separatorChar + filename;
-		} else if (!file.exists()) {
-			return null;
-		} else {
-			throw new IllegalArgumentException("Invalid file " + file + " type");
-		}
 	}
 
 	private void closeQuietly(Closeable closeable) {

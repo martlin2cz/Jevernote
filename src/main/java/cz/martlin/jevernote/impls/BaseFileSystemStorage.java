@@ -17,7 +17,7 @@ import cz.martlin.jevernote.dataobj.Package;
 public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 	protected final File basePath;
-	
+
 	public BaseFileSystemStorage(File basePath) {
 		super();
 		this.basePath = basePath;
@@ -43,7 +43,6 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 	}
 
-
 	protected void createPackageNative(Package pack, File dir) throws IOException {
 		Files.createDirectory(dir.toPath());
 	}
@@ -63,12 +62,11 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 		}
 
 	}
-/*
-	protected Package findPackageById(String id) throws IOException {
-		File dir = findPackageDirById(id);
-		return nativeToPackage(dir);
-	}
-*/
+
+	/*
+	 * protected Package findPackageById(String id) throws IOException { File
+	 * dir = findPackageDirById(id); return nativeToPackage(dir); }
+	 */
 	protected abstract File findPackageDirById(String id) throws IOException;
 
 	protected void updateNativeItem(Item item, File file) throws IOException {
@@ -80,18 +78,16 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 			Files.move(originalFile.toPath(), file.toPath());
 		}
 
-	
-		//if (!original.getContent().equals(item.getContent())) {
-			String content = item.getContent();
-			writeToFile(file, content);
-		//}
+		// if (!original.getContent().equals(item.getContent())) {
+		String content = item.getContent();
+		writeToFile(file, content);
+		// }
 	}
-/*
-	protected Item findItemById(Package pack, String id) throws IOException {
-		File file = findItemFileById(id);
-		return nativeToItem(pack, file);
-	}
-*/
+
+	/*
+	 * protected Item findItemById(Package pack, String id) throws IOException {
+	 * File file = findItemFileById(id); return nativeToItem(pack, file); }
+	 */
 	protected abstract File findItemFileById(String id) throws IOException;
 
 	protected void removePackageNative(Package pack, File dir) throws IOException {
@@ -143,11 +139,10 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 		return new File(basePath, name);
 	}
 
-
 	protected File nameToItemFile(Package pack, String name) {
 		return new File(nameToPackageFile(pack.getName()), name);
 	}
-	
+
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static void writeToFile(File file, String content) throws IOException {
@@ -165,6 +160,24 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 		return new String(bytes);
 
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	protected static String packOrItemToPath(File fileorDir) {
+		if (fileorDir.isDirectory()) {
+			return fileorDir.getName();
+
+		} else if (fileorDir.isFile()) {
+			String dirname = fileorDir.getParentFile().getName();
+			String filename = fileorDir.getName();
+
+			return dirname + File.separatorChar + filename;
+		} else if (!fileorDir.exists()) {
+			return null;
+		} else {
+			throw new IllegalArgumentException("Invalid file " + fileorDir + " type");
+		}
 	}
 
 }

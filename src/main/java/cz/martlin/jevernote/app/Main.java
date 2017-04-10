@@ -12,10 +12,13 @@ public class Main {
 	
 	
 	public void printUsage(PrintStream out) {
-		out.println("Create item locally:");
-		out.println("jevernote mk <ITEM or PACKAGE name> <initial content if ITEM>");
-		out.println("jevernote mv <old ITEM or PACKAGE name> <new ITEM or PACKAGE name>");
-		out.println("jevernote rm <ITEM or PACKAGE name>");
+		out.println("Working with local:");
+		out.println("jevernote mk <ITEM> [<initial content>]  (creates item)");
+		out.println("jevernote mk <PACK>                      (creates package)");
+		out.println("jevernote ad <ITEM or PACK>              (adds existing item or package to index)");
+		out.println("jevernote mv <old ITEM or PACK> <new ITEM or PACK>        (moves/renames item or package)");
+		out.println("jevernote rm <ITEM or PACK>              (removes item or package)");
+		
 	}
 
 }

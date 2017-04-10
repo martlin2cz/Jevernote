@@ -42,11 +42,15 @@ public class _Testing {
 	}
 
 	private static void testFileSystem() {
-		File base = new File("/xxx/tmp/jevernote/");
+		File base = new File("/home/martin/tmp/jevernote/");
 		
 		FileSystemStorageWithIndexFile storage;
 		try {
-			storage = new FileSystemStorageWithIndexFile(base, true);
+			if (!FileSystemStorageWithIndexFile.hasIndexFile(base)) {
+				System.err.println("Index file does not exist");
+				return;
+			}
+			storage = new FileSystemStorageWithIndexFile(base);
 		} catch (JevernoteException e) {
 			e.printStackTrace();
 			return;
@@ -56,7 +60,7 @@ public class _Testing {
 	}
 
 	private static void testEvernote() {
-		final String token = "";
+		final String token = "S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f";
 
 		EvernoteStorage storage;
 		try {
