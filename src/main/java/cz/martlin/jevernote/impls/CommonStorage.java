@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import cz.martlin.jevernote.core.BaseStorage;
-import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.misc.JevernoteException;
 
 public abstract class CommonStorage<PT, IT> implements BaseStorage {
 
@@ -104,18 +104,34 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void updatePackage(Package pack) throws JevernoteException {
+	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
 		try {
-			PT nativ = packageToNative(pack);
+			PT oldNativ = packageToNative(oldPack);
+			PT newNativ = packageToNative(newPack);
 
-			updatePackageNative(pack, nativ);
+			movePackageNative(oldPack, newPack, oldNativ, newNativ);
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot update package", e);
 		}
 
 	}
 
-	protected abstract void updatePackageNative(Package pack, PT nativ) throws Exception;
+	protected abstract void movePackageNative(Package oldPack, Package newPack, PT oldNativ, PT newNativ) throws Exception;
+
+	@Override
+	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
+		try {
+			IT oldNativ = itemToNative(oldItem);
+			IT newNativ = itemToNative(newItem);
+
+			moveItemNative(oldItem, newItem, oldNativ, newNativ);
+		} catch (Exception e) {
+			throw new JevernoteException("Cannot update item", e);
+		}
+	}
+
+
+	protected abstract void moveItemNative(Item oldItem, Item newItem, IT oldNativ, IT newNativ) throws Exception;
 
 	@Override
 	public void updateItem(Item item) throws JevernoteException {
@@ -127,7 +143,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 			throw new JevernoteException("Cannot update item", e);
 		}
 	}
-
+	
 	protected abstract void updateNativeItem(Item item, IT nativ) throws Exception;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -141,7 +157,6 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot remove package", e);
 		}
-
 	}
 
 	protected abstract void removePackageNative(Package pack, PT nativ) throws Exception;
@@ -155,7 +170,6 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot remove item", e);
 		}
-
 	}
 
 	protected abstract void removeNativeItem(Item item, IT nativ) throws Exception;

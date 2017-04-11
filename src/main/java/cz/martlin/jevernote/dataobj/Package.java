@@ -1,6 +1,10 @@
 package cz.martlin.jevernote.dataobj;
 
-public class Package {
+import java.io.Serializable;
+
+public class Package implements Serializable, Cloneable {
+
+	private static final long serialVersionUID = 4296043013265462681L;
 
 	private String id;
 	private String name;
@@ -55,6 +59,18 @@ public class Package {
 	@Override
 	public String toString() {
 		return "Package [id=" + id + ", name=" + name + "]";
+	}
+
+	public Package copy() {
+		String id = this.getId();
+		String name = this.getName();
+
+		return new Package(id, name);
+	}
+
+	@Override
+	protected Object clone() {
+		return copy();
 	}
 
 }

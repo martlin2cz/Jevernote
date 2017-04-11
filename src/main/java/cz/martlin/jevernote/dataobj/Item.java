@@ -1,8 +1,11 @@
 package cz.martlin.jevernote.dataobj;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Item {
+public class Item implements Serializable, Cloneable {
+
+	private static final long serialVersionUID = 1884785802441695009L;
 
 	private Package pack;
 	private String id;
@@ -59,8 +62,6 @@ public class Item {
 		this.lastModifiedAt = lastModifiedAt;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +91,22 @@ public class Item {
 	public String toString() {
 		return "Item [id=" + id + ", name=" + name + ", content=" + content + ", lastModifiedAt="
 				+ (lastModifiedAt != null ? lastModifiedAt.getTime() : "-") + ", pack=" + pack + "]";
+	}
+
+	public Item copy() {
+		Package pack = this.getPack().copy();
+		String id = this.getId();
+		String name = this.getName();
+		String content = this.getContent();
+		Calendar lastModifiedAt = this.getLastModifiedAt();
+
+		return new Item(pack, id, name, content, lastModifiedAt);
+
+	}
+
+	@Override
+	protected Object clone() {
+		return copy();
 	}
 
 }

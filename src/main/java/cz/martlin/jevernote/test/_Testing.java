@@ -5,18 +5,18 @@ import java.util.Calendar;
 import java.util.List;
 
 import cz.martlin.jevernote.core.BaseStorage;
-import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
 import cz.martlin.jevernote.impls.EvernoteStorage;
 import cz.martlin.jevernote.impls.FileSystemStorageWithIndexFile;
+import cz.martlin.jevernote.misc.JevernoteException;
 
 public class _Testing {
 
 	public static void main(String[] args) {
 		// TODO
-		//testEvernote();
-		 testFileSystem();
+		testEvernote();
+		// testFileSystem();
 		//testInMemory();
 
 	}
@@ -77,7 +77,7 @@ public class _Testing {
 		try {
 
 			// create package
-			String name1 = "Můj čtvrtý noteboočík";
+			String name1 = "Můj pátý noteboočík";
 			Package pack1 = new Package(null, name1);
 
 			storage.createPackage(pack1);
@@ -89,8 +89,8 @@ public class _Testing {
 			Package pack2 = packs2.get(0);
 
 			// create item
-			String name3 = "Moje třetí poznámka";
-			String content3 = "<span style=\"color:green;\">Ahoj, musíš toho udělat ještě hodně!</span><br/>";
+			String name3 = "Moje pátá poznámka";
+			String content3 = "<span style=\"color:green;\">Ahoj, FAKT, musíš toho udělat ještě hodně!</span><br/>";
 			Calendar lastModifiedAt3 = Calendar.getInstance();
 			Item item3 = new Item(pack2, null, name3, content3, lastModifiedAt3);
 
@@ -102,15 +102,17 @@ public class _Testing {
 			System.out.println("List items: " + items4);
 
 			// update package
-			String name5 = "Můj fakt třetí notebočík";
+			String name5 = "Můj fakt pátý notebočík";
+			Package oldPack5 = pack2.copy();
 			pack2.setName(name5);
-			storage.updatePackage(pack2);
+			storage.movePackage(oldPack5, pack2);
 			System.out.println("Updated pack: " + pack2);
 
 			// update item
-			String name6 = "Moje fakt opravdu třetí poznámka";
+			String name6 = "Moje fakt opravdu pátá a půltá poznámka";
+			Item oldItem6 = item3.copy();
 			item3.setName(name6);
-			storage.updateItem(item3);
+			storage.moveItem(oldItem6, item3);
 			System.out.println("Updated item: " + item3);
 
 			// remove item

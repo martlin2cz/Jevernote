@@ -19,7 +19,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	public InMemoryStorage() {
 		this.storage = new HashMap<>();
 	}
-	
+
 	public void initialize(Map<Package, List<Item>> data) {
 		this.storage.clear();
 		this.storage.putAll(data);
@@ -52,16 +52,41 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		List<Item> items = storage.get(pack);
 		items.add(nativ);
 	}
+	//
+	// @Override
+	// protected void updatePackageNative(Package pack, Package nativ) throws
+	// Exception {
+	// // yet done
+	// }
+	//
+	// @Override
+	// protected void updateNativeItem(Item item, Item nativ) throws Exception {
+	// // yet done
+	//
+	// }
 
 	@Override
-	protected void updatePackageNative(Package pack, Package nativ) throws Exception {
-		// yet done
+	protected void movePackageNative(Package oldPack, Package newPack, Package oldNativ, Package newNativ)
+			throws Exception {
+		
+		List<Item> items = storage.remove(oldNativ);
+		storage.put(newNativ, items);
+	}
+
+	@Override
+	protected void moveItemNative(Item oldItem, Item newItem, Item oldNativ, Item newNativ) throws Exception {
+		
+		List<Item> oldItems = storage.get(oldNativ.getPack());
+		oldItems.remove(oldNativ);
+		
+		List<Item> newItems = storage.get(newNativ.getPack());
+		newItems.add(newNativ);
+		
 	}
 
 	@Override
 	protected void updateNativeItem(Item item, Item nativ) throws Exception {
-		// yet done
-
+		// just modified existing object
 	}
 
 	@Override
@@ -101,16 +126,17 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	///////////////////////////////////////////////////////////////////////////
 
 	public void print(PrintStream out) {
-		for (Package pack: storage.keySet()) {
+		for (Package pack : storage.keySet()) {
 			out.println(pack.getName() + " (" + pack.getId() + "):");
-			
+
 			List<Item> items = storage.get(pack);
-			for (Item item: items) {
-				out.println(" - "+ item.getName() + " (" + item.getId() + "), " + item.getLastModifiedAt().getTime() + ":");
+			for (Item item : items) {
+				out.println(" - " + item.getName() + " (" + item.getId() + "), " + item.getLastModifiedAt().getTime()
+						+ ":");
 				out.println("    " + item.getContent());
 			}
 		}
-		
+
 	}
-	
+
 }

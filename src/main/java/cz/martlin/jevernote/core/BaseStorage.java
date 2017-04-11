@@ -5,6 +5,7 @@ import java.util.Map;
 
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.misc.JevernoteException;
 
 /**
  * Base storage implementation. Specifies loading, creating, updating and
@@ -41,7 +42,7 @@ public interface BaseStorage {
 	List<Item> listItems(Package pack) throws JevernoteException;
 
 	/**
-	 * Creates package.
+	 * Creates package (assuming package does not exist).
 	 * 
 	 * @param pack
 	 *
@@ -50,7 +51,8 @@ public interface BaseStorage {
 	void createPackage(Package pack) throws JevernoteException;
 
 	/**
-	 * Creates item in given package.
+	 * Creates item in given package (assuming package yet exists, but the item
+	 * not).
 	 * 
 	 * @param item
 	 * 
@@ -59,25 +61,41 @@ public interface BaseStorage {
 	void createItem(Item item) throws JevernoteException;
 
 	/**
-	 * Updates package.
+	 * Renames (in fact just renames) oldPack to newPack (assuming old package
+	 * exists and the new one not).
 	 * 
-	 * @param pack
+	 * @param oldPack
+	 * 
+	 * @param newPack
+	 * 
 	 * @throws JevernoteException
 	 */
-	void updatePackage(Package pack) throws JevernoteException;
+	void movePackage(Package oldPack, Package newPack) throws JevernoteException;
 
 	/**
-	 * Updates item (and optionally moves into another package if specified).
+	 * Renames/moves (moves into another package, renames, or both) oldItem to
+	 * newItem (assuming old item exists and new one not (but new package
+	 * must)).
+	 * 
+	 * @param oldItem
+	 * @param newItem
+	 * @param pack
+	 * 
+	 * @throws JevernoteException
+	 */
+	void moveItem(Item oldItem, Item newItem) throws JevernoteException;
+
+	/**
+	 * Updates item's content (item must exist).
 	 * 
 	 * @param item
 	 * @param pack
-	 *            TODO
 	 * @throws JevernoteException
 	 */
 	void updateItem(Item item) throws JevernoteException;
 
 	/**
-	 * Removes package.
+	 * Removes package (package must exist, but empty).
 	 * 
 	 * @param pack
 	 * @throws JevernoteException
@@ -85,7 +103,7 @@ public interface BaseStorage {
 	void removePackage(Package pack) throws JevernoteException;
 
 	/**
-	 * Removes item.
+	 * Removes item (item must exist).
 	 * 
 	 * @param item
 	 * @throws JevernoteException

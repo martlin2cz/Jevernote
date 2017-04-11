@@ -20,9 +20,9 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
 
-import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.misc.JevernoteException;
 
 public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
@@ -117,21 +117,22 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	}
 
 	@Override
-	protected void updatePackageNative(Package pack, Notebook notebook)
+	protected void movePackageNative(Package oldPack, Package newPack, Notebook oldNotebook, Notebook newNotebook)
+			throws Exception {
+
+		cli.updateNotebook(newNotebook);
+	}
+
+	@Override
+	protected void moveItemNative(Item oldItem, Item newItem, Note oldNote, Note newNote)
 			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 
-		cli.updateNotebook(notebook);
+		cli.updateNote(newNote);
 	}
 
 	@Override
 	protected void updateNativeItem(Item item, Note note)
 			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
-
-		// if (pack != null) {
-		Notebook notebook = packageToNative(item.getPack());
-		String nid = notebook.getGuid();
-		note.setNotebookGuid(nid);
-		// }
 
 		cli.updateNote(note);
 	}
@@ -224,13 +225,13 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		} else {
 			final String noteStartTag = "<en-note>";
 			final String noteEndTag = "</en-note>";
-			
+
 			int startIndex = nativ.indexOf(noteStartTag);
 			int startCut = startIndex + noteStartTag.length();
-			
+
 			int endIndex = nativ.lastIndexOf(noteEndTag);
 			int endCut = endIndex;
-			
+
 			return nativ.substring(startCut, endCut);
 		}
 	}

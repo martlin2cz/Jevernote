@@ -1,8 +1,6 @@
 package cz.martlin.jevernote.impls;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeNoException;
@@ -20,14 +18,13 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cz.martlin.jevernote.core.JevernoteException;
 import cz.martlin.jevernote.dataobj.Item;
 import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.Log;
 
 public class FileSystemStorageWithIndexFileTest {
-	private static final String PACK0_NAME = "foo";
-	private static final String ITEM0_NAME = "Lorem";
+	private static final boolean WITH_ID = false;
 
 	private static File baseDir;
 
@@ -58,213 +55,287 @@ public class FileSystemStorageWithIndexFileTest {
 	}
 
 	@Test
-	public void testBasicPackages() throws JevernoteException {
+	public void testBasicPackages() throws JevernoteException, IOException {
 		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+
+		final String name1 = "foo";
+		final String name2 = "bar";
+
+		createPackage(WITH_ID, name1);
+		assertTrue(dirOfPack(name1).isDirectory());
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertTrue(hasIndexPack(name1));
+		assertFalse(hasIndexPack(name2));
+
+		movePackage(WITH_ID, name1, name2);
+		assertFalse(dirOfPack(name1).isDirectory());
+		assertTrue(dirOfPack(name2).isDirectory());
+		assertFalse(hasIndexPack(name1));
+		assertTrue(hasIndexPack(name2));
+
+		removePackage(WITH_ID, name2);
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertFalse(hasIndexPack(name1));
+		assertFalse(hasIndexPack(name2));
+	}
+
+	@Test
+	public void testBasicPackagesByHand() throws JevernoteException, IOException {
+		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+
+		final String name1 = "foo";
+		final String name2 = "bar";
+
+		createPackageByHand(name1);
+		assertTrue(dirOfPack(name1).isDirectory());
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertFalse(hasIndexPack(name1));
+		assertFalse(hasIndexPack(name2));
+
+		movePackageByHand(name1, name2);
+		assertFalse(dirOfPack(name1).isDirectory());
+		assertTrue(dirOfPack(name2).isDirectory());
+		assertFalse(hasIndexPack(name1));
+		assertFalse(hasIndexPack(name2));
+
+		removePackageByHand(name2);
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertFalse(dirOfPack(name2).isDirectory());
+		assertFalse(hasIndexPack(name1));
+		assertFalse(hasIndexPack(name2));
+	}
+
+	@Test
+	public void testBasicItems() throws JevernoteException, IOException {
+		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+
+		final String packName1 = "foo";
+		final String packName2 = "bar";
+		final String name1 = "Lorem";
+		final String name2 = "Ipsum";
+
+		createPackage(WITH_ID, packName1);
+		createPackage(WITH_ID, packName2);
+
+		createItem(WITH_ID, packName1, name1, "Something #1");
+		assertTrue(fileOfItem(packName1, name1).isFile());
+		assertFalse(fileOfItem(packName2, name2).isFile());
+		assertTrue(hasIndexItem(packName1, name1));
+		assertFalse(hasIndexItem(packName2, name2));
+
+		moveItem(WITH_ID, packName1, name1, packName2, name2);
+		assertFalse(fileOfItem(packName1, name1).isFile());
+		assertTrue(fileOfItem(packName2, name2).isFile());
+		assertFalse(hasIndexItem(packName1, name1));
+		assertTrue(hasIndexItem(packName2, name2));
+
+		removeItem(WITH_ID, packName2, name2);
+		assertFalse(fileOfItem(packName1, name1).isFile());
+		assertFalse(fileOfItem(packName2, name2).isFile());
+		assertFalse(hasIndexItem(packName1, name1));
+		assertFalse(hasIndexItem(packName2, name2));
+	}
+
+	@Test
+	public void testBasicItemsByHand() throws JevernoteException, IOException {
+		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+
+		final String packName1 = "foo";
+		final String packName2 = "bar";
+		final String name1 = "Lorem";
+		final String name2 = "Ipsum";
+
+		createPackage(WITH_ID, packName1);
+		createPackage(WITH_ID, packName2);
+
+		createItemByHand(packName1, name1, "Something #1");
+		assertTrue(fileOfItem(packName1, name1).isFile());
+		assertFalse(fileOfItem(packName2, name2).isFile());
+		assertFalse(hasIndexItem(packName1, name1));
+		assertFalse(hasIndexItem(packName2, name2));
+
+		moveItemByHand(packName1, name1, packName2, name2);
+		assertFalse(fileOfItem(packName1, name1).isFile());
+		assertTrue(fileOfItem(packName2, name2).isFile());
+		assertFalse(hasIndexItem(packName1, name1));
+		assertFalse(hasIndexItem(packName2, name2));
+
+		removeItemByHand(packName2, name2);
+		assertFalse(fileOfItem(packName1, name1).isFile());
+		assertFalse(fileOfItem(packName2, name2).isFile());
+		assertFalse(hasIndexItem(packName1, name1));
+		assertFalse(hasIndexItem(packName2, name2));
+	}
+
+	@Test
+	public void testCutTghrought() throws JevernoteException, IOException {
+		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+
+		final String packName1 = "foo";
+		final String packName2 = "bar";
+		final String name1 = "Lorem";
+		final String name2 = "Ipsum";
+
+		createPackage(WITH_ID, packName1);
+
+		createItem(WITH_ID, packName1, name1, "Something #1");
+
+		createPackage(WITH_ID, packName2);
+
+		moveItem(WITH_ID, packName1, name1, packName2, name2);
+
+		updateItem(WITH_ID, packName2, name2, "Something absoluttely else #2");
+
+		removePackage(WITH_ID, packName1);
+
+		removeItem(WITH_ID, packName2, name2);
+
+		createItem(WITH_ID, packName2, name1, "Just nothing ... #3");
+
+		updateItem(WITH_ID, packName2, name1, "Really nothing ... #4");
+
+		removeItem(WITH_ID, packName2, name1);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	protected static void createPackage(boolean withId, String name) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		// create package
-		final String name = "bar";
-		Package pack = createPackageObj(name);
+		Package pack = createPackageObj(withId, name);
 		storage.createPackage(pack);
-		File dir1 = dirOfPack(pack);
 
-		assertEquals(dir1, storage.getBindings().get(pack.getId()));
-		assertTrue(dir1.isDirectory());
+		storage.checkAndSaveChanges();
+	}
 
-		// insert item
-		final String itemName = "Ipsum";
-		Item item = createItemObj(pack, itemName, "Something...");
+	protected static void createPackageByHand(String name) throws IOException {
+		File dir = dirOfPack(name);
+
+		Files.createDirectory(dir.toPath());
+	}
+
+	protected static void createItem(boolean withId, String packName, String name, String content)
+			throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+
+		Item item = createItemObj(withId, packName, name, content);
 		storage.createItem(item);
-		File file2 = fileOfItem(item);
 
-		assertEquals(file2, storage.getBindings().get(item.getId()));
-		assertTrue(file2.isFile());
+		storage.checkAndSaveChanges();
+	}
 
-		// rename package
-		final String newName = "baaar";
-		pack.setName(newName);
-		storage.updatePackage(pack);
-		File dir3 = dirOfPack(pack);
-		File file3 = fileOfItem(item);
+	protected static void createItemByHand(String packName, String name, String content) throws IOException {
+		File file = fileOfItem(packName, name);
 
-		assertEquals(dir3, storage.getBindings().get(pack.getId()));
-		assertTrue(dir3.isDirectory());
-		assertFalse(dir1.exists());
+		byte[] bytes = content.getBytes();
+		Files.write(file.toPath(), bytes);
+	}
 
-		assertTrue(file3.isFile());
-		assertFalse(file2.exists());
+	protected static void movePackage(boolean withId, String oldName, String newName) throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		// remove item (package must be empty while removing)
-		storage.removeItem(item);
+		Package oldPack = createPackageObj(withId, oldName);
+		Package newPack = oldPack.copy();
 
-		// remove package
+		newPack.setName(newName);
+		storage.movePackage(oldPack, newPack);
+
+		storage.checkAndSaveChanges();
+	}
+
+	protected static void movePackageByHand(String oldName, String newName) throws IOException {
+		File oldDir = dirOfPack(oldName);
+		File newDir = dirOfPack(newName);
+
+		Files.move(oldDir.toPath(), newDir.toPath());
+	}
+
+	protected static void moveItem(boolean withId, String oldPackName, String oldName, String newPackName,
+			String newName) throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+
+		Item oldItem = createItemObj(withId, oldPackName, oldName, null);
+		Item newItem = oldItem.copy();
+
+		newItem.getPack().setName(newPackName);
+		newItem.setName(newName);
+		storage.moveItem(oldItem, newItem);
+
+		storage.checkAndSaveChanges();
+	}
+
+	protected static void moveItemByHand(String oldPackName, String oldName, String newPackName, String newName)
+			throws IOException {
+		File oldFile = fileOfItem(oldPackName, oldName);
+		File newFile = fileOfItem(newPackName, newName);
+
+		Files.move(oldFile.toPath(), newFile.toPath());
+	}
+
+	protected static void updateItem(boolean withId, String packName, String name, String newContent)
+			throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+
+		Item item = createItemObj(withId, packName, name, newContent);
+		storage.updateItem(item);
+
+		storage.checkAndSaveChanges();
+	}
+
+	protected static void updateItemByHand(String packName, String name, String newContent) throws IOException {
+		File file = fileOfItem(packName, name);
+
+		byte[] bytes = newContent.getBytes();
+		Files.write(file.toPath(), bytes);
+	}
+
+	protected static void removePackage(boolean withId, String name) throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+
+		Package pack = createPackageObj(withId, name);
 		storage.removePackage(pack);
 
-		assertNull(storage.getBindings().get(pack.getId()));
-		assertFalse(file2.exists());
-		assertFalse(dir1.exists());
+		storage.checkAndSaveChanges();
 	}
 
-	@Test
-	public void testBasicItems() throws JevernoteException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+	protected static void removePackageByHand(String name) throws IOException {
+		File dir = dirOfPack(name);
+
+		Files.delete(dir.toPath());
+	}
+
+	protected static void removeItem(boolean withId, String packName, String name) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		// create item
-		final String packName = "foo";
-		final String name = "Ipsum";
-		
-		Package pack = createPackageObj(packName);
-		Item item = createItemObj(pack, name, "Something...");
-		storage.createPackage(pack);
-		storage.createItem(item);
-		File file1 = fileOfItem(item);
-
-		assertEquals(file1, storage.getBindings().get(item.getId()));
-		assertTrue(file1.isFile());
-
-		// rename item
-		final String newName = "Dolor";
-		item.setName(newName);
-		storage.updateItem(item);
-		File file2 = fileOfItem(item);
-
-		assertEquals(file2, storage.getBindings().get(item.getId()));
-		assertTrue(file2.isFile());
-		assertFalse(file1.exists());
-
-		// create new package and move item into
-		final String newPackName = "bar";
-		createPackDir(newPackName);
-		final Package newPack = createPackageObj(newPackName);
-
-		item.setPack(newPack);
-		storage.updateItem(item);
-		File file3 = fileOfItem(item);
-
-		assertEquals(file3, storage.getBindings().get(item.getId()));
-		assertTrue(file3.isFile());
-		assertFalse(file2.exists());
-		assertFalse(file1.exists());
-
-		// remove item
+		Item item = createItemObj(withId, packName, name, null);
 		storage.removeItem(item);
 
-		assertNull(storage.getBindings().get(item.getId()));
-		assertFalse(file3.exists());
-		assertFalse(file2.exists());
-		assertFalse(file1.exists());
-	}
-
-	@Test
-	public void testPackageCreatedByHand() throws JevernoteException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
-		// create package dir by hand (not indexed)
-		final String name = "qux";
-		createPackDir(name);
-
-		// try to rename it
-		FileSystemStorageWithIndexFile storage1 = new FileSystemStorageWithIndexFile(baseDir);
-		final String newName = "aux";
-
-		Package pack1 = createPackageObj(newName);
-		try {
-			storage1.updatePackage(pack1);
-			fail("Should fail, package does not exist in index");
-		} catch (JevernoteException e) {
-			// ok
-		}
-
-		// try to delete
-		FileSystemStorageWithIndexFile storage2 = new FileSystemStorageWithIndexFile(baseDir);
-
-		Package pack2 = createPackageObj(name);
-		try {
-			storage2.removePackage(pack2);
-			// ok
-		} catch (JevernoteException e) {
-			fail("Should not fail, removed package can be");
-		}
+		storage.checkAndSaveChanges();
 
 	}
 
-	@Test
-	public void testIndexedPackage() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+	protected static void removeItemByHand(String packName, String name) throws IOException {
+		File file = fileOfItem(packName, name);
 
-		// create package
-		FileSystemStorageWithIndexFile storage1 = new FileSystemStorageWithIndexFile(baseDir);
-		final String name = "aux";
-
-		Package pack1 = createPackageObj(name);
-		storage1.createPackage(pack1);
-
-		// rename by hand
-		final String newName = "qux";
-
-		File dir2 = dirOfPack(pack1);
-		Package newPack2 = createPackageObj(newName);
-		File newDir2 = dirOfPack(newPack2);
-
-		Files.move(dir2.toPath(), newDir2.toPath());
-
-		// try to rename it
-		FileSystemStorageWithIndexFile storage2 = new FileSystemStorageWithIndexFile(baseDir);
-		final String newNewName = "fux";
-
-		Package pack3 = createPackageObj(newNewName);
-		try {
-			storage2.updatePackage(pack3);
-			fail("Should fail, package was renamed by hand and hence it does not exist in index");
-		} catch (JevernoteException e) {
-			// ok
-		}
+		Files.delete(file.toPath());
 	}
 
-	@Test
-	public void testIndexedItem() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+	///////////////////////////////////////////////////////////////////////////
 
-		// create item
-		FileSystemStorageWithIndexFile storage1 = new FileSystemStorageWithIndexFile(baseDir);
-		final String packName = "foo";
-		final String name = "Lorem";
+	protected static boolean hasIndexPack(String name) throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Item item1 = createItemObj(packName, name, "Something different...");
-		storage1.createPackage(item1.getPack());
-		storage1.createItem(item1);
-
-		
-		// move by hand
-		final String newPackName = "qux";
-		final String newName = "Amet";
-		
-		File oldFile = fileOfItem(item1);
-		
-		Item item2 = createItemObj(newPackName, newName, "(whatever)");
-		File newDir = dirOfPack(item2.getPack());
-		File newFile = fileOfItem(item2);
-		
-		
-		Files.createDirectory(newDir.toPath());
-		Files.move(oldFile.toPath(), newFile.toPath());
-		
-		
-		// try to update its content
-		FileSystemStorageWithIndexFile storage2 = new FileSystemStorageWithIndexFile(baseDir);
-		final String newContent = "This is different.";
-		Item item3 = createItemObj(newPackName, newName, "(whatever)");
-		item3.setContent(newContent);
-		
-		try {
-			storage2.updateItem(item3);
-			fail("Should fail, the item has in index different file spec");
-		} catch (JevernoteException e) {
-			// ok
-		}
+		File dir = dirOfPack(name);
+		return storage.getBindings().values().contains(dir);
 	}
 
+	protected static boolean hasIndexItem(String packName, String name) throws JevernoteException {
+		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+
+		File file = fileOfItem(packName, name);
+		return storage.getBindings().values().contains(file);
+	}
 	///////////////////////////////////////////////////////////////////////////
 
 	@BeforeClass
@@ -292,9 +363,9 @@ public class FileSystemStorageWithIndexFileTest {
 	@Before
 	public void setUp() throws Exception {
 		/*
-		File dir = createPackDir(PACK0_NAME);
-		createItemFile(dir, ITEM0_NAME);
-		*/
+		 * File dir = createPackDir(PACK0_NAME); createItemFile(dir,
+		 * ITEM0_NAME);
+		 */
 	}
 
 	@After
@@ -313,57 +384,35 @@ public class FileSystemStorageWithIndexFileTest {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private Package createPackageObj(String name) {
-		String id = "the-pack-" + name + "-" + System.nanoTime();
+	private static Package createPackageObj(boolean withId, String name) {
+		String id = withId ? "the-pack-" + name + "-" + System.nanoTime() : null;
 
 		Package pack1 = new Package(id, name);
 		return pack1;
 	}
 
-	private Item createItemObj(String packName, String name, String content) {
-		Package pack = createPackageObj(packName);
+	private static Item createItemObj(boolean withId, String packName, String name, String content) {
+		Package pack = createPackageObj(withId, packName);
 
-		return createItemObj(pack, name, content);
+		return createItemObj(withId, pack, name, content);
 	}
 
-	private Item createItemObj(Package pack, String name, String content) {
-		String id = "the-item-[" + pack.getName() + "]-" + name + "-" + System.nanoTime();
+	private static Item createItemObj(boolean withId, Package pack, String name, String content) {
+		String id = withId ? "the-item-" + pack.getName() + "/" + name + "-" + System.nanoTime() : null;
 		Calendar date = Calendar.getInstance();
 
 		Item item = new Item(pack, id, name, content, date);
 		return item;
 	}
 
-	private File dirOfPack(Package pack) {
-		return new File(baseDir, pack.getName());
-	}
-
-	private File fileOfItem(Item item) {
-		return new File(new File(baseDir, item.getPack().getName()), item.getName());
-	}
-
 	///////////////////////////////////////////////////////////////////////////
 
-	private static File createPackDir(String name) throws JevernoteException {
-		File dir = new File(baseDir, name);
-		Path dirPath = dir.toPath();
-		try {
-			Files.createDirectory(dirPath);
-		} catch (IOException e) {
-			throw new JevernoteException(e);
-		}
-		return dir;
+	private static File dirOfPack(String name) {
+		return new File(baseDir, name);
 	}
 
-	private static File createItemFile(File dir, String name) throws JevernoteException {
-		File file = new File(dir, name);
-		Path filePath = file.toPath();
-		try {
-			Files.createFile(filePath);
-		} catch (IOException e) {
-			throw new JevernoteException(e);
-		}
-		return file;
+	private static File fileOfItem(String packName, String name) {
+		return new File(new File(baseDir, packName), name);
 	}
 
 	private static void delete(File file) throws IOException {
