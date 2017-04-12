@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impls;
+package cz.martlin.jevernote.storage.impls;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Calendar;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -18,10 +17,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.Log;
+import cz.martlin.jevernote.tools.TestingUtils;
 
 public class FileSystemStorageWithIndexFileTest {
 	private static final boolean WITH_ID = false;
@@ -203,7 +203,7 @@ public class FileSystemStorageWithIndexFileTest {
 	protected static void createPackage(boolean withId, String name) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Package pack = createPackageObj(withId, name);
+		Package pack = TestingUtils.createPackageObj(withId, name);
 		storage.createPackage(pack);
 
 		storage.checkAndSaveChanges();
@@ -219,7 +219,7 @@ public class FileSystemStorageWithIndexFileTest {
 			throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Item item = createItemObj(withId, packName, name, content);
+		Item item = TestingUtils.createItemObj(withId, packName, name, content);
 		storage.createItem(item);
 
 		storage.checkAndSaveChanges();
@@ -235,7 +235,7 @@ public class FileSystemStorageWithIndexFileTest {
 	protected static void movePackage(boolean withId, String oldName, String newName) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Package oldPack = createPackageObj(withId, oldName);
+		Package oldPack = TestingUtils.createPackageObj(withId, oldName);
 		Package newPack = oldPack.copy();
 
 		newPack.setName(newName);
@@ -255,7 +255,7 @@ public class FileSystemStorageWithIndexFileTest {
 			String newName) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Item oldItem = createItemObj(withId, oldPackName, oldName, null);
+		Item oldItem = TestingUtils.createItemObj(withId, oldPackName, oldName, null);
 		Item newItem = oldItem.copy();
 
 		newItem.getPack().setName(newPackName);
@@ -277,7 +277,7 @@ public class FileSystemStorageWithIndexFileTest {
 			throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Item item = createItemObj(withId, packName, name, newContent);
+		Item item = TestingUtils.createItemObj(withId, packName, name, newContent);
 		storage.updateItem(item);
 
 		storage.checkAndSaveChanges();
@@ -293,7 +293,7 @@ public class FileSystemStorageWithIndexFileTest {
 	protected static void removePackage(boolean withId, String name) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Package pack = createPackageObj(withId, name);
+		Package pack = TestingUtils.createPackageObj(withId, name);
 		storage.removePackage(pack);
 
 		storage.checkAndSaveChanges();
@@ -308,7 +308,7 @@ public class FileSystemStorageWithIndexFileTest {
 	protected static void removeItem(boolean withId, String packName, String name) throws JevernoteException {
 		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
 
-		Item item = createItemObj(withId, packName, name, null);
+		Item item = TestingUtils.createItemObj(withId, packName, name, null);
 		storage.removeItem(item);
 
 		storage.checkAndSaveChanges();
@@ -383,27 +383,6 @@ public class FileSystemStorageWithIndexFileTest {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-
-	private static Package createPackageObj(boolean withId, String name) {
-		String id = withId ? "the-pack-" + name + "-" + System.nanoTime() : null;
-
-		Package pack1 = new Package(id, name);
-		return pack1;
-	}
-
-	private static Item createItemObj(boolean withId, String packName, String name, String content) {
-		Package pack = createPackageObj(withId, packName);
-
-		return createItemObj(withId, pack, name, content);
-	}
-
-	private static Item createItemObj(boolean withId, Package pack, String name, String content) {
-		String id = withId ? "the-item-" + pack.getName() + "/" + name + "-" + System.nanoTime() : null;
-		Calendar date = Calendar.getInstance();
-
-		Item item = new Item(pack, id, name, content, date);
-		return item;
-	}
 
 	///////////////////////////////////////////////////////////////////////////
 

@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impls;
+package cz.martlin.jevernote.storage.impls;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,9 +20,10 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
+import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 

@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.test;
+package cz.martlin.jevernote.storage.impls;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
-import cz.martlin.jevernote.impls.CommonStorage;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.dataobj.storage.StorageData;
+import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public class InMemoryStorage extends CommonStorage<Package, Item> {
 
@@ -20,9 +21,9 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		this.storage = new HashMap<>();
 	}
 
-	public void initialize(Map<Package, List<Item>> data) {
+	public void initialize(StorageData data) {
 		this.storage.clear();
-		this.storage.putAll(data);
+		this.storage.putAll(data.getData());
 	}
 
 	///////////////////////////////////////////////////////////////////////////

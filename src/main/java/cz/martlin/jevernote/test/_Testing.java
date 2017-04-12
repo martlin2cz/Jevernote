@@ -4,12 +4,13 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
-import cz.martlin.jevernote.core.BaseStorage;
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
-import cz.martlin.jevernote.impls.EvernoteStorage;
-import cz.martlin.jevernote.impls.FileSystemStorageWithIndexFile;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
+import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.impls.EvernoteStorage;
+import cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFile;
+import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class _Testing {
 

@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impls;
+package cz.martlin.jevernote.storage.base;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cz.martlin.jevernote.core.BaseStorage;
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
 
 public abstract class CommonStorage<PT, IT> implements BaseStorage {
@@ -20,7 +20,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public Map<Package, List<Item>> list() throws JevernoteException {
+	public StorageData list() throws JevernoteException {
 		Map<Package, List<Item>> result = new HashMap<>();
 
 		List<Package> packages = listPackages();
@@ -29,7 +29,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 			result.put(pack, items);
 		}
 
-		return result;
+		return new StorageData(result);
 	}
 
 	@Override

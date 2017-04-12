@@ -1,10 +1,10 @@
-package cz.martlin.jevernote.core;
+package cz.martlin.jevernote.storage.base;
 
 import java.util.List;
-import java.util.Map;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
 
 /**
@@ -22,7 +22,7 @@ public interface BaseStorage {
 	 * @return
 	 * @throws JevernoteException
 	 */
-	Map<Package, List<Item>> list() throws JevernoteException;
+	StorageData list() throws JevernoteException;
 
 	/**
 	 * Lists all packages.

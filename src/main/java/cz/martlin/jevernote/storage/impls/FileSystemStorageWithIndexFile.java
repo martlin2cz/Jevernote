@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impls;
+package cz.martlin.jevernote.storage.impls;
 
 import java.io.Closeable;
 import java.io.File;
@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.Log;
 

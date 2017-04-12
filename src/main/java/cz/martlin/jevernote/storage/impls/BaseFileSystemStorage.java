@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.impls;
+package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +11,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import cz.martlin.jevernote.dataobj.Item;
-import cz.martlin.jevernote.dataobj.Package;
+import cz.martlin.jevernote.dataobj.storage.Item;
+import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 

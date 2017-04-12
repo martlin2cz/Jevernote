@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.dataobj;
+package cz.martlin.jevernote.dataobj.storage;
 
 import java.io.Serializable;
 
