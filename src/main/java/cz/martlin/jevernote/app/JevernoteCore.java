@@ -8,6 +8,7 @@ import cz.martlin.jevernote.perf.impl.DefaultDifferencesPerformer;
 import cz.martlin.jevernote.perf.impl.ForceDifferencesPerformer;
 import cz.martlin.jevernote.perf.impl.WeakDifferencesPerformer;
 import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
 
 public class JevernoteCore {
 
@@ -16,10 +17,17 @@ public class JevernoteCore {
 
 	public JevernoteCore(BaseStorage local, BaseStorage remote) {
 		super();
-		this.local = local;
-		this.remote = remote;
+		this.local = new LoggingStorageWrapper(local);
+		this.remote = new LoggingStorageWrapper(remote);
 	}
+/*
+ * //TODO ME
+	public abstract boolean isReady();
+	
+	public abstract void initialize() throws JevernoteException;
 
+	public abstract void clone() throws JevernoteException;
+*/
 	public void push(boolean weak, boolean force) throws JevernoteException {
 		transfer(local, remote, weak, force);
 	}
@@ -30,10 +38,9 @@ public class JevernoteCore {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	
 	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force)
 			throws JevernoteException {
-		
+
 		StoragesDifferencer differ = new StoragesDifferencer();
 		StoragesDifference diff = differ.compute(source, target);
 
