@@ -69,20 +69,20 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	@Override
 	protected void movePackageNative(Package oldPack, Package newPack, Package oldNativ, Package newNativ)
 			throws Exception {
-		
+
 		List<Item> items = storage.remove(oldNativ);
 		storage.put(newNativ, items);
 	}
 
 	@Override
 	protected void moveItemNative(Item oldItem, Item newItem, Item oldNativ, Item newNativ) throws Exception {
-		
+
 		List<Item> oldItems = storage.get(oldNativ.getPack());
 		oldItems.remove(oldNativ);
-		
+
 		List<Item> newItems = storage.get(newNativ.getPack());
 		newItems.add(newNativ);
-		
+
 	}
 
 	@Override
@@ -137,7 +137,36 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 				out.println("    " + item.getContent());
 			}
 		}
+	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((storage == null) ? 0 : storage.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InMemoryStorage other = (InMemoryStorage) obj;
+		if (storage == null) {
+			if (other.storage != null)
+				return false;
+		} else if (!storage.equals(other.storage))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "InMemoryStorage [storage=" + storage + "]";
 	}
 
 }

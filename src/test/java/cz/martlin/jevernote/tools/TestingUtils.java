@@ -31,4 +31,14 @@ public class TestingUtils {
 		Item item = new Item(pack, id, name, content, date);
 		return item;
 	}
+
+
+	public static Calendar makeTime(int minsAgo) {
+		Calendar cal = Calendar.getInstance();
+	
+		cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) - minsAgo);
+	
+		return cal;
+	
+	}
 }

@@ -1,22 +1,17 @@
-package cz.martlin.jevernote.diff.core;
+package cz.martlin.jevernote.app;
 
 import static org.junit.Assert.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.Test;
+import org.omg.Messaging.SyncScopeHelper;
 
-import cz.martlin.jevernote.app.Exporter;
-import cz.martlin.jevernote.dataobj.cmp.Change;
-import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 import cz.martlin.jevernote.tools.TestingUtils;
 
-public class StoragesDifferencerTest {
+public class JevernoteCoreTest {
 
 	private static final String PACK_ID0 = "pack-0";
 	private static final String PACK_ID1 = "pack-1";
@@ -40,101 +35,67 @@ public class StoragesDifferencerTest {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private final Exporter export = new Exporter();
-	
-	public StoragesDifferencerTest() {
+	public JevernoteCoreTest() {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-
 
 	@Test
-	public void testIdentity() throws JevernoteException {
-		InMemoryStorage local = initSource();
-		InMemoryStorage remote = initSource();
+	public void testDefault() throws JevernoteException {
+		InMemoryStorage local = createLocalStorage();
+		InMemoryStorage remote = createRemoteStorage();
 
-		StoragesDifferencer differ = new StoragesDifferencer();
-		StoragesDifference diff = differ.compute(local, remote);
-		
-		System.out.println(export.exportDiff(diff));
-		
-		assertTrue(diff.getPackageDifferences().isEmpty());
-		assertTrue(diff.getItemsDifferences().isEmpty());
+		JevernoteCore core = new JevernoteCore(local, remote);
 
+		core.push(false, false);
+
+		local.print(System.out);
+		System.out.println();
+		remote.print(System.out);
+		System.out.println();
+
+		// TODO
 	}
-	
+
 	@Test
-	public void testSome() throws JevernoteException {
+	public void testWeak() throws JevernoteException {
+		InMemoryStorage local = createLocalStorage();
+		InMemoryStorage remote = createRemoteStorage();
 
-		InMemoryStorage local = initSource();
-		InMemoryStorage remote = initTarget();
+		JevernoteCore core = new JevernoteCore(local, remote);
 
-		StoragesDifferencer differ = new StoragesDifferencer();
-		StoragesDifference diff = differ.compute(local, remote);
+		core.push(true, false);
+
+		local.print(System.out);
+		System.out.println();
+		remote.print(System.out);
+		System.out.println();
+
+		// TODO
+	}
+
+	@Test
+	public void testForce() throws JevernoteException {
+		InMemoryStorage local = createLocalStorage();
+		InMemoryStorage remote = createRemoteStorage();
+
+		JevernoteCore core = new JevernoteCore(local, remote);
+
+		core.push(false, true);
+
+		local.print(System.out);
+		System.out.println();
+		remote.print(System.out);
+		System.out.println();
+
+		// TODO
 		
-		System.out.println(export.exportDiff(diff));
-
-		Set<Change<Package>> actualPacks = new HashSet<>(diff.getPackageDifferences());
-		Set<Change<Package>> expectedPacks = createExpectedPackChanges();
-
-		// actualPacks.forEach(System.out::println);
-		// System.out.println();
-		// expectedPacks.forEach(System.out::println);
-		// System.out.println();
-
-		assertEquals(expectedPacks, actualPacks);
-
-		Set<Change<Item>> actualItems = new HashSet<>(diff.getItemsDifferences());
-		Set<Change<Item>> expectedItems = createExpectedItemsChanges();
-
-		// actualItems.forEach(System.out::println);
-		// System.out.println();
-		// expectedItems.forEach(System.out::println);
-		// System.out.println();
-
-		assertEquals(expectedItems, actualItems);
-
+		//FIXME assertEquals(local, remote);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private Set<Change<Package>> createExpectedPackChanges() {
-		Set<Change<Package>> expectedPacks = new HashSet<>();
-
-		expectedPacks.add(Change.delete(pack(PACK_ID1)));
-		expectedPacks.add(Change.rename(pack(PACK_ID2), pack(PACK_ID2)));
-		// PACK_ID3 is kept
-		expectedPacks.add(Change.create(pack(PACK_ID3)));
-		return expectedPacks;
-	}
-
-	private Set<Change<Item>> createExpectedItemsChanges() {
-		Set<Change<Item>> expectedItems = new HashSet<>();
-
-		// item 0 is kept
-		expectedItems.add(Change.create(item(ITEM_ID1)));
-		expectedItems.add(Change.rename(item(ITEM_ID2), item(ITEM_ID2)));
-		expectedItems.add(Change.update(item(ITEM_ID3), item(ITEM_ID3)));
-		expectedItems.add(Change.delete(item(ITEM_ID4)));
-
-		expectedItems.add(Change.rename(item(ITEM_ID5), item(ITEM_ID5)));
-		expectedItems.add(Change.rename(item(ITEM_ID6), item(ITEM_ID6)));
-		expectedItems.add(Change.rename(item(ITEM_ID7), item(ITEM_ID7)));
-		// item 8 is just been moved
-		expectedItems.add(Change.rename(item(ITEM_ID9), item(ITEM_ID9)));
-		expectedItems.add(Change.rename(item(ITEM_IDa), item(ITEM_IDa)));
-		expectedItems.add(Change.update(item(ITEM_IDb), item(ITEM_IDb)));
-
-		expectedItems.add(Change.rename(item(ITEM_IDc), item(ITEM_IDc)));
-		expectedItems.add(Change.update(item(ITEM_IDc), item(ITEM_IDc)));
-		expectedItems.add(Change.rename(item(ITEM_IDd), item(ITEM_IDd)));
-		expectedItems.add(Change.update(item(ITEM_IDd), item(ITEM_IDd)));
-		return expectedItems;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	private InMemoryStorage initSource() throws JevernoteException {
+	private static InMemoryStorage createLocalStorage() throws JevernoteException {
 		InMemoryStorage storage = new InMemoryStorage();
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
@@ -151,13 +112,17 @@ public class StoragesDifferencerTest {
 		final Item item5 = new Item(pack0, ITEM_ID5, "item-to-rename", "something #5", TestingUtils.makeTime(5));
 		final Item item6 = new Item(pack0, ITEM_ID6, "item-to-move", "something #6", TestingUtils.makeTime(6));
 		final Item item7 = new Item(pack0, ITEM_ID7, "item-to-move-rename", "something #7", TestingUtils.makeTime(7));
-		final Item item8 = new Item(pack2, ITEM_ID8, "item-to-have-been-moved", "something #8", TestingUtils.makeTime(8));
-		final Item item9 = new Item(pack2, ITEM_ID9, "item-to-have-been-moved-and-rename", "something #9", TestingUtils.makeTime(9));
-		final Item itemA = new Item(pack2, ITEM_IDa, "item-to-have-been-moved-and-move", "something #10", TestingUtils.makeTime(10));
+		final Item item8 = new Item(pack2, ITEM_ID8, "item-to-have-been-moved", "something #8",
+				TestingUtils.makeTime(8));
+		final Item item9 = new Item(pack2, ITEM_ID9, "item-to-have-been-moved-and-rename", "something #9",
+				TestingUtils.makeTime(9));
+		final Item itemA = new Item(pack2, ITEM_IDa, "item-to-have-been-moved-and-move", "something #10",
+				TestingUtils.makeTime(10));
 		final Item itemB = new Item(pack2, ITEM_IDb, "item-to-have-been-moved-and-update", "something #11",
 				TestingUtils.makeTime(11));
 
-		final Item itemC = new Item(pack0, ITEM_IDc, "item-to-rename-update", "something #12", TestingUtils.makeTime(12));
+		final Item itemC = new Item(pack0, ITEM_IDc, "item-to-rename-update", "something #12",
+				TestingUtils.makeTime(12));
 		final Item itemD = new Item(pack2, ITEM_IDd, "item-to-have-been-moved-rename-and-update", "something #13",
 				TestingUtils.makeTime(13));
 
@@ -181,7 +146,7 @@ public class StoragesDifferencerTest {
 		return storage;
 	}
 
-	private InMemoryStorage initTarget() throws JevernoteException {
+	private InMemoryStorage createRemoteStorage() throws JevernoteException {
 		InMemoryStorage storage = new InMemoryStorage();
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
@@ -191,17 +156,23 @@ public class StoragesDifferencerTest {
 
 		final Item item0 = new Item(pack0, ITEM_ID0, "item-to-keep", "something #0", TestingUtils.makeTime(0));
 		final Item item1 = new Item(pack0, ITEM_ID1, "item-to-add", "something #1", TestingUtils.makeTime(1));
-		final Item item2 = new Item(pack0, ITEM_ID2, "item-to-rename-RENAMED", "something #2", TestingUtils.makeTime(2));
-		final Item item3 = new Item(pack0, ITEM_ID3, "item-to-update", "Absoluttely different text", TestingUtils.makeTime(3));
+		final Item item2 = new Item(pack0, ITEM_ID2, "item-to-rename-RENAMED", "something #2",
+				TestingUtils.makeTime(2));
+		final Item item3 = new Item(pack0, ITEM_ID3, "item-to-update", "Absoluttely different text",
+				TestingUtils.makeTime(3));
 		// item 4 was removed
 
-		final Item item5 = new Item(pack0, ITEM_ID5, "item-to-rename-RENAMED", "something #5", TestingUtils.makeTime(5));
+		final Item item5 = new Item(pack0, ITEM_ID5, "item-to-rename-RENAMED", "something #5",
+				TestingUtils.makeTime(5));
 		final Item item6 = new Item(pack3, ITEM_ID6, "item-to-move", "something #6", TestingUtils.makeTime(6));
-		final Item item7 = new Item(pack3, ITEM_ID7, "item-to-move-rename-RENAMED", "something #7", TestingUtils.makeTime(7));
-		final Item item8 = new Item(pack2, ITEM_ID8, "item-to-have-been-moved", "something #8", TestingUtils.makeTime(8));
+		final Item item7 = new Item(pack3, ITEM_ID7, "item-to-move-rename-RENAMED", "something #7",
+				TestingUtils.makeTime(7));
+		final Item item8 = new Item(pack2, ITEM_ID8, "item-to-have-been-moved", "something #8",
+				TestingUtils.makeTime(8));
 		final Item item9 = new Item(pack2, ITEM_ID9, "item-to-have-been-moved-and-rename-RENAMED", "something #9",
 				TestingUtils.makeTime(9));
-		final Item itemA = new Item(pack3, ITEM_IDa, "item-to-have-been-moved-and-move", "something #10", TestingUtils.makeTime(10));
+		final Item itemA = new Item(pack3, ITEM_IDa, "item-to-have-been-moved-and-move", "something #10",
+				TestingUtils.makeTime(10));
 		final Item itemB = new Item(pack2, ITEM_IDb, "item-to-have-been-moved-and-update", "Totally different content.",
 				TestingUtils.makeTime(11));
 
@@ -228,16 +199,6 @@ public class StoragesDifferencerTest {
 		storage.createItem(itemD);
 
 		return storage;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	private Package pack(String id) {
-		return new Package(id, "whatever...");
-	}
-
-	private Item item(String id) {
-		return new Item(pack("xxx"), id, "whatever", "Something ##", TestingUtils.makeTime(0));
 	}
 
 }
