@@ -1,16 +1,9 @@
 package cz.martlin.jevernote.storage.impls;
 
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
@@ -19,20 +12,27 @@ import cz.martlin.jevernote.misc.Log;
 
 public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
-	public static final String INDEX_FILE_NAME = ".index.properties";
-	private static final String COMMENT = "Jevernote index file (mapping betweeen names and ids of packages and items)";
-
 	private final Map<String, File> bindings;
 	private boolean changed;
 
-	public FileSystemStorageWithIndexFile(File basePath) throws JevernoteException {
+	public FileSystemStorageWithIndexFile(File basePath, Map<String, File> bindings) {
 		super(basePath);
 
-		this.bindings = loadBindings();
+		this.bindings = bindings;
 	}
 
 	protected Map<String, File> getBindings() {
 		return bindings;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void markChanged() {
+		this.changed = true;
+	}
+
+	public boolean isChanged() {
+		return changed;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -154,130 +154,10 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private void markChanged() {
-		this.changed = true;
-	}
-
-	public void checkAndSaveChanges() throws JevernoteException {
-		if (this.changed) {
-			saveChangesInIndex();
-		}
-	}
-
-	private void saveChangesInIndex() throws JevernoteException {
-		saveBindings();
-	}
-
-	public void reloadChangesInIndex() throws JevernoteException {
-		Map<String, File> loaded = loadBindings();
-
-		this.bindings.clear();
-		this.bindings.putAll(loaded);
-		this.changed = false;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	public static boolean hasIndexFile(File basePath) {
-		File file = indexFile(basePath);
-		return file.exists() && file.isFile();
-	}
-
-	public static void createIndexFile(File basePath) throws JevernoteException {
-		File file = indexFile(basePath);
-
-		try {
-			file.createNewFile(); // TODO make it with some content
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot create file", e);
-		}
-	}
-
-	private static File indexFile(File basePath) {
-		return new File(basePath, INDEX_FILE_NAME);
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	protected Map<String, File> loadBindings() throws JevernoteException {
-		Properties props = loadProperties();
-		Map<String, File> map = toMap(props);
-
-		return map;
-	}
-
-	private Map<String, File> toMap(Properties props) {
-		Map<String, File> result = new HashMap<>(props.size());
-
-		props.forEach((k, v) -> {
-			String id = (String) k;
-			String path = (String) v;
-
-			result.put(id, new File(basePath, path));
-		});
-
-		return result;
-	}
-
-	private Properties loadProperties() throws JevernoteException {
-		File file = indexFile(basePath);
-
-		Properties props = new Properties();
-
-		Reader r = null;
-		try {
-			r = new FileReader(file);
-			props.load(r);
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot read index file", e);
-		} finally {
-			closeQuietly(r);
-		}
-
-		return props;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	protected void saveBindings() throws JevernoteException {
-		Properties props = toProperties();
-		saveProperties(props);
-
-	}
-
-	private Properties toProperties() {
-		Properties props = new Properties();
-
-		bindings.forEach((id, file) -> {
-			String path = packOrItemToPath(file);
-			if (path != null) {
-				props.put(id, path);
-			}
-		});
-
-		return props;
-	}
-
-	private void saveProperties(Properties props) throws JevernoteException {
-		File file = indexFile(basePath);
-
-		Writer w = null;
-		try {
-			w = new FileWriter(file);
-			props.store(w, COMMENT);
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot write index file", e);
-		} finally {
-			closeQuietly(w);
-		}
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
 	private void createPackageInIndex(Package pack) {
 		String id = checkPackageId(pack, "Creating");
 		File dir = packageToNative(pack);
-		
+
 		bindings.put(id, dir);
 
 		markChanged();
@@ -286,7 +166,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	private void createItemInIndex(Item item) {
 		String id = checkItemId(item, "Creating");
 		File file = itemToNative(item);
-		
+
 		bindings.put(id, file);
 
 		markChanged();
@@ -295,7 +175,7 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	private void movePackageInIndex(Package oldPack, Package newPack) {
 		File newDir = packageToNative(newPack);
 		File oldDir = packageToNative(oldPack);
-		
+
 		String id = checkPackageId(newPack, "Moving");
 		bindings.put(id, newDir);
 
@@ -371,16 +251,6 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-
-	private void closeQuietly(Closeable closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (IOException e) {
-				// ignore, or not?
-			}
-		}
-	}
 
 	public static <K, V> K findKey(V value, Map<K, V> map) {
 

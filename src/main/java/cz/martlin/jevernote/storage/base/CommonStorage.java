@@ -17,6 +17,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		super();
 	}
 
+
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
@@ -116,7 +117,8 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 
 	}
 
-	protected abstract void movePackageNative(Package oldPack, Package newPack, PT oldNativ, PT newNativ) throws Exception;
+	protected abstract void movePackageNative(Package oldPack, Package newPack, PT oldNativ, PT newNativ)
+			throws Exception;
 
 	@Override
 	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
@@ -130,7 +132,6 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		}
 	}
 
-
 	protected abstract void moveItemNative(Item oldItem, Item newItem, IT oldNativ, IT newNativ) throws Exception;
 
 	@Override
@@ -143,7 +144,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 			throw new JevernoteException("Cannot update item", e);
 		}
 	}
-	
+
 	protected abstract void updateNativeItem(Item item, IT nativ) throws Exception;
 
 	///////////////////////////////////////////////////////////////////////////

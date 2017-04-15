@@ -11,6 +11,7 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.ContentProcessor;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.EvernoteStrippingProcessor;
+import cz.martlin.jevernote.storage.impls.FSwIndexFileStorageWrapper;
 import cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFile;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
@@ -47,13 +48,11 @@ public class _Testing {
 	private static void testFileSystem() {
 		File base = new File("/home/martin/tmp/jevernote/");
 
-		FileSystemStorageWithIndexFile storage;
+		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(base);
 		try {
-			if (!FileSystemStorageWithIndexFile.hasIndexFile(base)) {
-				System.err.println("Index file does not exist");
-				return;
-			}
-			storage = new FileSystemStorageWithIndexFile(base);
+			
+			storage.install();
+			storage.initialize();
 		} catch (JevernoteException e) {
 			e.printStackTrace();
 			return;

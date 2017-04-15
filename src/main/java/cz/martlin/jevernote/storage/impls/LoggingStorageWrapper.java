@@ -10,68 +10,77 @@ import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.WrappingStorage;
 
-public class LoggingStorageWrapper implements BaseStorage {
+public class LoggingStorageWrapper extends WrappingStorage {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private final BaseStorage wrapped;
 
 	public LoggingStorageWrapper(BaseStorage wrapped) {
 		this.wrapped = wrapped;
-
 	}
 
+	@Override
+	public BaseStorage getWrapped() {
+		return wrapped;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
 	public StorageData list() throws JevernoteException {
-		return wrapped.list();
+		return super.list();
 	}
 
 	public List<Package> listPackages() throws JevernoteException {
-		return wrapped.listPackages();
+		return super.listPackages();
 	}
 
 	public List<Item> listItems(Package pack) throws JevernoteException {
-		return wrapped.listItems(pack);
+		return super.listItems(pack);
 	}
+
+	///////////////////////////////////////////////////////////////////////////
 
 	public void createPackage(Package pack) throws JevernoteException {
 		LOG.debug("Creating package " + pack.getName());
-		wrapped.createPackage(pack);
+		super.createPackage(pack);
 		LOG.info("Created package " + pack.getName());
 	}
 
 	public void createItem(Item item) throws JevernoteException {
 		LOG.debug("Creating item " + item.getName());
-		wrapped.createItem(item);
+		super.createItem(item);
 		LOG.info("Created item " + item.getName());
 	}
 
 	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
 		LOG.debug("Moving package " + oldPack.getName());
-		wrapped.movePackage(oldPack, newPack);
+		super.movePackage(oldPack, newPack);
 		LOG.info("Moved package " + oldPack.getName());
 	}
 
 	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
 		LOG.debug("Moving item " + oldItem.getName());
-		wrapped.moveItem(oldItem, newItem);
+		super.moveItem(oldItem, newItem);
 		LOG.info("Moved item " + oldItem.getName());
 	}
 
 	public void updateItem(Item item) throws JevernoteException {
 		LOG.debug("Updating item " + item.getName());
-		wrapped.updateItem(item);
+		super.updateItem(item);
 		LOG.info("Updated item " + item.getName());
 	}
 
 	public void removePackage(Package pack) throws JevernoteException {
 		LOG.debug("Removing package " + pack.getName());
-		wrapped.removePackage(pack);
+		super.removePackage(pack);
 		LOG.info("Removed package " + pack.getName());
 	}
 
 	public void removeItem(Item item) throws JevernoteException {
 		LOG.debug("Removing item " + item.getName());
-		wrapped.removeItem(item);
+		super.removeItem(item);
 		LOG.info("Removed item " + item.getName());
 	}
 

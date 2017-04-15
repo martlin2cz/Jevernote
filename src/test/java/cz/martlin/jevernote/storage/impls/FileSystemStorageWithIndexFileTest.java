@@ -2,7 +2,6 @@ package cz.martlin.jevernote.storage.impls;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeNoException;
 
 import java.io.File;
@@ -35,29 +34,22 @@ public class FileSystemStorageWithIndexFileTest {
 
 	@Test
 	public void testIndexFileItself() throws JevernoteException {
-		assertFalse(FileSystemStorageWithIndexFile.hasIndexFile(baseDir));
-		try {
-			new FileSystemStorageWithIndexFile(baseDir);
-			fail("Index file does not exist, should fail");
-		} catch (JevernoteException e) {
-			// ok
-		}
+		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(baseDir);
 
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
+		assertTrue(storage.hasIndexFile());
 
-		assertTrue(FileSystemStorageWithIndexFile.hasIndexFile(baseDir));
+		storage.uninstall();
 
-		try {
-			new FileSystemStorageWithIndexFile(baseDir);
-		} catch (JevernoteException e) {
-			fail("Index file exists, should not fail");
-		}
+		assertFalse(storage.hasIndexFile());
+
+		storage.install();
+
+		assertTrue(storage.hasIndexFile());
+
 	}
 
 	@Test
 	public void testBasicPackages() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
 		final String name1 = "foo";
 		final String name2 = "bar";
 
@@ -82,8 +74,6 @@ public class FileSystemStorageWithIndexFileTest {
 
 	@Test
 	public void testBasicPackagesByHand() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
 		final String name1 = "foo";
 		final String name2 = "bar";
 
@@ -108,8 +98,6 @@ public class FileSystemStorageWithIndexFileTest {
 
 	@Test
 	public void testBasicItems() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
 		final String packName1 = "foo";
 		final String packName2 = "bar";
 		final String name1 = "Lorem";
@@ -139,8 +127,6 @@ public class FileSystemStorageWithIndexFileTest {
 
 	@Test
 	public void testBasicItemsByHand() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
 		final String packName1 = "foo";
 		final String packName2 = "bar";
 		final String name1 = "Lorem";
@@ -170,8 +156,6 @@ public class FileSystemStorageWithIndexFileTest {
 
 	@Test
 	public void testCutTghrought() throws JevernoteException, IOException {
-		FileSystemStorageWithIndexFile.createIndexFile(baseDir);
-
 		final String packName1 = "foo";
 		final String packName2 = "bar";
 		final String name1 = "Lorem";
@@ -201,12 +185,12 @@ public class FileSystemStorageWithIndexFileTest {
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static void createPackage(boolean withId, String name) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Package pack = TestingUtils.createPackageObj(withId, name);
 		storage.createPackage(pack);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void createPackageByHand(String name) throws IOException {
@@ -217,12 +201,12 @@ public class FileSystemStorageWithIndexFileTest {
 
 	protected static void createItem(boolean withId, String packName, String name, String content)
 			throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Item item = TestingUtils.createItemObj(withId, packName, name, content);
 		storage.createItem(item);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void createItemByHand(String packName, String name, String content) throws IOException {
@@ -233,7 +217,7 @@ public class FileSystemStorageWithIndexFileTest {
 	}
 
 	protected static void movePackage(boolean withId, String oldName, String newName) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Package oldPack = TestingUtils.createPackageObj(withId, oldName);
 		Package newPack = oldPack.copy();
@@ -241,7 +225,7 @@ public class FileSystemStorageWithIndexFileTest {
 		newPack.setName(newName);
 		storage.movePackage(oldPack, newPack);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void movePackageByHand(String oldName, String newName) throws IOException {
@@ -253,7 +237,7 @@ public class FileSystemStorageWithIndexFileTest {
 
 	protected static void moveItem(boolean withId, String oldPackName, String oldName, String newPackName,
 			String newName) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Item oldItem = TestingUtils.createItemObj(withId, oldPackName, oldName, null);
 		Item newItem = oldItem.copy();
@@ -262,7 +246,7 @@ public class FileSystemStorageWithIndexFileTest {
 		newItem.setName(newName);
 		storage.moveItem(oldItem, newItem);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void moveItemByHand(String oldPackName, String oldName, String newPackName, String newName)
@@ -275,12 +259,12 @@ public class FileSystemStorageWithIndexFileTest {
 
 	protected static void updateItem(boolean withId, String packName, String name, String newContent)
 			throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Item item = TestingUtils.createItemObj(withId, packName, name, newContent);
 		storage.updateItem(item);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void updateItemByHand(String packName, String name, String newContent) throws IOException {
@@ -291,12 +275,12 @@ public class FileSystemStorageWithIndexFileTest {
 	}
 
 	protected static void removePackage(boolean withId, String name) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Package pack = TestingUtils.createPackageObj(withId, name);
 		storage.removePackage(pack);
 
-		storage.checkAndSaveChanges();
+		finishStorage(storage);
 	}
 
 	protected static void removePackageByHand(String name) throws IOException {
@@ -306,13 +290,12 @@ public class FileSystemStorageWithIndexFileTest {
 	}
 
 	protected static void removeItem(boolean withId, String packName, String name) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		Item item = TestingUtils.createItemObj(withId, packName, name, null);
 		storage.removeItem(item);
 
-		storage.checkAndSaveChanges();
-
+		finishStorage(storage);
 	}
 
 	protected static void removeItemByHand(String packName, String name) throws IOException {
@@ -323,15 +306,28 @@ public class FileSystemStorageWithIndexFileTest {
 
 	///////////////////////////////////////////////////////////////////////////
 
+	private static FSwIndexFileStorageWrapper initStorage() throws JevernoteException {
+		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(baseDir);
+
+		storage.initialize();
+
+		return storage;
+	}
+
+	private static void finishStorage(FSwIndexFileStorageWrapper storage) throws JevernoteException {
+		storage.finish();
+	}
+	///////////////////////////////////////////////////////////////////////////
+
 	protected static boolean hasIndexPack(String name) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		File dir = dirOfPack(name);
 		return storage.getBindings().values().contains(dir);
 	}
 
 	protected static boolean hasIndexItem(String packName, String name) throws JevernoteException {
-		FileSystemStorageWithIndexFile storage = new FileSystemStorageWithIndexFile(baseDir);
+		FSwIndexFileStorageWrapper storage = initStorage();
 
 		File file = fileOfItem(packName, name);
 		return storage.getBindings().values().contains(file);
@@ -351,25 +347,31 @@ public class FileSystemStorageWithIndexFileTest {
 			Log.warn("Cannot create temp directory, skipping test "
 					+ FileSystemStorageWithIndexFileTest.class.getName());
 		}
+
 	}
 
 	@AfterClass
-	public static void tearDownAfterClass() throws IOException {
+	public static void tearDownAfterClass() throws IOException, JevernoteException {
 		delete(baseDir);
-
 		Log.write("Working tmp directory deleted!");
+
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		/*
-		 * File dir = createPackDir(PACK0_NAME); createItemFile(dir,
-		 * ITEM0_NAME);
-		 */
+		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(baseDir);
+		try {
+			storage.install();
+		} catch (JevernoteException e) {
+			assumeNoException(e);
+			Log.warn("Cannot install, skipping test " + FileSystemStorageWithIndexFileTest.class.getName());
+		}
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(baseDir);
+		storage.uninstall();
 
 		Arrays//
 				.stream(baseDir.listFiles()) //
@@ -381,8 +383,6 @@ public class FileSystemStorageWithIndexFileTest {
 					}
 				});
 	}
-
-	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
 

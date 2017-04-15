@@ -46,4 +46,16 @@ public class SimpleJevernoteCore extends BaseJevernoteCore {
 
 	}
 
+	@Override
+	public BaseStorage createLocal() throws JevernoteException {
+		// TODO ....
+		return null;
+	}
+
+	@Override
+	public BaseStorage createRemote() throws JevernoteException {
+		// TODO ....
+		return null;
+	}
+
 }
