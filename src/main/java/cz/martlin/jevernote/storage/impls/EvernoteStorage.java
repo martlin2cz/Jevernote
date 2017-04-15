@@ -24,15 +24,17 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.CommonStorage;
+import cz.martlin.jevernote.storage.base.ContentProcessor;
 
 public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	private final NoteStoreClient cli;
-	private final boolean removePreable;
+	private final ContentProcessor proces;
 
-	public EvernoteStorage(String token, boolean removePreamble) throws JevernoteException {
+	public EvernoteStorage(String token, ContentProcessor proces) throws JevernoteException {
+		super();
 		this.cli = createNoteStore(token);
-		this.removePreable = removePreamble;
+		this.proces = proces;
 	}
 
 	/**
@@ -165,7 +167,7 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 		String id = item.getId();
 		note.setGuid(id);
 
-		String content = contentToNative(item.getContent());
+		String content = proces.toStorage(item.getContent());
 		note.setContent(content);
 
 		return note;
@@ -175,7 +177,7 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	protected Item nativeToItem(Package pack, Note note) {
 		String id = note.getGuid();
 		String name = note.getTitle();
-		String content = nativeToContent(note.getContent());
+		String content = proces.fromStorage(note.getContent());
 
 		Calendar lastModifiedAt = toCalendar(note.getUpdated());
 
@@ -205,36 +207,5 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-
-	private String contentToNative(String content) {
-		if (!removePreable) {
-			return content;
-		} else {
-			return //
-			"<?xml version=\"1.0\" encoding=\"UTF-8\"?>" //
-					+ "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">" //
-					+ "<en-note>" //
-					+ content //
-					+ "</en-note>"; //
-		}
-
-	}
-
-	private String nativeToContent(String nativ) {
-		if (!removePreable) {
-			return nativ;
-		} else {
-			final String noteStartTag = "<en-note>";
-			final String noteEndTag = "</en-note>";
-
-			int startIndex = nativ.indexOf(noteStartTag);
-			int startCut = startIndex + noteStartTag.length();
-
-			int endIndex = nativ.lastIndexOf(noteEndTag);
-			int endCut = endIndex;
-
-			return nativ.substring(startCut, endCut);
-		}
-	}
 
 }

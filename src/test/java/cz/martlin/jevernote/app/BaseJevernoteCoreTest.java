@@ -3,15 +3,15 @@ package cz.martlin.jevernote.app;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import cz.martlin.jevernote.core.base.BaseJevernoteCore;
+import cz.martlin.jevernote.core.impl.SimpleJevernoteCore;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
-import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
 import cz.martlin.jevernote.tools.TestingUtils;
 
-public class JevernoteCoreTest {
+public class BaseJevernoteCoreTest {
 
 	private static final String PACK_ID0 = "pack-0";
 	private static final String PACK_ID1 = "pack-1";
@@ -35,12 +35,12 @@ public class JevernoteCoreTest {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	public JevernoteCoreTest() {
+	public BaseJevernoteCoreTest() {
 	}
 	
 	@BeforeClass
 	public static void beforeClass() {
-		ConsoleLoggingConfigurer.setTo(false, true);
+		ConsoleLoggingConfigurer.setTo(true, true);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ public class JevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		JevernoteCore core = new JevernoteCore(local, remote);
+		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
 
 		core.push(false, false);
 
@@ -67,7 +67,7 @@ public class JevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		JevernoteCore core = new JevernoteCore(local, remote);
+		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
 
 		core.push(true, false);
 
@@ -84,7 +84,7 @@ public class JevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		JevernoteCore core = new JevernoteCore(local, remote);
+		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
 
 		core.push(false, true);
 

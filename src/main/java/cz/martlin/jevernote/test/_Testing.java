@@ -8,7 +8,9 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.ContentProcessor;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
+import cz.martlin.jevernote.storage.impls.EvernoteStrippingProcessor;
 import cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFile;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
@@ -18,7 +20,7 @@ public class _Testing {
 		// TODO
 		testEvernote();
 		// testFileSystem();
-		//testInMemory();
+		// testInMemory();
 
 	}
 
@@ -44,7 +46,7 @@ public class _Testing {
 
 	private static void testFileSystem() {
 		File base = new File("/home/martin/tmp/jevernote/");
-		
+
 		FileSystemStorageWithIndexFile storage;
 		try {
 			if (!FileSystemStorageWithIndexFile.hasIndexFile(base)) {
@@ -64,8 +66,9 @@ public class _Testing {
 		final String token = "S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f";
 
 		EvernoteStorage storage;
+		ContentProcessor proc = new EvernoteStrippingProcessor();
 		try {
-			storage = new EvernoteStorage(token, true);
+			storage = new EvernoteStorage(token, proc);
 		} catch (JevernoteException e) {
 			e.printStackTrace();
 			return;
