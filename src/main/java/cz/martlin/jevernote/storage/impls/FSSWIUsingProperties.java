@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import cz.martlin.jevernote.dataobj.config.Config;
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.misc.FileSystemUtils;
 import cz.martlin.jevernote.misc.JevernoteException;
 

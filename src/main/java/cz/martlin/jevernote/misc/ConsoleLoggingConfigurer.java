@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.app;
+package cz.martlin.jevernote.misc;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

@@ -2,7 +2,7 @@ package cz.martlin.jevernote.storage.base;
 
 import java.util.List;
 
-import cz.martlin.jevernote.dataobj.config.Config;
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;

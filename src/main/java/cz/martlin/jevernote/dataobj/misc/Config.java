@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.dataobj.config;
+package cz.martlin.jevernote.dataobj.misc;
 
 import java.io.File;
 import java.util.Properties;

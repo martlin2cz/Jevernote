@@ -18,10 +18,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cz.martlin.jevernote.app.ConsoleLoggingConfigurer;
-import cz.martlin.jevernote.dataobj.config.Config;
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.FileSystemUtils;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.tools.TestingUtils;

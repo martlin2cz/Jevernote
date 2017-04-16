@@ -1,0 +1,196 @@
+package cz.martlin.jevernote.app;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cz.martlin.jevernote.dataobj.misc.CommandLineData;
+
+public class CommandLineParser {
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
+
+	public CommandLineParser() {
+	}
+
+	public CommandLineData parse(String[] args) {
+		Queue<String> params = toQueue(args);
+		return parse(params);
+	}
+
+	private CommandLineData parse(Queue<String> params) {
+		CommandLineData data = new CommandLineData();
+
+		parseGlobalFlags(params, data);
+
+		String command = parseCommand(params);
+		if (command == null) {
+			return null;
+		}
+
+		data.setCommand(command);
+
+		boolean succ = parseCommandFlags(command, params, data);
+		if (!succ) {
+			return null;
+		}
+
+		return data;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void parseGlobalFlags(Queue<String> params, CommandLineData data) {
+		while (!params.isEmpty()) {
+
+			String next = params.peek();
+			if (!next.startsWith("-")) {
+				return;
+			}
+
+			next = params.poll();
+			parseGlobalFlag(next, params, data);
+		}
+	}
+
+	private void parseGlobalFlag(String next, Queue<String> params, CommandLineData data) {
+		switch (next) {
+		case "--verbose":
+			data.setVerbose(true);
+			break;
+
+		case "--debug":
+			data.setDebug(true);
+			break;
+
+		case "--interactive":
+			data.setInteractive(true);
+			break;
+
+		case "--base-dir":
+			String dirName = params.poll();
+			if (dirName == null) {
+				LOG.error("Missing dir name value, ignoring flag");
+			} else {
+				File baseDir = new File(dirName);
+				data.setBaseDir(baseDir);
+			}
+			break;
+		default:
+			LOG.warn("Unknown flag " + next + ", ignoring");
+		}
+
+	}
+
+	private String parseCommand(Queue<String> params) {
+		if (params.isEmpty()) {
+			return null;
+		}
+
+		String command = params.poll();
+		switch (command) {
+		case "init":
+		case "clone":
+		case "push":
+		case "pull":
+		case "synchronize":
+		case "status":
+			// TODO mv, ad, rm ...
+			return command;
+		case "easter":
+			System.out.println("Happy easter!");
+		default:
+			LOG.error("Uknown command: " + command);
+			return null;
+		}
+	}
+
+	private boolean parseCommandFlags(String command, Queue<String> params, CommandLineData data) {
+		switch (command) {
+		case "init":
+		case "clone":
+			return parseInitCloneFlags(params, data);
+		case "push":
+		case "pull":
+			return parsePushPullFlags(params, data);
+		case "synchronize":
+			return parseSynchronizeFlags(params, data);
+		case "status":
+			return true;
+		default:
+			throw new IllegalArgumentException("Unknown command:" + command);
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private boolean parseInitCloneFlags(Queue<String> params, CommandLineData data) {
+		if (params.size() < 1) {
+			LOG.error("Missing remote token");
+			return false;
+		}
+
+		if (params.size() > 1) {
+			LOG.warn("Uneccessary params after remote token");
+		}
+
+		String token = params.poll();
+		data.setRemoteToken(token);
+
+		return true;
+	}
+
+	private boolean parsePushPullFlags(Queue<String> params, CommandLineData data) {
+		while (!params.isEmpty()) {
+			String next = params.poll();
+			switch (next) {
+			case "--weak":
+				data.setWeak(true);
+				break;
+			case "--force":
+				data.setForce(true);
+				break;
+			default:
+				LOG.warn("Unknown flag " + next);
+				break;
+			}
+		}
+
+		return true;
+	}
+
+	private boolean parseSynchronizeFlags(Queue<String> params, CommandLineData data) {
+		if (params.size() < 1) {
+			LOG.error("Missing target specifier");
+			return false;
+		}
+
+		if (params.size() > 1) {
+			LOG.warn("Uneccessary params after target specifier");
+		}
+
+		String pref = params.poll();
+
+		if ("local".equals(pref)) {
+			data.setPreferLocal(true);
+			return true;
+		}
+		if ("remote".equals(pref)) {
+			data.setPreferLocal(false);
+			return true;
+		}
+		
+		LOG.error("Required remote target specifier, given: " + pref);
+		return false;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private LinkedList<String> toQueue(String[] args) {
+		return new LinkedList<String>(Arrays.asList(args));
+	}
+
+}

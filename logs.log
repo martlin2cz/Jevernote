@@ -667,3 +667,67 @@
 18:20:37 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
 18:20:37 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
 18:20:37 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+20:03:42 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+20:03:42 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -debug, ignoring
+20:15:24 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --verbose, ignoring
+20:22:48 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: 12345
+20:22:48 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: --weak
+20:32:14 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+20:32:14 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+20:32:14 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+20:32:14 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+20:32:14 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+20:32:14 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+20:32:14 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+20:33:22 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+20:33:22 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+20:33:22 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given:--force
+20:33:22 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+20:33:22 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+20:33:22 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+20:33:22 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+20:33:22 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+20:40:55 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+20:40:55 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+20:40:55 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+20:40:55 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+20:40:55 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+20:40:55 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+20:40:55 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+20:40:55 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+20:40:55 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add

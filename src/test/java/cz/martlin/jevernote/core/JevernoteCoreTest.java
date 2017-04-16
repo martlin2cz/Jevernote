@@ -8,9 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cz.martlin.jevernote.app.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 import cz.martlin.jevernote.tools.TestingUtils;
