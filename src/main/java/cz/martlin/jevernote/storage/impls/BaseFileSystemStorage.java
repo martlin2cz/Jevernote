@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
-import cz.martlin.jevernote.storage.base.CommonStorage;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 
-public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
+public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, File> {
 
 	protected final File basePath;
 
@@ -23,6 +23,7 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 		super();
 		this.basePath = basePath;
 	}
+
 
 	///////////////////////////////////////////////////////////////////////////
 

@@ -26,6 +26,12 @@ public class LoggingStorageWrapper extends WrappingStorage {
 		return wrapped;
 	}
 
+	@Override
+	public void initialize(String storageDesc) throws JevernoteException {
+		super.initialize(storageDesc);
+		
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
 
 	public StorageData list() throws JevernoteException {

@@ -4,12 +4,13 @@ import cz.martlin.jevernote.core.base.BaseJevernoteCore;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 
-public class SimpleJevernoteCore extends BaseJevernoteCore {
+@Deprecated
+public class XXXXSimpleJevernoteCore extends BaseJevernoteCore {
 
 	private final BaseStorage local;
 	private final BaseStorage remote;
 
-	public SimpleJevernoteCore(BaseStorage local, BaseStorage remote) {
+	public XXXXSimpleJevernoteCore(BaseStorage local, BaseStorage remote) {
 		super();
 		this.local = local;
 		this.remote = remote;

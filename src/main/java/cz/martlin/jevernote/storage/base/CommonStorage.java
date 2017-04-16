@@ -18,6 +18,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	}
 
 
+
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override

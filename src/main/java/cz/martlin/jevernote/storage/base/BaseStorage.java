@@ -17,6 +17,14 @@ import cz.martlin.jevernote.misc.JevernoteException;
 public interface BaseStorage {
 
 	/**
+	 * Does the initialization of storage using some storage descriptor.
+	 * 
+	 * @param storageDesc
+	 * @throws JevernoteException
+	 */
+	void initialize(String storageDesc) throws JevernoteException;
+
+	/**
 	 * Lists all items in all packages.
 	 * 
 	 * @return

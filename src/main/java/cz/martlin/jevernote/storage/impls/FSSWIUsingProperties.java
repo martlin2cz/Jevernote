@@ -7,71 +7,38 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
-import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.BaseStorage;
-import cz.martlin.jevernote.storage.base.WrappingStorage;
 
-public class FSwIndexFileStorageWrapper extends WrappingStorage {
+public class FSSWIUsingProperties extends FSstorageWithIndex {
 
 	public static final String INDEX_FILE_NAME = ".index.properties";
 	private static final String COMMENT = "Jevernote index file (mapping betweeen names and ids of packages and items)";
 
-	private final File basePath;
-
-	private FileSystemStorageWithIndexFile wrapped;
-
-	public FSwIndexFileStorageWrapper(File basePath) {
-		super();
-		this.basePath = basePath;
+	public FSSWIUsingProperties(File basePath) {
+		super(basePath);
 	}
 
 	@Override
-	public BaseStorage getWrapped() {
-		if (wrapped == null) {
-			throw new IllegalStateException("Not yet initialized");
-		}
-
-		return wrapped;
-	}
-
-	public Map<String, File> getBindings() {
-		return wrapped.getBindings();
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	public void install() throws JevernoteException {
-		createIndexFile(basePath);
+	protected Map<String, File> initializeBindingsStorage(String noDescNeeded) throws JevernoteException {
+		Map<String, File> bindings = new HashMap<>();
+		saveBindings(bindings);
+		return bindings;
 	}
 
 	@Override
-	public void initialize() throws JevernoteException {
+	protected Map<String, File> loadBindings() throws JevernoteException {
 		File file = indexFile(basePath);
-		Map<String, File> bindings = loadBindings(basePath, file);
-
-		wrapped = new FileSystemStorageWithIndexFile(basePath, bindings);
+		return loadBindings(basePath, file);
 	}
 
 	@Override
-	public void finish() throws JevernoteException {
-		if (wrapped.isChanged()) {
-			Map<String, File> bindings = wrapped.getBindings();
-			File file = indexFile(basePath);
-			saveBindings(file, bindings);
-		}
-	}
-
-	public void uninstall() throws JevernoteException {
-		removeIndexFile(basePath);
-	}
-
-	public boolean hasIndexFile() {
-		return hasIndexFile(basePath);
+	protected void saveBindings(Map<String, File> bindings) throws JevernoteException {
+		File file = indexFile(basePath);
+		saveBindings(file, bindings);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -134,7 +101,6 @@ public class FSwIndexFileStorageWrapper extends WrappingStorage {
 	}
 
 	private static void saveProperties(File file, Properties props) throws JevernoteException {
-		
 
 		Writer w = null;
 		try {
@@ -144,35 +110,6 @@ public class FSwIndexFileStorageWrapper extends WrappingStorage {
 			throw new JevernoteException("Cannot write index file", e);
 		} finally {
 			closeQuietly(w);
-		}
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	public static boolean hasIndexFile(File basePath) {
-		File file = indexFile(basePath);
-		
-		return file.exists() && file.isFile();
-	}
-
-	public static void createIndexFile(File basePath) throws JevernoteException {
-		File file = indexFile(basePath);
-		Properties props = new Properties();
-		
-		try {
-			saveProperties(file, props);
-		} catch (JevernoteException e) {
-			throw new JevernoteException("Cannot create file", e);
-		}
-	}
-
-	private static void removeIndexFile(File basePath) throws JevernoteException {
-		File file = indexFile(basePath);
-
-		try {
-			Files.delete(file.toPath());
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot create file", e);
 		}
 	}
 
@@ -191,7 +128,5 @@ public class FSwIndexFileStorageWrapper extends WrappingStorage {
 			}
 		}
 	}
-
-	///////////////////////////////////////////////////////////////////////////
 
 }

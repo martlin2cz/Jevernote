@@ -11,8 +11,8 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.ContentProcessor;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.EvernoteStrippingProcessor;
-import cz.martlin.jevernote.storage.impls.FSwIndexFileStorageWrapper;
-import cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFile;
+import cz.martlin.jevernote.storage.impls.XXXFSwIndexFileStorageWrapper;
+import cz.martlin.jevernote.storage.impls.XXXFileSystemStorageWithIndexFile;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class _Testing {
@@ -48,7 +48,7 @@ public class _Testing {
 	private static void testFileSystem() {
 		File base = new File("/home/martin/tmp/jevernote/");
 
-		FSwIndexFileStorageWrapper storage = new FSwIndexFileStorageWrapper(base);
+		XXXFSwIndexFileStorageWrapper storage = new XXXFSwIndexFileStorageWrapper(base);
 		try {
 			
 			storage.install();
@@ -67,7 +67,8 @@ public class _Testing {
 		EvernoteStorage storage;
 		ContentProcessor proc = new EvernoteStrippingProcessor();
 		try {
-			storage = new EvernoteStorage(token, proc);
+			storage = new EvernoteStorage(proc);
+			storage.initialize(token);
 		} catch (JevernoteException e) {
 			e.printStackTrace();
 			return;

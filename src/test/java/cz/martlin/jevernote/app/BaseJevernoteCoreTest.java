@@ -4,7 +4,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cz.martlin.jevernote.core.base.BaseJevernoteCore;
-import cz.martlin.jevernote.core.impl.SimpleJevernoteCore;
+import cz.martlin.jevernote.core.impl.XXXXSimpleJevernoteCore;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
@@ -50,9 +50,9 @@ public class BaseJevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
+		BaseJevernoteCore core = new XXXXSimpleJevernoteCore(local, remote);
 
-		core.push(false, false);
+		core.pushCmd(false, false);
 
 		local.print(System.out);
 		System.out.println();
@@ -67,9 +67,9 @@ public class BaseJevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
+		BaseJevernoteCore core = new XXXXSimpleJevernoteCore(local, remote);
 
-		core.push(true, false);
+		core.pushCmd(true, false);
 
 		local.print(System.out);
 		System.out.println();
@@ -84,9 +84,9 @@ public class BaseJevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		BaseJevernoteCore core = new SimpleJevernoteCore(local, remote);
+		BaseJevernoteCore core = new XXXXSimpleJevernoteCore(local, remote);
 
-		core.push(false, true);
+		core.pushCmd(false, true);
 
 		local.print(System.out);
 		System.out.println();

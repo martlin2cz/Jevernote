@@ -1,7 +1,6 @@
 package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -10,96 +9,45 @@ import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.Log;
 
-public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
+public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 
-	private final Map<String, File> bindings;
-	private boolean changed;
+	private Map<String, File> bindings;
+	private boolean indexChanged;
 
-	public FileSystemStorageWithIndexFile(File basePath, Map<String, File> bindings) {
+	public FSstorageWithIndex(File basePath) {
 		super(basePath);
-
-		this.bindings = bindings;
 	}
 
-	protected Map<String, File> getBindings() {
+	public Map<String, File> getBindings() {
 		return bindings;
 	}
+	
+	@Override
+	public void initialize(String storageDesc) throws JevernoteException {
+		initializeBindingsStorage(storageDesc);
+	}
 
+	protected abstract Map<String, File> initializeBindingsStorage(String storageDesc) throws JevernoteException;
+
+	
 	///////////////////////////////////////////////////////////////////////////
 
-	private void markChanged() {
-		this.changed = true;
+	
+	@Override
+	protected void doLoad() throws JevernoteException {
+		this.bindings = loadBindings();
 	}
 
-	public boolean isChanged() {
-		return changed;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
+	protected abstract Map<String, File> loadBindings() throws JevernoteException;
 
 	@Override
-	protected String findIdOfItem(File file) {
-		String id = findKey(file, bindings);
-		if (id != null) {
-			return id;
-		} else {
-			Log.warn("No record for item " + packOrItemToPath(file) + " in index file");
-			return createId();
+	protected void doStore() throws JevernoteException {
+		if (requiresSave()) {
+			saveBindings(bindings);
 		}
 	}
 
-	@Override
-	protected String findIdOfPack(File dir) {
-		String id = findKey(dir, bindings);
-		if (id != null) {
-			return id;
-		} else {
-			Log.warn("No record for package " + packOrItemToPath(dir) + " in index file");
-			return createId();
-		}
-	}
-
-	@Override
-	protected File findPackageDirById(String id) {
-		File dir = bindings.get(id);
-		if (dir != null) {
-			return dir;
-		} else {
-			throw new IllegalArgumentException("Package with id " + id + " seems does not exist");
-		}
-	}
-
-	@Override
-	protected File findItemFileById(String id) {
-		File file = bindings.get(id);
-		if (file != null) {
-			return file;
-		} else {
-			throw new IllegalArgumentException("Item with id " + id + " seems does not exist");
-		}
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-
-	@Override
-	protected Package nativeToPackage(File dir) throws IOException {
-		Package pack = super.nativeToPackage(dir);
-
-		String id = findIdOfPack(dir);
-		pack.setId(id);
-
-		return pack;
-	}
-
-	@Override
-	protected Item nativeToItem(Package pack, File file) throws IOException {
-		Item item = super.nativeToItem(pack, file);
-
-		String id = findIdOfItem(file);
-		item.setId(id);
-
-		return item;
-	}
+	protected abstract void saveBindings(Map<String, File> bindings) throws JevernoteException;
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -252,6 +200,60 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
 	///////////////////////////////////////////////////////////////////////////
 
+	@Override
+	protected String findIdOfItem(File file) {
+		String id = findKey(file, bindings);
+		if (id != null) {
+			return id;
+		} else {
+			Log.warn("No record for item " + packOrItemToPath(file) + " in index file");
+			return createId();
+		}
+	}
+
+	@Override
+	protected String findIdOfPack(File dir) {
+		String id = findKey(dir, bindings);
+		if (id != null) {
+			return id;
+		} else {
+			Log.warn("No record for package " + packOrItemToPath(dir) + " in index file");
+			return createId();
+		}
+	}
+
+	@Override
+	protected File findPackageDirById(String id) {
+		File dir = bindings.get(id);
+		if (dir != null) {
+			return dir;
+		} else {
+			throw new IllegalArgumentException("Package with id " + id + " seems does not exist");
+		}
+	}
+
+	@Override
+	protected File findItemFileById(String id) {
+		File file = bindings.get(id);
+		if (file != null) {
+			return file;
+		} else {
+			throw new IllegalArgumentException("Item with id " + id + " seems does not exist");
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void markChanged() {
+		this.indexChanged = true;
+	}
+
+	public boolean requiresSave() {
+		return this.indexChanged;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
 	public static <K, V> K findKey(V value, Map<K, V> map) {
 
 		for (Entry<K, V> entry : map.entrySet()) {
@@ -262,7 +264,5 @@ public class FileSystemStorageWithIndexFile extends BaseFileSystemStorage {
 
 		return null;
 	}
-
-	///////////////////////////////////////////////////////////////////////////
 
 }

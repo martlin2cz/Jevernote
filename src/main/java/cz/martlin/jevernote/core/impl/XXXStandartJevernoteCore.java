@@ -9,7 +9,7 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.ContentProcessor;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.EvernoteStrippingProcessor;
-import cz.martlin.jevernote.storage.impls.FSwIndexFileStorageWrapper;
+import cz.martlin.jevernote.storage.impls.XXXFSwIndexFileStorageWrapper;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class XXXStandartJevernoteCore extends BaseJevernoteCore {
@@ -38,7 +38,7 @@ public class XXXStandartJevernoteCore extends BaseJevernoteCore {
 		if (dryRun) {
 			return new InMemoryStorage();
 		} else {
-			return new FSwIndexFileStorageWrapper(basePath);
+			return new XXXFSwIndexFileStorageWrapper(basePath);
 		}
 	}
 	
@@ -78,8 +78,8 @@ public class XXXStandartJevernoteCore extends BaseJevernoteCore {
 
 	@Override
 	public void finish() throws JevernoteException {
-		local.finish();
-		remote.finish();
+		local.store();
+		remote.store();
 		StandartConfig.save(config);
 	}
 

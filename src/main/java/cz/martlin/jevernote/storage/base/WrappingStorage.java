@@ -17,26 +17,9 @@ public abstract class WrappingStorage implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void install() throws JevernoteException {
-		// nothing by default
+	public void initialize(String storageDesc) throws JevernoteException {
+		getWrapped().initialize(storageDesc);
 	}
-
-	@Override
-	public void uninstall() throws JevernoteException {
-		// nothing by default
-	}
-
-	@Override
-	public void initialize() throws JevernoteException {
-		// nothing by default
-	}
-
-	@Override
-	public void finish() throws JevernoteException {
-		// nothing by default
-	}
-
-	///////////////////////////////////////////////////////////////////////////
 
 	public StorageData list() throws JevernoteException {
 		return getWrapped().list();

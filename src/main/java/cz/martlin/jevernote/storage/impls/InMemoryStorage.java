@@ -26,6 +26,11 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		this.storage.putAll(data.getData());
 	}
 
+	@Override
+	public void initialize(String noDescNeeded) {
+		// no initialization needed
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override

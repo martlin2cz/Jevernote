@@ -20,54 +20,49 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
 
+import cz.martlin.jevernote.dataobj.config.StandartConfig;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.CommonStorage;
 import cz.martlin.jevernote.storage.base.ContentProcessor;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 
-public class EvernoteStorage extends CommonStorage<Notebook, Note> {
+public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 
-	private final NoteStoreClient cli;
+	private NoteStoreClient cli;
 	private final ContentProcessor proces;
 
-	public EvernoteStorage(String token, ContentProcessor proces) throws JevernoteException {
+	public EvernoteStorage(ContentProcessor proces) {
 		super();
-		this.cli = createNoteStore(token);
 		this.proces = proces;
 	}
 
-	/**
-	 * Connects to the evernote using given auth token.
-	 * 
-	 * @param token
-	 * @return
-	 * @throws JevernoteException
-	 */
-	private NoteStoreClient createNoteStore(String token) throws JevernoteException {
-		try {
-			// https://github.com/evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java
-			EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, token);
-			ClientFactory factory = new ClientFactory(evernoteAuth);
-			UserStoreClient userStore = factory.createUserStoreClient();
+	///////////////////////////////////////////////////////////////////////////
 
-			boolean versionOk = userStore.checkVersion("Evernote EDAMDemo (Java)",
-					com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
-					com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
+	protected void doLoad() throws JevernoteException {
+		StandartConfig config = StandartConfig.load();
+		String token = config.getAuthToken();
 
-			if (!versionOk) {
-				throw new IllegalArgumentException("Incompatible Evernote client protocol version");
-			}
+		this.cli = createNoteStore(token);
 
-			// Set up the NoteStore client
-			NoteStoreClient noteStore = factory.createNoteStoreClient();
-			return noteStore;
-		} catch (Exception e) {
-			throw new JevernoteException("Cannot connec to evernote", e);
-		}
 	}
 
+	@Override
+	protected void doStore() throws JevernoteException {
+		// nothing needed here
+	}
+
+	@Override
+	public void initialize(String token) throws JevernoteException {
+		StandartConfig config = new StandartConfig();
+		
+		config.setAuthToken(token);
+		
+		StandartConfig.save(config);
+	}
+	
 	///////////////////////////////////////////////////////////////////////////
+
 
 	@Override
 	protected List<Notebook> listNativePackages() throws EDAMUserException, EDAMSystemException, TException {
@@ -208,4 +203,33 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	///////////////////////////////////////////////////////////////////////////
 
+	/**
+	 * Connects to the evernote using given auth token.
+	 * 
+	 * @param token
+	 * @return
+	 * @throws JevernoteException
+	 */
+	private NoteStoreClient createNoteStore(String token) throws JevernoteException {
+		try {
+			// https://github.com/evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java
+			EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, token);
+			ClientFactory factory = new ClientFactory(evernoteAuth);
+			UserStoreClient userStore = factory.createUserStoreClient();
+
+			boolean versionOk = userStore.checkVersion("Evernote EDAMDemo (Java)",
+					com.evernote.edam.userstore.Constants.EDAM_VERSION_MAJOR,
+					com.evernote.edam.userstore.Constants.EDAM_VERSION_MINOR);
+
+			if (!versionOk) {
+				throw new IllegalArgumentException("Incompatible Evernote client protocol version");
+			}
+
+			// Set up the NoteStore client
+			NoteStoreClient noteStore = factory.createNoteStoreClient();
+			return noteStore;
+		} catch (Exception e) {
+			throw new JevernoteException("Cannot connec to evernote", e);
+		}
+	}
 }
