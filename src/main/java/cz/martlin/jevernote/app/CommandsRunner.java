@@ -7,22 +7,26 @@ import org.slf4j.LoggerFactory;
 
 import cz.martlin.jevernote.core.JevernoteCore;
 import cz.martlin.jevernote.dataobj.misc.Config;
+import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.content.impls.ReadOnlyStorage;
+import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
-public class MainCommandsPerformer implements RequiresLoad {
+public class CommandsRunner implements RequiresLoad {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private boolean loaded;
 	private final JevernoteCore core;
 
-	public MainCommandsPerformer(File basePath, boolean dryRun, boolean interactive) {
+	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive) {
 		super();
 		// TODO dry run
 		// TODO interactive
+
+		ConsoleLoggingConfigurer.setTo(verbose, debug);
 
 		Config config = new Config();
 		BaseStorage local = createLocal(config, basePath, dryRun);
@@ -32,7 +36,7 @@ public class MainCommandsPerformer implements RequiresLoad {
 	}
 
 	private BaseStorage createLocal(Config config, File basePath, boolean dryRun) {
-		BaseStorage storage = new InMemoryStorage();
+		BaseStorage storage = new FSSWIUsingProperties(config, basePath);
 		return tryMakeDry(storage, dryRun);
 	}
 

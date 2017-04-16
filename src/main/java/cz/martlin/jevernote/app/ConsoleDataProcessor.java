@@ -8,18 +8,20 @@ import org.slf4j.LoggerFactory;
 import cz.martlin.jevernote.dataobj.misc.CommandLineData;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 
-public class CommandsParser {
+public class ConsoleDataProcessor {
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	public CommandsParser() {
+	public ConsoleDataProcessor() {
 	}
 
 	public boolean process(CommandLineData data) {
 		ConsoleLoggingConfigurer.setTo(data.isVerbose(), data.isDebug());
 
 		File basePath = basePath(data);
-		MainCommandsPerformer performer = new MainCommandsPerformer(basePath, data.isDryRun(), data.isInteractive());
+
+		CommandsRunner performer = new CommandsRunner(basePath, data.isVerbose(), data.isDebug(), data.isDryRun(),
+				data.isInteractive());
 
 		performer.load();
 		if (!performer.isLoaded()) {
@@ -37,7 +39,7 @@ public class CommandsParser {
 
 	}
 
-	private boolean process(MainCommandsPerformer performer, CommandLineData data) {
+	private boolean process(CommandsRunner performer, CommandLineData data) {
 		switch (data.getCommand()) {
 		case "init":
 			return performer.cmdInit(data.getRemoteToken());

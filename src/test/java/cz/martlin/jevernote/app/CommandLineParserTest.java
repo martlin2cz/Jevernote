@@ -56,6 +56,7 @@ public class CommandLineParserTest {
 
 	@Test
 	public void testIncorrects() {
+		check(false);
 		check(false, "make-world-peace", "--now");
 		check(false, "clone");
 		check(false, "synchronize", "--force");

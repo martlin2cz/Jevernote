@@ -87,6 +87,7 @@ public class CommandLineParser {
 
 	private String parseCommand(Queue<String> params) {
 		if (params.isEmpty()) {
+			LOG.error("Unspecified command");
 			return null;
 		}
 
@@ -182,7 +183,7 @@ public class CommandLineParser {
 			data.setPreferLocal(false);
 			return true;
 		}
-		
+
 		LOG.error("Required remote target specifier, given: " + pref);
 		return false;
 	}
