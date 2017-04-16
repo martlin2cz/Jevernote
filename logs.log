@@ -244,3 +244,204 @@
 22:00:10 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
 22:00:10 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removing package pack-to-remove
 22:00:10 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating package pack-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item item-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-rename-and-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updating item item-to-rename-update-RENAMED
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-rename-update-RENAMED
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updating item item-to-have-been-moved-and-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-and-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updating item item-to-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updating item item-to-have-been-moved-rename-and-update-RENAMED
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-rename-and-update-RENAMED
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removing item item-to-remove
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving package pack-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removing package pack-to-remove
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating package pack-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item item-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-rename-and-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving package pack-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating package pack-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item item-to-add
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-and-move
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-have-been-moved-rename-and-update
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving item item-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removing item item-to-remove
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moving package pack-to-rename
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:35:51 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removing package pack-to-remove
+11:35:51 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-rename-update-RENAMED
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-and-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-rename-and-update-RENAMED
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:36:30 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-rename-update-RENAMED
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-and-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-to-have-been-moved-rename-and-update-RENAMED
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-add
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-and-move
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-have-been-moved-rename-and-update
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved item item-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename
+11:55:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-remove
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:08 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+12:50:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+12:50:33 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:50:33 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!

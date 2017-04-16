@@ -1,8 +1,9 @@
-package cz.martlin.jevernote.core.base;
+package cz.martlin.jevernote.core;
 
 import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
 import cz.martlin.jevernote.diff.core.StoragesDifferencer;
 import cz.martlin.jevernote.misc.JevernoteException;
+import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.perf.base.BaseDifferencesPerformer;
 import cz.martlin.jevernote.perf.impl.DefaultDifferencesPerformer;
 import cz.martlin.jevernote.perf.impl.ForceDifferencesPerformer;
@@ -11,44 +12,52 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
 
-public abstract class BaseJevernoteCore {
+public class JevernoteCore implements RequiresLoad {
 
-	private BaseStorage local;
-	private BaseStorage remote;
-	private LoggingStorageWrapper loggingLocal;
-	private LoggingStorageWrapper loggingRemote;
+	private final BaseStorage local;
+	private final BaseStorage remote;
+	private final LoggingStorageWrapper loggingLocal;
+	private final LoggingStorageWrapper loggingRemote;
 
-	/*
-	 * private boolean loaded;
-	 */
-	public BaseJevernoteCore() {
+	private boolean loaded;
+
+	public JevernoteCore(BaseStorage local, BaseStorage remote) {
 		super();
-	}
 
-	public void begin() throws JevernoteException {
-		createStorages();
-	}
-
-	private void createStorages() throws JevernoteException {
-		local = createLocal();
-		remote = createRemote();
-
-		StorageRequiringLoad.checkAndLoad(local);
-		StorageRequiringLoad.checkAndLoad(remote);
+		this.local = local;
+		this.remote = remote;
 
 		loggingLocal = new LoggingStorageWrapper(local);
 		loggingRemote = new LoggingStorageWrapper(remote);
 	}
 
-	protected abstract BaseStorage createLocal() throws JevernoteException;
+	///////////////////////////////////////////////////////////////////////////
 
-	protected abstract BaseStorage createRemote() throws JevernoteException;
-
-	public void complete() throws JevernoteException {
-		finishStorages();
+	@Override
+	public void load() throws JevernoteException {
+		loadStorages();
+		loaded = true;
 	}
 
-	private void finishStorages() throws JevernoteException {
+	@Override
+	public void store() throws JevernoteException {
+		storeStorages();
+		loaded = false;
+	}
+
+	@Override
+	public boolean isLoaded() {
+		return loaded;
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void loadStorages() throws JevernoteException {
+		StorageRequiringLoad.checkAndLoad(local);
+		StorageRequiringLoad.checkAndLoad(remote);
+	}
+
+	private void storeStorages() throws JevernoteException {
 		StorageRequiringLoad.checkAndStore(local);
 		StorageRequiringLoad.checkAndStore(remote);
 	}

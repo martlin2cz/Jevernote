@@ -1,6 +1,6 @@
-package cz.martlin.jevernote.storage.impls;
+package cz.martlin.jevernote.storage.content.impls;
 
-import cz.martlin.jevernote.storage.base.ContentProcessor;
+import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 
 public class EvernoteStrippingProcessor implements ContentProcessor {
 

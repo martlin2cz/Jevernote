@@ -1,25 +1,21 @@
 package cz.martlin.jevernote.storage.impls;
 
-import java.io.Closeable;
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import cz.martlin.jevernote.dataobj.config.Config;
+import cz.martlin.jevernote.misc.FileSystemUtils;
 import cz.martlin.jevernote.misc.JevernoteException;
 
 public class FSSWIUsingProperties extends FSstorageWithIndex {
 
 	public static final String INDEX_FILE_NAME = ".index.properties";
-	private static final String COMMENT = "Jevernote index file (mapping betweeen names and ids of packages and items)";
+	public static final String COMMENT = "Jevernote index file (mapping betweeen names and ids of packages and items)";
 
-	public FSSWIUsingProperties(File basePath) {
-		super(basePath);
+	public FSSWIUsingProperties(Config config, File basePath) {
+		super(config, basePath);
 	}
 
 	@Override
@@ -41,10 +37,14 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 		saveBindings(file, bindings);
 	}
 
+	public boolean existsIndexFile() {
+		File file = indexFile(basePath);
+		return file.exists();
+	}
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static Map<String, File> loadBindings(File basePath, File file) throws JevernoteException {
-		Properties props = loadProperties(file);
+		Properties props = FileSystemUtils.loadProperties(file);
 		Map<String, File> map = toMap(basePath, props);
 
 		return map;
@@ -63,27 +63,10 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 		return result;
 	}
 
-	private static Properties loadProperties(File file) throws JevernoteException {
-
-		Properties props = new Properties();
-
-		Reader r = null;
-		try {
-			r = new FileReader(file);
-			props.load(r);
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot read index file", e);
-		} finally {
-			closeQuietly(r);
-		}
-
-		return props;
-	}
-
 	///////////////////////////////////////////////////////////////////////////
 	protected static void saveBindings(File file, Map<String, File> bindings) throws JevernoteException {
 		Properties props = toProperties(bindings);
-		saveProperties(file, props);
+		FileSystemUtils.saveProperties(file, props);
 
 	}
 
@@ -100,33 +83,10 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 		return props;
 	}
 
-	private static void saveProperties(File file, Properties props) throws JevernoteException {
-
-		Writer w = null;
-		try {
-			w = new FileWriter(file);
-			props.store(w, COMMENT);
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot write index file", e);
-		} finally {
-			closeQuietly(w);
-		}
-	}
-
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static File indexFile(File basePath) {
 		return new File(basePath, INDEX_FILE_NAME);
-	}
-
-	public static void closeQuietly(Closeable closeable) {
-		if (closeable != null) {
-			try {
-				closeable.close();
-			} catch (IOException e) {
-				// ignore, or not?
-			}
-		}
 	}
 
 }

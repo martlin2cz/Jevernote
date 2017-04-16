@@ -2,6 +2,7 @@ package cz.martlin.jevernote.storage.base;
 
 import java.util.List;
 
+import cz.martlin.jevernote.dataobj.config.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
@@ -12,15 +13,21 @@ public abstract class StorageRequiringLoad<PT, IT> //
 		extends CommonStorage<PT, IT> //
 		implements RequiresLoad {
 
+	protected final Config config;
 	private boolean loaded;
 
-	public StorageRequiringLoad() {
+	public StorageRequiringLoad(Config config) {
+		this.config = config;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public void load() throws JevernoteException {
+		if (loaded) {
+			Exception e = new IllegalStateException("Already loaded");
+			throw new JevernoteException(e);
+		}
 		doLoad();
 		loaded = true;
 	}
@@ -32,6 +39,11 @@ public abstract class StorageRequiringLoad<PT, IT> //
 
 	@Override
 	public void store() throws JevernoteException {
+		if (!loaded) {
+			Exception e = new IllegalStateException("Not loaded");
+			throw new JevernoteException(e);
+		}
+
 		doStore();
 		loaded = false;
 	}

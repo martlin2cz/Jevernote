@@ -3,24 +3,24 @@ package cz.martlin.jevernote.storage.impls;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import cz.martlin.jevernote.dataobj.config.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.misc.FileSystemUtils;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 
 public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, File> {
 
 	protected final File basePath;
 
-	public BaseFileSystemStorage(File basePath) {
-		super();
+	public BaseFileSystemStorage(Config config, File basePath) {
+		super(config);
 		this.basePath = basePath;
 	}
 
@@ -44,7 +44,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 
 		return Arrays.stream(names).//
 				map((n) -> nameToItemFile(pack, n)).//
-				filter((f) -> !f.isDirectory()). // //TODO crash if folder?
+				filter((f) -> !f.isDirectory()). // //TODO crash if folder?	//TODO .jevernoteignore 
 				collect(Collectors.toList());
 
 	}
@@ -57,9 +57,9 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	}
 
 	@Override
-	protected void createNativeItem(Item item, File nativ) throws IOException {
+	protected void createNativeItem(Item item, File file) throws IOException {
 		String content = item.getContent();
-		writeToFile(nativ, content);
+		FileSystemUtils.writeToFile(content, file);
 	}
 
 	protected void movePackageNative(Package oldPack, Package newPack, File oldDir, File newDir) throws IOException {
@@ -81,7 +81,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	protected void updateNativeItem(Item item, File file) throws IOException {
 		// if (!original.getContent().equals(item.getContent())) {
 		String content = item.getContent();
-		writeToFile(file, content);
+		FileSystemUtils.writeToFile(content, file);
 		// }
 	}
 
@@ -112,7 +112,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	protected Item nativeToItem(Package pack, File file) throws IOException {
 		String id = findIdOfItem(file);
 		String name = file.getName();
-		String content = readFile(file);
+		String content = FileSystemUtils.readFile(file);
 
 		Calendar lastModifiedAt = Calendar.getInstance();
 		lastModifiedAt.setTime(new Date(file.lastModified()));
@@ -146,24 +146,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 		return new File(nameToPackageFile(pack.getName()), name);
 	}
 
-	///////////////////////////////////////////////////////////////////////////
-
-	protected static void writeToFile(File file, String content) throws IOException {
-		Path path = file.toPath();
-		byte[] bytes = content.getBytes();
-		OpenOption[] options = new OpenOption[0];
-
-		Files.write(path, bytes, options);
-	}
-
-	protected static String readFile(File file) throws IOException {
-		Path path = file.toPath();
-
-		byte[] bytes = Files.readAllBytes(path);
-
-		return new String(bytes);
-
-	}
+	
 
 	///////////////////////////////////////////////////////////////////////////
 

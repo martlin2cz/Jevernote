@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.storage.base;
+package cz.martlin.jevernote.storage.content.base;
 
 public interface ContentProcessor {
 

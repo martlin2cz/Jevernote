@@ -1,5 +1,6 @@
 package cz.martlin.jevernote.storage.impls;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -20,31 +21,32 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
 
-import cz.martlin.jevernote.dataobj.config.StandartConfig;
+import cz.martlin.jevernote.dataobj.config.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.ContentProcessor;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
+import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 
 public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 
-	private NoteStoreClient cli;
 	private final ContentProcessor proces;
+	private final File baseDir;
+	private NoteStoreClient cli;
 
-	public EvernoteStorage(ContentProcessor proces) {
-		super();
+	public EvernoteStorage(Config config, File baseDir, ContentProcessor proces) {
+		super(config);
+		this.baseDir = baseDir;
 		this.proces = proces;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
 	protected void doLoad() throws JevernoteException {
-		StandartConfig config = StandartConfig.load();
+		config.load(baseDir);
+
 		String token = config.getAuthToken();
-
-		this.cli = createNoteStore(token);
-
+		cli = createNoteStore(token);
 	}
 
 	@Override
@@ -54,15 +56,12 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 
 	@Override
 	public void initialize(String token) throws JevernoteException {
-		StandartConfig config = new StandartConfig();
-		
 		config.setAuthToken(token);
-		
-		StandartConfig.save(config);
-	}
-	
-	///////////////////////////////////////////////////////////////////////////
 
+		config.save(baseDir);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
 
 	@Override
 	protected List<Notebook> listNativePackages() throws EDAMUserException, EDAMSystemException, TException {

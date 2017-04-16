@@ -4,18 +4,23 @@ import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cz.martlin.jevernote.dataobj.config.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.misc.Log;
 
 public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
+	
 	private Map<String, File> bindings;
 	private boolean indexChanged;
 
-	public FSstorageWithIndex(File basePath) {
-		super(basePath);
+	public FSstorageWithIndex(Config config, File basePath) {
+		super(config, basePath);
 	}
 
 	public Map<String, File> getBindings() {
@@ -176,7 +181,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		if (id == null) {
 			id = createId();
 			pack.setId(id);
-			Log.warn(operation + " package with no id");
+			LOG.warn(operation + " package with no id");
 		}
 
 		return id;
@@ -188,7 +193,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		if (id == null) {
 			id = createId();
 			item.setId(id);
-			Log.warn(operation + " item with no id");
+			LOG.warn(operation + " item with no id");
 		}
 
 		return id;
@@ -206,7 +211,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		if (id != null) {
 			return id;
 		} else {
-			Log.warn("No record for item " + packOrItemToPath(file) + " in index file");
+			LOG.warn("No record for item " + packOrItemToPath(file) + " in index file");
 			return createId();
 		}
 	}
@@ -217,7 +222,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		if (id != null) {
 			return id;
 		} else {
-			Log.warn("No record for package " + packOrItemToPath(dir) + " in index file");
+			LOG.warn("No record for package " + packOrItemToPath(dir) + " in index file");
 			return createId();
 		}
 	}
