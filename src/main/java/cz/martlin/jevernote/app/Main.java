@@ -20,7 +20,7 @@ public class Main {
 		out.println("jevernote push [--weak|--force]");
 		out.println("jevernote pull [--weak|--force]");
 		out.println("jevernote ... ?");	//TODO sync?
-		
+		//TODO --save
 		
 		out.println("Working with local:");
 		out.println("jevernote ad <ITEM or PACK>              (adds existing item or package to index)");

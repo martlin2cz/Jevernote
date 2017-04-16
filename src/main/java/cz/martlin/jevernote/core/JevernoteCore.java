@@ -1,21 +1,28 @@
 package cz.martlin.jevernote.core;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import cz.martlin.jevernote.app.Exporter;
 import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
 import cz.martlin.jevernote.diff.core.StoragesDifferencer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.perf.base.BaseDifferencesPerformer;
-import cz.martlin.jevernote.perf.impl.DefaultDifferencesPerformer;
-import cz.martlin.jevernote.perf.impl.ForceDifferencesPerformer;
-import cz.martlin.jevernote.perf.impl.WeakDifferencesPerformer;
+import cz.martlin.jevernote.perf.impl.DiffPerformerUsingStragegies;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
+import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.impl.DefaultStrategy;
+import cz.martlin.jevernote.strategy.impl.ForceStrategy;
+import cz.martlin.jevernote.strategy.impl.WeakStrategy;
 
 public class JevernoteCore implements RequiresLoad {
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	private final BaseStorage local;
-	private final BaseStorage remote;
+	protected final BaseStorage local;
+	protected final BaseStorage remote;
 	private final LoggingStorageWrapper loggingLocal;
 	private final LoggingStorageWrapper loggingRemote;
 
@@ -35,14 +42,22 @@ public class JevernoteCore implements RequiresLoad {
 
 	@Override
 	public void load() throws JevernoteException {
+		LOG.debug("Loading core");
+
 		loadStorages();
 		loaded = true;
+
+		LOG.debug("Loaded core");
 	}
 
 	@Override
 	public void store() throws JevernoteException {
+		LOG.debug("Storing core");
+
 		storeStorages();
 		loaded = false;
+
+		LOG.debug("Stored core");
 	}
 
 	@Override
@@ -65,27 +80,56 @@ public class JevernoteCore implements RequiresLoad {
 	///////////////////////////////////////////////////////////////////////////
 
 	public void initCmd(String localSpecifier, String remoteSpecifier) throws JevernoteException {
+		LOG.debug("Running init command (local specifier = " + localSpecifier + ", remote specifier = "
+				+ remoteSpecifier + ")");
+
 		doInit(localSpecifier, remoteSpecifier);
+
+		LOG.debug("Command completed");
 	}
 
 	public void cloneCmd(String localSpecifier, String remoteSpecifier) throws JevernoteException {
+		LOG.debug("Running clone command (local specifier = " + localSpecifier + ", remote specifier = "
+				+ remoteSpecifier + ")");
+
 		doInit(localSpecifier, remoteSpecifier);
 		doPull(false, true);
+
+		LOG.debug("Command completed");
 	}
 
 	public void pushCmd(boolean weak, boolean force) throws JevernoteException {
+		LOG.debug("Running push command (weak? " + weak + ", force? " + force + ")");
+
 		doPush(weak, force);
+
+		LOG.debug("Command completed");
 	}
 
 	public void pullCmd(boolean weak, boolean force) throws JevernoteException {
+		LOG.debug("Running pull command (weak? " + weak + ", force? " + force + ")");
+
 		doPull(weak, force);
+
+		LOG.debug("Command completed");
 	}
 
-	public void synchronizeCmd(boolean weak, boolean force) throws JevernoteException {
-		doPull(weak, force);
-		doPush(weak, force);
-		// TODO ?
+	public void synchronizeCmd(boolean preferLocal) throws JevernoteException {
+		LOG.debug("Running synchronize command (prefer local? " + preferLocal + ")");
 
+		if (preferLocal) {
+			doPull(true, false);
+			doPush(false, true);
+		} else {
+			doPush(true, false);
+			doPull(false, true);
+		}
+
+		LOG.debug("Command completed");
+	}
+
+	public void statusCmd() throws JevernoteException {
+		doStatus();
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -103,127 +147,39 @@ public class JevernoteCore implements RequiresLoad {
 		transfer(loggingLocal, loggingRemote, weak, force);
 	}
 
+	private void doStatus() throws JevernoteException {
+		StoragesDifferencer differ = new StoragesDifferencer();
+
+		StoragesDifference diff = differ.compute(local, remote);
+		Exporter export = new Exporter();
+		LOG.info(export.exportDiff(diff));
+
+	}
 	///////////////////////////////////////////////////////////////////////////
 
 	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force)
 			throws JevernoteException {
 
 		StoragesDifferencer differ = new StoragesDifferencer();
-		StoragesDifference diff = differ.compute(source, target);
 
-		BaseDifferencesPerformer perf = findPerformer(source, target, weak, force);
+		StoragesDifference diff = differ.compute(target, source);
+
+		BaseDifferencePerformStrategy strategy = findStrategy(weak, force);
+		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, strategy);
+
 		perf.performDifferences(diff);
 	}
 
-	private BaseDifferencesPerformer findPerformer(BaseStorage source, BaseStorage target, boolean weak,
-			boolean force) {
+	private BaseDifferencePerformStrategy findStrategy(boolean weak, boolean force) {
 
 		if (weak) {
-			return new WeakDifferencesPerformer(source, target);
+			return new WeakStrategy();
 		}
 
 		if (force) {
-			return new ForceDifferencesPerformer(source, target);
+			return new ForceStrategy();
 		}
 
-		return new DefaultDifferencesPerformer(source, target);
+		return new DefaultStrategy();
 	}
-
-	// XXX
-	// XXX
-	// XXX
-	/*
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 * 
-	 * public void initialize() throws JevernoteException { if (isInitialized())
-	 * { Exception e = new IllegalStateException("Yet initialized"); throw new
-	 * JevernoteException("Yet initialized", e); }
-	 * 
-	 * doInitialize(); }
-	 * 
-	 * protected boolean isInitialized() { return local != null && remote !=
-	 * null; }
-	 * 
-	 * protected void doInitialize() throws JevernoteException { try { local =
-	 * createLocal(); local.install();
-	 * 
-	 * remote = createRemote(); remote.install(); } catch (JevernoteException e)
-	 * { throw new JevernoteException("Cannot initialize", e); } }
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 * 
-	 * public void checkAndLoad() throws JevernoteException { if (!loaded) {
-	 * doLoad(); } }
-	 * 
-	 * private void doLoad() throws JevernoteException { try {
-	 * local.initialize(); remote.initialize(); loaded = true; } catch
-	 * (JevernoteException e) { throw new JevernoteException("Cannot load", e);
-	 * } }
-	 * 
-	 * public void complete() throws JevernoteException { if (!loaded) {
-	 * Exception e = new IllegalStateException("Not loaded"); throw new
-	 * JevernoteException("Not loaded", e); }
-	 * 
-	 * doComplete(); }
-	 * 
-	 * private void doComplete() throws JevernoteException { try {
-	 * local.store(); remote.store(); loaded = false; } catch
-	 * (JevernoteException e) { throw new JevernoteException("Cannot complete",
-	 * e); } }
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 * 
-	 * // XXX // XXX // XXX
-	 * 
-	 * @Deprecated public abstract BaseStorage getLocal();
-	 * 
-	 * @Deprecated public abstract BaseStorage getRemote();
-	 * 
-	 * @Deprecated public LoggingStorageWrapper getWrappedLocal() { return new
-	 * LoggingStorageWrapper(getLocal()); }
-	 * 
-	 * @Deprecated public LoggingStorageWrapper getWrappedRemote() { return new
-	 * LoggingStorageWrapper(getRemote()); }
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 * 
-	 * public abstract boolean isReady();
-	 * 
-	 * public abstract void start() throws JevernoteException;
-	 * 
-	 * public abstract void finish() throws JevernoteException;
-	 * 
-	 * private void checkReady() throws JevernoteException { if (!isReady()) {
-	 * Exception e = new IllegalStateException("Not ready"); throw new
-	 * JevernoteException("Not ready", e); } }
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 * 
-	 * public abstract void initialize(String remoteIdentifier) throws
-	 * JevernoteException;
-	 * 
-	 * public void xXXXcloneCmd(String remoteIdentifier) throws
-	 * JevernoteException { initialize(remoteIdentifier); pull(false, true); }
-	 * 
-	 * // TODO load/list // TODO --dry-run ?
-	 * 
-	 * public void push(boolean weak, boolean force) throws JevernoteException {
-	 * checkReady();
-	 * 
-	 * transfer(getWrappedLocal(), getWrappedRemote(), weak, force); }
-	 * 
-	 * public void pull(boolean weak, boolean force) throws JevernoteException {
-	 * checkReady();
-	 * 
-	 * transfer(getWrappedRemote(), getWrappedLocal(), weak, force); }
-	 * 
-	 * /////////////////////////////////////////////////////////////////////////
-	 * //
-	 */
 }

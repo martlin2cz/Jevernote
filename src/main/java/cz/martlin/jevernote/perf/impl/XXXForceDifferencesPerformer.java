@@ -7,9 +7,9 @@ import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.perf.base.BaseDifferencesPerformer;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 
-public class DefaultDifferencesPerformer extends BaseDifferencesPerformer {
+public class XXXForceDifferencesPerformer extends BaseDifferencesPerformer {
 
-	public DefaultDifferencesPerformer(BaseStorage source, BaseStorage target) {
+	public XXXForceDifferencesPerformer(BaseStorage source, BaseStorage target) {
 		super(source, target);
 	}
 
@@ -44,9 +44,7 @@ public class DefaultDifferencesPerformer extends BaseDifferencesPerformer {
 
 	@Override
 	protected void performUpdateItem(Change<Item> change) throws JevernoteException {
-		if (isToNewer(change)) {
-			target.updateItem(change.getSecond());
-		}
+		target.updateItem(change.getSecond());
 	}
 
 	@Override

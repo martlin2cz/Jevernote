@@ -13,11 +13,9 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 
 public abstract class BaseDifferencesPerformer {
 
-	protected final BaseStorage source;
 	protected final BaseStorage target;
 
-	public BaseDifferencesPerformer(BaseStorage source, BaseStorage target) {
-		this.source = source;
+	public BaseDifferencesPerformer(BaseStorage target) {
 		this.target = target;
 	}
 
@@ -79,16 +77,16 @@ public abstract class BaseDifferencesPerformer {
 	private void performItemChange(Change<Item> change) throws JevernoteException {
 		switch (change.getType()) {
 		case CREATE:
-			performCreateItem(change);
+			performCreateItem(change.getFirst());
 			break;
 		case DELETE:
-			performRemoveItem(change);
+			performRemoveItem(change.getFirst());
 			break;
 		case RENAME:
-			performRenameItem(change);
+			performRenameItem(change.getFirst(), change.getSecond());
 			break;
 		case UPDATE:
-			performUpdateItem(change);
+			performUpdateItem(change.getFirst(), change.getSecond());
 			break;
 		default:
 			throw new IllegalArgumentException("Unknown change type " + change.getType());
@@ -98,13 +96,13 @@ public abstract class BaseDifferencesPerformer {
 	private void performPackageChange(Change<Package> change) throws JevernoteException {
 		switch (change.getType()) {
 		case CREATE:
-			performCreatePackage(change);
+			performCreatePackage(change.getFirst());
 			break;
 		case DELETE:
-			performDeletePackage(change);
+			performDeletePackage(change.getFirst());
 			break;
 		case RENAME:
-			performRenamePackage(change);
+			performRenamePackage(change.getFirst(), change.getSecond());
 			break;
 		case UPDATE:
 			throw new UnsupportedOperationException("update of package");
@@ -115,25 +113,25 @@ public abstract class BaseDifferencesPerformer {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	protected abstract void performCreatePackage(Change<Package> change) throws JevernoteException;
+	protected abstract void performCreatePackage(Package pack) throws JevernoteException;
 
-	protected abstract void performRenamePackage(Change<Package> change) throws JevernoteException;
+	protected abstract void performRenamePackage(Package oldPackage, Package newPackage) throws JevernoteException;
 
-	protected abstract void performDeletePackage(Change<Package> change) throws JevernoteException;
+	protected abstract void performDeletePackage(Package pack) throws JevernoteException;
 
-	protected abstract void performCreateItem(Change<Item> change) throws JevernoteException;
+	protected abstract void performCreateItem(Item item) throws JevernoteException;
 
-	protected abstract void performRenameItem(Change<Item> change) throws JevernoteException;
+	protected abstract void performRenameItem(Item oldItem, Item newItem) throws JevernoteException;
 
-	protected abstract void performUpdateItem(Change<Item> change) throws JevernoteException;
+	protected abstract void performUpdateItem(Item oldItem, Item newItem) throws JevernoteException;
 
-	protected abstract void performRemoveItem(Change<Item> change) throws JevernoteException;
+	protected abstract void performRemoveItem(Item item) throws JevernoteException;
 
 	///////////////////////////////////////////////////////////////////////////
 
-	public static boolean isToNewer(Change<Item> change) {
-		Calendar oldDate = change.getFirst().getLastModifiedAt();
-		Calendar newDate = change.getFirst().getLastModifiedAt();
+	public static boolean isToNewer(Item oldItem, Item newItem) {
+		Calendar oldDate = oldItem.getLastModifiedAt();
+		Calendar newDate = newItem.getLastModifiedAt();
 
 		return oldDate.compareTo(newDate) < 0; // TODO TESTME
 	}

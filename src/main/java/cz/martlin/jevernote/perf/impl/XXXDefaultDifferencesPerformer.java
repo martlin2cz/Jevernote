@@ -7,9 +7,9 @@ import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.perf.base.BaseDifferencesPerformer;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 
-public class WeakDifferencesPerformer extends BaseDifferencesPerformer {
+public class XXXDefaultDifferencesPerformer extends BaseDifferencesPerformer {
 
-	public WeakDifferencesPerformer(BaseStorage source, BaseStorage target) {
+	public XXXDefaultDifferencesPerformer(BaseStorage source, BaseStorage target) {
 		super(source, target);
 	}
 
@@ -27,7 +27,7 @@ public class WeakDifferencesPerformer extends BaseDifferencesPerformer {
 
 	@Override
 	protected void performDeletePackage(Change<Package> change) throws JevernoteException {
-		// weak performer does not remove
+		target.removePackage(change.getFirst());
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -44,12 +44,14 @@ public class WeakDifferencesPerformer extends BaseDifferencesPerformer {
 
 	@Override
 	protected void performUpdateItem(Change<Item> change) throws JevernoteException {
-		// weak performer does not update
+		if (isToNewer(change)) {
+			target.updateItem(change.getSecond());
+		}
 	}
 
 	@Override
 	protected void performRemoveItem(Change<Item> change) throws JevernoteException {
-		//weak performer does not remove
+		target.removeItem(change.getFirst());
 	}
 
 }

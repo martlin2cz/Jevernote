@@ -41,4 +41,14 @@ public class TestingUtils {
 		return cal;
 	
 	}
+
+
+	public static Package pack(String id) {
+		return new Package(id, "whatever...");
+	}
+
+
+	public static Item item(String id) {
+		return new Item(pack("xxx"), id, "whatever", "Something ##", makeTime(0));
+	}
 }

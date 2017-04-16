@@ -92,7 +92,10 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	@Override
 	protected void updateNativeItem(Item item, Item nativ) throws Exception {
-		// just modified existing object
+		List<Item> items = storage.get(nativ.getPack());
+		
+		items.remove(nativ);
+		items.add(item);
 	}
 
 	@Override
