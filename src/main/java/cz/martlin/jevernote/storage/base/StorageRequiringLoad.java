@@ -56,8 +56,8 @@ public abstract class StorageRequiringLoad<PT, IT> //
 
 	private void check() throws JevernoteException {
 		if (!isLoaded()) {
-			Exception e = new IllegalStateException("Initialization required");
-			throw new JevernoteException("Not yet initialized", e);
+			Exception e = new IllegalStateException("Load required");
+			throw new JevernoteException("Not yet loaded", e);
 		}
 	}
 
@@ -126,18 +126,26 @@ public abstract class StorageRequiringLoad<PT, IT> //
 	///////////////////////////////////////////////////////////////////////////
 
 	public static void checkAndLoad(BaseStorage storage) throws JevernoteException {
-		if (storage instanceof StorageRequiringLoad) {
-			StorageRequiringLoad<?, ?> ris = (StorageRequiringLoad<?, ?>) storage;
+		if (storage instanceof RequiresLoad) {
+			RequiresLoad ris = (RequiresLoad) storage;
 
-			ris.load();
+			try {
+				ris.load();
+			} catch (Exception e) {
+				throw new JevernoteException("Cannot load", e);
+			}
 		}
 	}
 
 	public static void checkAndStore(BaseStorage storage) throws JevernoteException {
-		if (storage instanceof StorageRequiringLoad) {
-			StorageRequiringLoad<?, ?> ris = (StorageRequiringLoad<?, ?>) storage;
+		if (storage instanceof RequiresLoad) {
+			RequiresLoad ris = (RequiresLoad) storage;
 
-			ris.store();
+			try {
+				ris.store();
+			} catch (Exception e) {
+				throw new JevernoteException("Cannot store", e);
+			}
 		}
 	}
 

@@ -2,14 +2,14 @@ package cz.martlin.jevernote.strategy.impl;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
-import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 
-public class AndStrategy implements BaseDifferencePerformStrategy {
+public class AndStrategy implements BaseOperationsStrategy {
 
-	private final BaseDifferencePerformStrategy first;
-	private final BaseDifferencePerformStrategy second;
+	private final BaseOperationsStrategy first;
+	private final BaseOperationsStrategy second;
 
-	public AndStrategy(BaseDifferencePerformStrategy first, BaseDifferencePerformStrategy second) {
+	public AndStrategy(BaseOperationsStrategy first, BaseOperationsStrategy second) {
 		super();
 		this.first = first;
 		this.second = second;

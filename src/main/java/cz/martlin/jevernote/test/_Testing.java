@@ -4,9 +4,12 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
+import cz.martlin.jevernote.app.Main;
+import cz.martlin.jevernote.core.JevernoteCore;
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
+import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
@@ -21,10 +24,47 @@ public class _Testing {
 
 	public static void main(String[] args) {
 		// TODO
-		testEvernote();
-		 testFileSystem();
+		//testMain();
+		 testCore();
+		 
+		// testEvernote();
+		// testFileSystem();
 		// testInMemory();
 
+	}
+
+	private static void testMain() {
+		String[] args = new String[] { //
+				"--base-dir", base.getAbsolutePath(), "--verbose", "--dry-run", "push" };//
+		Main.main(args);
+	}
+
+	private static void testCore() {
+		
+		Config config = new Config();
+
+		BaseStorage local = new InMemoryStorage();
+		BaseStorage remote = new FSSWIUsingProperties(config, base);
+
+		boolean save = true;
+		boolean interactive = false;
+		boolean verbose = true;
+		boolean debug = false;
+		
+		ConsoleLoggingConfigurer.setTo(verbose, debug);
+		JevernoteCore core = new JevernoteCore(local, remote, interactive, save);
+		try {
+			core.load();
+
+			//local.createPackage(new Package("id1", "boom"));
+			
+			core.pushCmd(false, true);
+			// other commands here
+
+			core.store();
+		} catch (JevernoteException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void testInMemory() {
@@ -66,7 +106,7 @@ public class _Testing {
 		ContentProcessor proc = new EvernoteStripingNewliningProcessor();
 
 		Config config = new Config();
-		config.setAuthToken(token);	//if cfg file does not exist
+		config.setAuthToken(token); // if cfg file does not exist
 		EvernoteStorage storage = new EvernoteStorage(config, base, proc);
 
 		try {

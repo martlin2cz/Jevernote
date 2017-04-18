@@ -79,6 +79,9 @@ public class CommandLineParser {
 				data.setBaseDir(baseDir);
 			}
 			break;
+		case "--dry-run":
+			data.setDryRun(true);
+			break;
 		default:
 			LOG.warn("Unknown flag " + next + ", ignoring");
 		}
@@ -118,7 +121,7 @@ public class CommandLineParser {
 		case "pull":
 			return parsePushPullFlags(params, data);
 		case "synchronize":
-			return parseSynchronizeFlags(params, data);
+			return true;
 		case "status":
 			return true;
 		default:
@@ -161,31 +164,6 @@ public class CommandLineParser {
 		}
 
 		return true;
-	}
-
-	private boolean parseSynchronizeFlags(Queue<String> params, CommandLineData data) {
-		if (params.size() < 1) {
-			LOG.error("Missing target specifier");
-			return false;
-		}
-
-		if (params.size() > 1) {
-			LOG.warn("Uneccessary params after target specifier");
-		}
-
-		String pref = params.poll();
-
-		if ("local".equals(pref)) {
-			data.setPreferLocal(true);
-			return true;
-		}
-		if ("remote".equals(pref)) {
-			data.setPreferLocal(false);
-			return true;
-		}
-
-		LOG.error("Required remote target specifier, given: " + pref);
-		return false;
 	}
 
 	///////////////////////////////////////////////////////////////////////////

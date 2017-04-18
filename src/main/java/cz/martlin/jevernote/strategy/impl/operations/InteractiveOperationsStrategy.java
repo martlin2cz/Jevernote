@@ -1,13 +1,13 @@
-package cz.martlin.jevernote.strategy.impl;
+package cz.martlin.jevernote.strategy.impl.operations;
 
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
-import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 
-public class InteractiveStrategy implements BaseDifferencePerformStrategy {
+public class InteractiveOperationsStrategy implements BaseOperationsStrategy {
 
 	private static final char YES_CHAR = 'y';
 	private static final char NO_CHAR = 'n';
@@ -15,7 +15,7 @@ public class InteractiveStrategy implements BaseDifferencePerformStrategy {
 	private final String desc;
 	private final Scanner scan;
 
-	public InteractiveStrategy(String desc) {
+	public InteractiveOperationsStrategy(String desc) {
 		this.desc = desc;
 		this.scan = new Scanner(System.in);
 	}

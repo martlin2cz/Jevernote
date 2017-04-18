@@ -731,3 +731,1533 @@
 20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
 20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
 20:40:55 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+20:59:17 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+20:59:17 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+20:59:17 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+20:59:17 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+20:59:17 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+20:59:17 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+20:59:17 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+20:59:17 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+20:59:17 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:59:17 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+20:59:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+21:09:56 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+21:09:56 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:09:56 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:09:56 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:09:56 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:09:56 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:09:56 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:09:56 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:09:56 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:09:56 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:21:31 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:21:31 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:21:31 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:21:31 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:21:31 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:21:31 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:21:31 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:21:31 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:21:35 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:21:35 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:21:35 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:21:35 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:21:35 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:21:35 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:21:35 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:21:35 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+21:24:09 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+21:24:09 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:24:09 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:24:09 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:24:09 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:24:09 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:24:09 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:24:09 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:24:09 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:24:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:24:32 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: foo
+21:25:39 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: foo
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+21:25:53 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+21:25:53 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:25:53 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:25:53 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:25:53 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:25:53 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:25:53 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:25:53 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:25:53 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:25:53 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:25:58 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspefied command
+21:26:52 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing target specifier
+21:28:05 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+21:28:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:28:05 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+21:28:06 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:28:06 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:28:06 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:28:06 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:28:06 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:28:06 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:28:06 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:28:06 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:28:06 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+21:28:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+21:30:12 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+21:30:12 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:30:12 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:30:12 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:30:12 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:30:12 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:30:12 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:30:12 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:30:12 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+21:30:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Loading core
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Loaded core
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Running synchronize command (prefer local? true)
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+21:30:22 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+21:30:22 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating package Můj třetí noteboočík
+21:30:22 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package Můj třetí noteboočík
+21:30:22 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating package foo
+21:30:22 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package foo
+21:30:22 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item something
+21:30:22 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item something
+21:30:22 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item Moje třetí poznámka
+21:30:22 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Moje třetí poznámka
+21:30:22 [main] DEBUG cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Creating item Lorem
+21:30:22 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Lorem
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Command completed
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Storing core
+21:30:22 [main] DEBUG cz.martlin.jevernote.core.JevernoteCore - Stored core
+21:36:06 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspefied command
+21:37:01 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+21:37:01 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+21:37:01 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+21:37:01 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+21:37:01 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+21:37:01 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+21:37:01 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+21:37:01 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+21:37:01 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+10:31:45 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+10:31:46 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+10:31:46 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+10:31:46 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+10:31:46 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+10:31:46 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+10:31:46 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+10:31:46 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+10:31:46 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+10:31:46 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+10:31:46 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+10:31:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+10:32:15 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --help, ignoring
+10:32:15 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+10:32:34 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --helú, ignoring
+10:32:34 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+12:01:25 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+12:01:25 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:01:25 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+12:01:25 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+12:01:25 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+12:01:25 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+12:01:25 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+12:01:25 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+12:01:25 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+12:01:25 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+12:01:25 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+12:01:25 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+12:01:38 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:03:14 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:04:03 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:11:14 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:11:15 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+12:11:16 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+12:23:48 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:40:04 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+12:40:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+12:40:04 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+12:40:04 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+12:40:04 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+12:40:04 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+12:40:04 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+12:40:04 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+12:40:04 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+12:40:04 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+12:40:04 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+12:40:04 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+12:44:11 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:44:16 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+12:44:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+12:44:33 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+12:47:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+12:47:09 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+12:48:10 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+12:48:11 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+12:48:12 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+13:20:57 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:29:07 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed: 	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:29:07 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed: 	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:07 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed: 	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:07 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:29:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed:
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:29:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed:
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed:
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:29:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:31:31 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-to-remove
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-to-add
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:31 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:31:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:31:32 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-to-remove
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-to-add
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:32 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:31:32 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-to-remove
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-to-add
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:32 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-to-remove
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-to-add
+	delete pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-to-remove
+	update pack-to-keep/item-updated-in-remote
+
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-to-remove
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-to-remove
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-to-remove
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:31:32 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-to-add
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED
+14:46:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:18 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of changes to be done:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - Changes to be performed (at remote):
+	create pack-only-at-local
+	rename pack-to-rename-RENAMED-AT-REMOTE -> pack-to-rename
+	delete pack-only-at-remote
+	delete pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	create pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+14:51:35 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:01:08 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:01:08 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:08 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:08 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:01:46 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+To make local synced with remote should be:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:01:46 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+To make local synced with remote should be:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:46 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - List of differences:
+To make local synced with remote should be:
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:01:46 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:02:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:02:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:02:26 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:02:26 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:04:49 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+15:04:50 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+15:04:50 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+15:04:50 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+15:04:50 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+15:04:50 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+15:04:50 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+15:04:50 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+15:04:50 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+15:04:50 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+15:04:50 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+15:04:50 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:04:50 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:04:50 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:04:50 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:05:20 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dry-run, ignoring
+15:05:21 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Cannot load
+cz.martlin.jevernote.misc.JevernoteException: Cannot read index file
+	at cz.martlin.jevernote.misc.FileSystemUtils.loadProperties(FileSystemUtils.java:50) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSSWIUsingProperties.loadBindings(FSSWIUsingProperties.java:47) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSSWIUsingProperties.loadBindings(FSSWIUsingProperties.java:31) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSstorageWithIndex.doLoad(FSstorageWithIndex.java:44) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.load(StorageRequiringLoad.java:31) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.checkAndLoad(StorageRequiringLoad.java:132) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.loadStorages(JevernoteCore.java:85) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.load(JevernoteCore.java:61) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.CommandsRunner.load(CommandsRunner.java:51) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:26) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+Caused by: java.io.FileNotFoundException: /home/martin/Programovani/Java/java8-1/Jevernote/.index.properties (Adresář nebo soubor neexistuje)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_60]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_60]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_60]
+	at java.io.FileReader.<init>(FileReader.java:72) ~[?:1.8.0_60]
+	at cz.martlin.jevernote.misc.FileSystemUtils.loadProperties(FileSystemUtils.java:47) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	... 11 more
+15:05:34 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dry-run, ignoring
+15:05:34 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+15:05:44 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dry-run, ignoring
+15:05:44 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Cannot load
+cz.martlin.jevernote.misc.JevernoteException: Cannot read index file
+	at cz.martlin.jevernote.misc.FileSystemUtils.loadProperties(FileSystemUtils.java:50) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSSWIUsingProperties.loadBindings(FSSWIUsingProperties.java:47) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSSWIUsingProperties.loadBindings(FSSWIUsingProperties.java:31) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.FSstorageWithIndex.doLoad(FSstorageWithIndex.java:44) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.load(StorageRequiringLoad.java:31) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.checkAndLoad(StorageRequiringLoad.java:132) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.loadStorages(JevernoteCore.java:85) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.load(JevernoteCore.java:61) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.CommandsRunner.load(CommandsRunner.java:51) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:26) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+Caused by: java.io.FileNotFoundException: /home/martin/Programovani/Java/java8-1/Jevernote/.index.properties (Adresář nebo soubor neexistuje)
+	at java.io.FileInputStream.open0(Native Method) ~[?:1.8.0_60]
+	at java.io.FileInputStream.open(FileInputStream.java:195) ~[?:1.8.0_60]
+	at java.io.FileInputStream.<init>(FileInputStream.java:138) ~[?:1.8.0_60]
+	at java.io.FileReader.<init>(FileReader.java:72) ~[?:1.8.0_60]
+	at cz.martlin.jevernote.misc.FileSystemUtils.loadProperties(FileSystemUtils.java:47) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	... 11 more
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Creating working tmp directory...
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing item with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Creating package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Moving package with no id
+15:06:36 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - Removing package with no id
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.FileSystemStorageWithIndexFileTest - Working tmp directory deleted!
+15:06:36 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+15:06:36 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: make-world-peace
+15:06:36 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Missing remote token
+15:06:36 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Required remote target specifier, given: --force
+15:06:36 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --undefined, ignoring
+15:06:36 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --dunno
+15:06:36 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Uneccessary params after remote token
+15:06:36 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -verbose, ignoring
+15:06:36 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag -force
+15:06:36 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-remote
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:06:36 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:06:36 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete pack-only-at-local
+	rename pack-to-rename -> pack-to-rename-RENAMED-AT-REMOTE
+	create pack-only-at-remote
+	create pack-to-keep/item-only-at-remote
+	update pack-to-keep/item-updated-in-local
+	delete pack-to-keep/item-only-at-local
+	update pack-to-keep/item-updated-in-remote
+
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package pack-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item item-only-at-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Updated item item-updated-in-local
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item item-only-at-remote
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Moved package pack-to-rename-RENAMED-AT-REMOTE
+15:06:36 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package pack-only-at-remote
+15:06:50 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+15:07:01 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet initialized
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	... 9 more
+Caused by: java.lang.IllegalStateException: Initialization required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[Jevernote-0.0.1-SNAPSHOT-jar-with-dependencies.jar:0.0.1-SNAPSHOT]
+	... 9 more
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:13:04 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:14:02 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: 
+15:14:32 [main] WARN  cz.martlin.jevernote.app.CommandLineParser - Unknown flag --base-path, ignoring
+15:14:32 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Uknown command: /home/martin/tmp/jevernote
+15:14:53 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:15:08 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:54) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:25) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:38) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:20:36 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:45) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:45) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:45) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:45) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:21:14 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:21:38 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:21:41 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+15:21:49 [main] ERROR cz.martlin.jevernote.app.CommandLineParser - Unspecified command
+15:22:54 [main] ERROR cz.martlin.jevernote.app.CommandsRunner - Command push failed
+cz.martlin.jevernote.misc.JevernoteException: Cannot load source storage
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:31) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:181) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.transfer(JevernoteCore.java:170) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.doPush(JevernoteCore.java:151) ~[classes/:?]
+	at cz.martlin.jevernote.core.JevernoteCore.pushCmd(JevernoteCore.java:118) ~[classes/:?]
+	at cz.martlin.jevernote.app.CommandsRunner.cmdPush(CommandsRunner.java:97) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:51) [classes/:?]
+	at cz.martlin.jevernote.app.ConsoleDataProcessor.process(ConsoleDataProcessor.java:31) [classes/:?]
+	at cz.martlin.jevernote.app.Main.runCommand(Main.java:47) [classes/:?]
+	at cz.martlin.jevernote.app.Main.main(Main.java:15) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.testMain(_Testing.java:39) [classes/:?]
+	at cz.martlin.jevernote.test._Testing.main(_Testing.java:26) [classes/:?]
+Caused by: cz.martlin.jevernote.misc.JevernoteException: Not yet loaded
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:60) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+Caused by: java.lang.IllegalStateException: Load required
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.check(StorageRequiringLoad.java:59) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.StorageRequiringLoad.list(StorageRequiringLoad.java:68) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.ReadOnlyStorage.list(ReadOnlyStorage.java:28) ~[classes/:?]
+	at cz.martlin.jevernote.storage.base.WrappingStorage.list(WrappingStorage.java:48) ~[classes/:?]
+	at cz.martlin.jevernote.storage.impls.LoggingStorageWrapper.list(LoggingStorageWrapper.java:33) ~[classes/:?]
+	at cz.martlin.jevernote.diff.core.StoragesDifferencer.compute(StoragesDifferencer.java:29) ~[classes/:?]
+	... 11 more
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:25:14 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:25:29 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete Můj třetí noteboočík
+	delete foo
+	delete Můj třetí noteboočík/something
+	delete Můj třetí noteboočík/Moje třetí poznámka
+	delete foo/Lorem
+
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:25:29 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:25:29 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package foo
+15:25:29 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package Můj třetí noteboočík
+15:25:29 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item something
+15:25:29 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Moje třetí poznámka
+15:25:29 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Lorem
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:26:23 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete foo
+	delete Můj třetí noteboočík
+	delete foo/Lorem
+	delete Můj třetí noteboočík/something
+	delete Můj třetí noteboočík/Moje třetí poznámka
+
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:26:23 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:26:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package foo
+15:26:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package Můj třetí noteboočík
+15:26:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item something
+15:26:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Moje třetí poznámka
+15:26:23 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Lorem
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:26:31 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	delete Můj třetí noteboočík
+	delete foo
+	delete foo/Lorem
+	delete Můj třetí noteboočík/Moje třetí poznámka
+	delete Můj třetí noteboočík/something
+
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:26:31 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:26:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package foo
+15:26:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package Můj třetí noteboočík
+15:26:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Lorem
+15:26:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item Moje třetí poznámka
+15:26:31 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created item something
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:27:05 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:27:41 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	create foo
+	create Můj třetí noteboočík
+	create Můj třetí noteboočík/something
+	create Můj třetí noteboočík/Moje třetí poznámka
+	create foo/Lorem
+
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:27:41 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:28:19 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	create foo
+	delete boom
+	create Můj třetí noteboočík
+	create Můj třetí noteboočík/Moje třetí poznámka
+	create foo/Lorem
+	create Můj třetí noteboočík/something
+
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:28:19 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:28:19 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Created package boom
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:28:44 [main] INFO  cz.martlin.jevernote.core.JevernoteCore - To make local synced with remote should be done
+	create foo
+	create Můj třetí noteboočík
+	create foo/Lorem
+	create Můj třetí noteboočík/something
+	create Můj třetí noteboočík/Moje třetí poznámka
+
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package Můj třetí noteboočík in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for package foo in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/something in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item Můj třetí noteboočík/Moje třetí poznámka in index file
+15:28:44 [main] WARN  cz.martlin.jevernote.storage.impls.FSSWIUsingProperties - No record for item foo/Lorem in index file
+15:28:44 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item something
+15:28:44 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item Moje třetí poznámka
+15:28:44 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed item Lorem
+15:28:44 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package foo
+15:28:44 [main] INFO  cz.martlin.jevernote.storage.impls.LoggingStorageWrapper - Removed package Můj třetí noteboočík

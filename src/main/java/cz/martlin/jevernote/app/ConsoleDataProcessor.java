@@ -21,7 +21,7 @@ public class ConsoleDataProcessor {
 		File basePath = basePath(data);
 
 		CommandsRunner performer = new CommandsRunner(basePath, data.isVerbose(), data.isDebug(), data.isDryRun(),
-				data.isInteractive());
+				data.isInteractive(), data.isSave());
 
 		performer.load();
 		if (!performer.isLoaded()) {

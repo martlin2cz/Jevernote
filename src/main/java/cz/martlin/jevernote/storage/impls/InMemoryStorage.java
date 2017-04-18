@@ -2,6 +2,7 @@ package cz.martlin.jevernote.storage.impls;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,8 +18,13 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	private final Map<Package, List<Item>> storage;
 
+	private final Map<Calendar, Package> backupPackages;
+	private final Map<Calendar, Item> backupItems;
+
 	public InMemoryStorage() {
 		this.storage = new HashMap<>();
+		this.backupPackages = new HashMap<>();
+		this.backupItems = new HashMap<>();
 	}
 
 	public void initialize(StorageData data) {
@@ -53,7 +59,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 
 	@Override
-	protected void createNativeItem(Item item, Item nativ) throws Exception {
+	protected void createItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
 		List<Item> items = storage.get(pack);
 		items.add(nativ);
@@ -91,9 +97,9 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 
 	@Override
-	protected void updateNativeItem(Item item, Item nativ) throws Exception {
+	protected void updateItemNative(Item item, Item nativ) throws Exception {
 		List<Item> items = storage.get(nativ.getPack());
-		
+
 		items.remove(nativ);
 		items.add(item);
 	}
@@ -104,10 +110,22 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 
 	@Override
-	protected void removeNativeItem(Item item, Item nativ) throws Exception {
+	protected void removeItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
 		List<Item> items = storage.get(pack);
 		items.remove(nativ);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	protected void backupPackageNative(Package pack, Package nativ) throws Exception {
+		Calendar now = Calendar.getInstance();
+		backupPackages.put(now, nativ);
+	}
+
+	protected void backupItemNative(Item item, Item nativ) throws Exception {
+		Calendar now = Calendar.getInstance();
+		backupItems.put(now, nativ);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -145,12 +163,30 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 				out.println("    " + item.getContent());
 			}
 		}
+
+		out.print("Backed up packages: ");
+		for (Package pack : backupPackages.values()) {
+			out.print(pack.getName());
+			out.print(", ");
+		}
+		out.println();
+
+		out.print("Backed up items: ");
+		for (Item item : backupItems.values()) {
+			out.print(item.getName());
+			out.print(", ");
+		}
+		out.println();
 	}
+
+	///////////////////////////////////////////////////////////////////////////
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((backupItems == null) ? 0 : backupItems.hashCode());
+		result = prime * result + ((backupPackages == null) ? 0 : backupPackages.hashCode());
 		result = prime * result + ((storage == null) ? 0 : storage.hashCode());
 		return result;
 	}
@@ -164,6 +200,16 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		if (getClass() != obj.getClass())
 			return false;
 		InMemoryStorage other = (InMemoryStorage) obj;
+		if (backupItems == null) {
+			if (other.backupItems != null)
+				return false;
+		} else if (!backupItems.equals(other.backupItems))
+			return false;
+		if (backupPackages == null) {
+			if (other.backupPackages != null)
+				return false;
+		} else if (!backupPackages.equals(other.backupPackages))
+			return false;
 		if (storage == null) {
 			if (other.storage != null)
 				return false;
@@ -174,7 +220,8 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	@Override
 	public String toString() {
-		return "InMemoryStorage [storage=" + storage + "]";
+		return "InMemoryStorage [storage=" + storage + ", backupPackages=" + backupPackages + ", backupItems="
+				+ backupItems + "]";
 	}
 
 }

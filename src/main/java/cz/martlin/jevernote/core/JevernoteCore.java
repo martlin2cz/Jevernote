@@ -3,6 +3,7 @@ package cz.martlin.jevernote.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cz.martlin.jevernote.app.Exporter;
 import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
 import cz.martlin.jevernote.diff.core.StoragesDifferencer;
 import cz.martlin.jevernote.misc.JevernoteException;
@@ -12,27 +13,34 @@ import cz.martlin.jevernote.perf.impl.DiffPerformerUsingStragegies;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
-import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 import cz.martlin.jevernote.strategy.impl.AndStrategy;
-import cz.martlin.jevernote.strategy.impl.DefaultStrategy;
-import cz.martlin.jevernote.strategy.impl.ForceStrategy;
-import cz.martlin.jevernote.strategy.impl.InteractiveStrategy;
-import cz.martlin.jevernote.strategy.impl.SynchronizeStrategy;
-import cz.martlin.jevernote.strategy.impl.WeakStrategy;
+import cz.martlin.jevernote.strategy.impl.backup.NoBackupStrategy;
+import cz.martlin.jevernote.strategy.impl.backup.StrongBackupStrategy;
+import cz.martlin.jevernote.strategy.impl.backup.WeakBackupStrategy;
+import cz.martlin.jevernote.strategy.impl.operations.DefaultOperationsStrategy;
+import cz.martlin.jevernote.strategy.impl.operations.ForceOperationsStrategy;
+import cz.martlin.jevernote.strategy.impl.operations.InteractiveOperationsStrategy;
+import cz.martlin.jevernote.strategy.impl.operations.SynchronizeOperationsStrategy;
+import cz.martlin.jevernote.strategy.impl.operations.WeakOperationsStrategy;
 
 public class JevernoteCore implements RequiresLoad {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
+	private final Exporter exporter;
 	protected final BaseStorage local;
 	protected final BaseStorage remote;
 	private final LoggingStorageWrapper loggingLocal;
 	private final LoggingStorageWrapper loggingRemote;
 	private final boolean interactive;
+	private final boolean save;
 
 	private boolean loaded;
 
-	public JevernoteCore(BaseStorage local, BaseStorage remote, boolean interactive) {
+	public JevernoteCore(BaseStorage local, BaseStorage remote, boolean interactive, boolean save) {
 		super();
+
+		this.exporter = new Exporter();
 
 		this.local = local;
 		this.remote = remote;
@@ -41,6 +49,7 @@ public class JevernoteCore implements RequiresLoad {
 		loggingRemote = new LoggingStorageWrapper(remote);
 
 		this.interactive = interactive;
+		this.save = save;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -135,59 +144,77 @@ public class JevernoteCore implements RequiresLoad {
 	}
 
 	private void doPull(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingRemote, loggingLocal, weak, force, "at local");
+		transfer(loggingRemote, loggingLocal, weak, force, save, false, "at local");
 	}
 
 	private void doPush(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingLocal, loggingRemote, weak, force, "at remote");
+		transfer(loggingLocal, loggingRemote, weak, force, save, false, "at remote");
 	}
 
 	private void doSyncrhonize() throws JevernoteException {
-		BaseDifferencePerformStrategy strategy = new SynchronizeStrategy();
+		BaseOperationsStrategy operationsStrategy = new SynchronizeOperationsStrategy();
+		BaseOperationsStrategy backupStrategy = findBackupStrategy(save, false);
 
-		transfer(loggingLocal, loggingRemote, strategy, "at remote");
-		transfer(loggingRemote, loggingLocal, strategy, "at local");
+		transfer(loggingLocal, loggingRemote, operationsStrategy, backupStrategy, "at remote");
+		transfer(loggingRemote, loggingLocal, operationsStrategy, backupStrategy, "at local");
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force, String desc)
-			throws JevernoteException {
+	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force, boolean weakSave,
+			boolean strongSave, String desc) throws JevernoteException {
 
-		BaseDifferencePerformStrategy strategy = findStrategy(weak, force);
-		transfer(source, target, strategy, desc);
+		BaseOperationsStrategy operationsStrategy = findOperationsStrategy(weak, force);
+		BaseOperationsStrategy backupStrategy = findBackupStrategy(weakSave, strongSave);
+
+		transfer(source, target, operationsStrategy, backupStrategy, desc);
 	}
 
-	private void transfer(BaseStorage source, BaseStorage target, BaseDifferencePerformStrategy strategy, String desc)
-			throws JevernoteException {
+	private void transfer(BaseStorage source, BaseStorage target, BaseOperationsStrategy baseOperationsStrategy,
+			BaseOperationsStrategy backupStrategy, String desc) throws JevernoteException {
 
-		strategy = tryMakeInteractive(desc, strategy);
+		BaseOperationsStrategy operationsStrategy = tryMakeInteractive(desc, baseOperationsStrategy);
 
 		StoragesDifferencer differ = new StoragesDifferencer();
-		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, strategy);
+		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, operationsStrategy, backupStrategy);
 
-		StoragesDifference diff = differ.compute(target, source);
-		perf.performDifferences(diff);
+		StoragesDifference changes = differ.compute(source, target);
+		LOG.info("To make local synced with remote should be done\n" + exporter.exportDiff(changes));
+
+		StoragesDifference diffToPerform = differ.compute(target, source);
+		perf.performDifferences(diffToPerform);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private BaseDifferencePerformStrategy findStrategy(boolean weak, boolean force) {
+	private BaseOperationsStrategy findOperationsStrategy(boolean weak, boolean force) {
 
 		if (weak) {
-			return new WeakStrategy();
+			return new WeakOperationsStrategy();
 		}
 
 		if (force) {
-			return new ForceStrategy();
+			return new ForceOperationsStrategy();
 		}
 
-		return new DefaultStrategy();
+		return new DefaultOperationsStrategy();
 	}
 
-	private BaseDifferencePerformStrategy tryMakeInteractive(String desc, BaseDifferencePerformStrategy baseStrategy) {
+	private BaseOperationsStrategy findBackupStrategy(boolean weakSave, boolean strongSave) {
+		if (weakSave) {
+			return new WeakBackupStrategy();
+		}
+
+		if (strongSave) {
+			return new StrongBackupStrategy();
+		}
+
+		return new NoBackupStrategy();
+	}
+
+	private BaseOperationsStrategy tryMakeInteractive(String desc, BaseOperationsStrategy baseStrategy) {
 		if (interactive) {
-			BaseDifferencePerformStrategy interactiveStrategy = new InteractiveStrategy(desc);
+			BaseOperationsStrategy interactiveStrategy = new InteractiveOperationsStrategy(desc);
 			return new AndStrategy(baseStrategy, interactiveStrategy);
 		} else {
 			return baseStrategy;

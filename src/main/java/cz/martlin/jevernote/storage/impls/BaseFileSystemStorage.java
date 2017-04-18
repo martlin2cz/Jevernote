@@ -13,9 +13,11 @@ import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.FileSystemUtils;
+import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 
 public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, File> {
+	public static final String BACKUP_DIR_NAME = ".backup";
 
 	protected final File basePath;
 
@@ -24,6 +26,19 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 		this.basePath = basePath;
 	}
 
+	@Override
+	public void initialize(String noDescNeeded) throws JevernoteException {
+		try {
+			createBackupDir();
+		} catch (IOException e) {
+			throw new JevernoteException("Cannot create backup dir", e);
+		}
+	}
+
+	private void createBackupDir() throws IOException {
+		File backupDir = backupDir();
+		Files.createDirectory(backupDir.toPath());
+	}
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +59,8 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 
 		return Arrays.stream(names).//
 				map((n) -> nameToItemFile(pack, n)).//
-				filter((f) -> !f.isDirectory()). // //TODO crash if folder?	//TODO .jevernoteignore 
+				filter((f) -> !f.isDirectory()). // //TODO crash if folder?
+													// //TODO .jevernoteignore
 				collect(Collectors.toList());
 
 	}
@@ -57,7 +73,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	}
 
 	@Override
-	protected void createNativeItem(Item item, File file) throws IOException {
+	protected void createItemNative(Item item, File file) throws IOException {
 		String content = item.getContent();
 		FileSystemUtils.writeToFile(content, file);
 	}
@@ -78,7 +94,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	protected abstract File findPackageDirById(String id) throws IOException;
 
 	@Override
-	protected void updateNativeItem(Item item, File file) throws IOException {
+	protected void updateItemNative(Item item, File file) throws IOException {
 		// if (!original.getContent().equals(item.getContent())) {
 		String content = item.getContent();
 		FileSystemUtils.writeToFile(content, file);
@@ -93,8 +109,48 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	}
 
 	@Override
-	protected void removeNativeItem(Item item, File file) throws IOException {
+	protected void removeItemNative(Item item, File file) throws IOException {
 		Files.delete(file.toPath());
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	@Override
+	protected void backupPackageNative(Package pack, File nativ) throws Exception {
+		File backupDir = backupDir();
+		File backupFile = packageToBackup(backupDir, pack);
+
+		Files.copy(nativ.toPath(), backupFile.toPath());
+	}
+
+	@Override
+	protected void backupItemNative(Item item, File nativ) throws Exception {
+		File backupDir = backupDir();
+		File backupFile = itemToBackup(backupDir, item);
+
+		Files.copy(nativ.toPath(), backupFile.toPath());
+	}
+
+	private File packageToBackup(File backupDir, Package pack) {
+		String timestamp = timestamp();
+		String dirName = pack.getName() + "-" + timestamp;
+		return new File(backupDir, dirName);
+	}
+
+	private File itemToBackup(File backupDir, Item item) {
+		String timestamp = timestamp();
+		String dirName = item.getPack().getName() + "-" + item.getName() + "-" + timestamp;
+		return new File(backupDir, dirName);
+	}
+
+	private File backupDir() {
+		return new File(basePath, BACKUP_DIR_NAME);
+	}
+
+	private String timestamp() {
+		Calendar cal = Calendar.getInstance();
+		String timestamp = cal.getTime().toString();
+		return timestamp.replace(' ', '-');
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -145,8 +201,6 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	protected File nameToItemFile(Package pack, String name) {
 		return new File(nameToPackageFile(pack.getName()), name);
 	}
-
-	
 
 	///////////////////////////////////////////////////////////////////////////
 

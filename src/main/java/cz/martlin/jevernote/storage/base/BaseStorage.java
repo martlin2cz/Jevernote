@@ -118,4 +118,18 @@ public interface BaseStorage {
 	 */
 	void removeItem(Item item) throws JevernoteException;
 
+	/**
+	 * Backs up the given package.
+	 * 
+	 * @param oldPack
+	 */
+	void backupPackage(Package pack) throws JevernoteException;
+
+	/**
+	 * Backs up the given package.
+	 * 
+	 * @param oldPack
+	 */
+	void backupItem(Item item) throws JevernoteException;
+
 }

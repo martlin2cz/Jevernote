@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.storage.content.impls;
+package cz.martlin.jevernote.storage.impls;
 
 import java.util.List;
 
@@ -8,41 +8,14 @@ import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.storage.base.BaseStorage;
-import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.base.WrappingStorage;
 
 public class ReadOnlyStorage //
 		extends WrappingStorage //
 		implements RequiresLoad {
 
-	private final BaseStorage source;
-	private boolean loaded;
-
 	public ReadOnlyStorage(BaseStorage source) {
-		this.source = source;
-	}
-
-	
-	@Override
-	public BaseStorage getWrapped() {
-		return source;
-	}
-
-	@Override
-	public void load() throws Exception {
-		StorageRequiringLoad.checkAndLoad(source);
-		loaded = true;
-	}
-
-	@Override
-	public void store() throws Exception {
-		StorageRequiringLoad.checkAndStore(source);
-		loaded = false;
-	}
-
-	@Override
-	public boolean isLoaded() {
-		return loaded;
+		super(source);
 	}
 
 	@Override
@@ -52,21 +25,21 @@ public class ReadOnlyStorage //
 
 	@Override
 	public StorageData list() throws JevernoteException {
-		return source.list();
+		return super.list();
 	}
 
 	@Override
 	public List<Package> listPackages() throws JevernoteException {
-		return source.listPackages();
+		return super.listPackages();
 	}
 
 	@Override
 	public List<Item> listItems(Package pack) throws JevernoteException {
-		return source.listItems(pack);
+		return super.listItems(pack);
 	}
 
-	//TODO at least print? LOG or stdout? or what?!
-	
+	// TODO at least print? LOG or stdout? or what?!
+
 	@Override
 	public void createPackage(Package pack) throws JevernoteException {
 		// nop
@@ -99,6 +72,16 @@ public class ReadOnlyStorage //
 
 	@Override
 	public void removeItem(Item item) throws JevernoteException {
+		// nop
+	}
+
+	@Override
+	public void backupPackage(Package pack) throws JevernoteException {
+		// nop
+	}
+
+	@Override
+	public void backupItem(Item item) throws JevernoteException {
 		// nop
 	}
 

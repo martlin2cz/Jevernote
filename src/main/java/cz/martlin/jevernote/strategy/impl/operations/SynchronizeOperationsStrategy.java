@@ -1,14 +1,15 @@
-package cz.martlin.jevernote.strategy.impl;
+package cz.martlin.jevernote.strategy.impl.operations;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
-import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.perf.impl.DiffPerformerUsingStragegies;
+import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 
-public class WeakStrategy implements BaseDifferencePerformStrategy {
+public class SynchronizeOperationsStrategy implements BaseOperationsStrategy {
 
-	public WeakStrategy() {
+	public SynchronizeOperationsStrategy() {
 	}
-
+	
 	@Override
 	public boolean performCreatePackage(Package pack) {
 		return true;
@@ -36,7 +37,7 @@ public class WeakStrategy implements BaseDifferencePerformStrategy {
 
 	@Override
 	public boolean performUpdateItem(Item oldItem, Item newItem) {
-		return false;
+		return DiffPerformerUsingStragegies.isToNewer(oldItem, newItem);
 	}
 
 	@Override

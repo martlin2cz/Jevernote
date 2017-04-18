@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.evernote.auth.EvernoteAuth;
 import com.evernote.auth.EvernoteService;
 import com.evernote.clients.ClientFactory;
@@ -29,6 +32,8 @@ import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 
 public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
+
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private final ContentProcessor proces;
 	private final File baseDir;
@@ -102,7 +107,7 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 	}
 
 	@Override
-	protected void createNativeItem(Item item, Note note)
+	protected void createItemNative(Item item, Note note)
 			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 		String pid = item.getPack().getId();
 		note.setNotebookGuid(pid);
@@ -128,7 +133,7 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 	}
 
 	@Override
-	protected void updateNativeItem(Item item, Note note)
+	protected void updateItemNative(Item item, Note note)
 			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 
 		cli.updateNote(note);
@@ -136,17 +141,28 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 
 	@Override
 	protected void removePackageNative(Package pack, Notebook notebook) {
-		throw new UnsupportedOperationException("remove notebook");
+		LOG.warn("Removing of packages not supported by evernote, package " + pack.getName() + " will not be removed");
 	}
 
 	@Override
-	protected void removeNativeItem(Item item, Note note)
+	protected void removeItemNative(Item item, Note note)
 			throws EDAMUserException, EDAMSystemException, EDAMNotFoundException, TException {
 		String id = note.getGuid();
 
 		cli.deleteNote(id);
 
 		item.setId(null);
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	protected void backupItemNative(Item item, Note nativ) throws Exception {
+		LOG.warn("Backup not supported by evernote, item " + item.getName() + " will not be backed up");
+	}
+
+	@Override
+	protected void backupPackageNative(Package pack, Notebook nativ) throws Exception {
+		LOG.warn("Backup not supported by evernote, package " + pack.getName() + " will not be backed up");
 	}
 
 	///////////////////////////////////////////////////////////////////////////

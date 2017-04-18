@@ -72,7 +72,7 @@ public class JevernoteCoreTest {
 		assertTrue(localItems.contains(TestingUtils.item(ITEM_ID2)));
 		assertTrue(localItems.contains(TestingUtils.item(ITEM_ID3)));
 		assertTrue(localItems.contains(TestingUtils.item(ITEM_ID4)));
-		assertEquals("something #3 UPDATED", findItem(localItems, ITEM_ID3).getContent());
+		assertEquals("something #3 UPDATED-AT-LOCAL", findItem(localItems, ITEM_ID3).getContent());
 		assertEquals("something #4", findItem(localItems, ITEM_ID4).getContent());
 
 		List<Item> remoteItems = ((InMemoryStorage) core.remote).list().getItems();
@@ -82,8 +82,8 @@ public class JevernoteCoreTest {
 		assertTrue(remoteItems.contains(TestingUtils.item(ITEM_ID2)));
 		assertTrue(remoteItems.contains(TestingUtils.item(ITEM_ID3)));
 		assertTrue(remoteItems.contains(TestingUtils.item(ITEM_ID4)));
-		assertEquals("something #3 UPDATED", findItem(remoteItems, ITEM_ID3).getContent());
-		assertEquals("something #4 UPDATED", findItem(remoteItems, ITEM_ID4).getContent());
+		assertEquals("something #3 UPDATED-AT-LOCAL", findItem(remoteItems, ITEM_ID3).getContent());
+		assertEquals("something #4 UPDATED-AT-REMOTE", findItem(remoteItems, ITEM_ID4).getContent());
 
 		finishCore(core);
 	}
@@ -107,7 +107,7 @@ public class JevernoteCoreTest {
 
 		assertTrue(remoteItems.contains(TestingUtils.item(ITEM_ID2)));
 		assertEquals("something #3", findItem(remoteItems, ITEM_ID3).getContent());
-		assertEquals("something #4 UPDATED", findItem(remoteItems, ITEM_ID4).getContent());
+		assertEquals("something #4 UPDATED-AT-REMOTE", findItem(remoteItems, ITEM_ID4).getContent());
 
 		finishCore(core);
 	}
@@ -130,7 +130,7 @@ public class JevernoteCoreTest {
 		List<Item> remoteItems = ((InMemoryStorage) core.remote).list().getItems();
 
 		assertTrue(remoteItems.contains(TestingUtils.item(ITEM_ID2)));
-		assertEquals("something #3 UPDATED", findItem(remoteItems, ITEM_ID3).getContent());
+		assertEquals("something #3 UPDATED-AT-LOCAL", findItem(remoteItems, ITEM_ID3).getContent());
 		assertEquals("something #4", findItem(remoteItems, ITEM_ID4).getContent());
 
 		assertEquals(core.local, core.remote);
@@ -138,6 +138,8 @@ public class JevernoteCoreTest {
 		finishCore(core);
 
 	}
+	
+	//TODO test synchronize !!!
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -145,14 +147,14 @@ public class JevernoteCoreTest {
 		InMemoryStorage storage = new InMemoryStorage();
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
-		final Package pack1 = new Package(PACK_ID1, "pack-to-remove");
+		final Package pack1 = new Package(PACK_ID1, "pack-only-at-local");
 		final Package pack2 = new Package(PACK_ID2, "pack-to-rename");
 		// pack 3 will be added
 
 		final Item item0 = new Item(pack0, ITEM_ID0, "item-to-keep", "something #0", TestingUtils.makeTime(0));
 		// item 1 will be added
-		final Item item2 = new Item(pack0, ITEM_ID2, "item-to-remove", "something #2", TestingUtils.makeTime(2));
-		final Item item3 = new Item(pack0, ITEM_ID3, "item-updated-in-local", "something #3 UPDATED",
+		final Item item2 = new Item(pack0, ITEM_ID2, "item-only-at-local", "something #2", TestingUtils.makeTime(2));
+		final Item item3 = new Item(pack0, ITEM_ID3, "item-updated-in-local", "something #3 UPDATED-AT-LOCAL",
 				TestingUtils.makeTime(17));
 		final Item item4 = new Item(pack0, ITEM_ID4, "item-updated-in-remote", "something #4",
 				TestingUtils.makeTime(20));
@@ -174,15 +176,15 @@ public class JevernoteCoreTest {
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
 		// pack 1 have been removed
-		final Package pack2 = new Package(PACK_ID2, "pack-to-rename-RENAMED");
-		final Package pack3 = new Package(PACK_ID3, "pack-to-add");
+		final Package pack2 = new Package(PACK_ID2, "pack-to-rename-RENAMED-AT-REMOTE");
+		final Package pack3 = new Package(PACK_ID3, "pack-only-at-remote");
 
 		final Item item0 = new Item(pack0, ITEM_ID0, "item-to-keep", "something #0", TestingUtils.makeTime(0));
-		final Item item1 = new Item(pack0, ITEM_ID1, "item-to-remove", "something #2", TestingUtils.makeTime(1));
+		final Item item1 = new Item(pack0, ITEM_ID1, "item-only-at-remote", "something #2", TestingUtils.makeTime(1));
 		// item 2 have been removed
 		final Item item3 = new Item(pack0, ITEM_ID3, "item-updated-in-local", "something #3",
 				TestingUtils.makeTime(20));
-		final Item item4 = new Item(pack0, ITEM_ID4, "item-updated-in-remote", "something #4 UPDATED",
+		final Item item4 = new Item(pack0, ITEM_ID4, "item-updated-in-remote", "something #4 UPDATED-AT-REMOTE",
 				TestingUtils.makeTime(18));
 
 		storage.createPackage(pack0);
@@ -239,7 +241,7 @@ public class JevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		JevernoteCore core = new JevernoteCore(local, remote, false);
+		JevernoteCore core = new JevernoteCore(local, remote, false, true);
 
 		core.load();
 

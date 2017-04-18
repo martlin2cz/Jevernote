@@ -11,9 +11,9 @@ import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.storage.base.BaseStorage;
-import cz.martlin.jevernote.storage.content.impls.ReadOnlyStorage;
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
+import cz.martlin.jevernote.storage.impls.ReadOnlyStorage;
 
 public class CommandsRunner implements RequiresLoad {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
@@ -21,11 +21,8 @@ public class CommandsRunner implements RequiresLoad {
 	private boolean loaded;
 	private final JevernoteCore core;
 
-	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive) {
+	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive, boolean save) {
 		super();
-		// TODO save
-		// TODO dry run
-		// TODO interactive
 
 		ConsoleLoggingConfigurer.setTo(verbose, debug);
 
@@ -33,7 +30,7 @@ public class CommandsRunner implements RequiresLoad {
 		BaseStorage local = createLocal(config, basePath, dryRun);
 		BaseStorage remote = createRemote(config, basePath, dryRun);
 
-		this.core = new JevernoteCore(local, remote, interactive);
+		this.core = new JevernoteCore(local, remote, interactive, save);
 	}
 
 	private BaseStorage createLocal(Config config, File basePath, boolean dryRun) {

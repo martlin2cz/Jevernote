@@ -1,13 +1,12 @@
-package cz.martlin.jevernote.strategy.impl;
+package cz.martlin.jevernote.strategy.impl.operations;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
-import cz.martlin.jevernote.perf.impl.DiffPerformerUsingStragegies;
-import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 
-public class DefaultStrategy implements BaseDifferencePerformStrategy {
+public class ForceOperationsStrategy implements BaseOperationsStrategy {
 
-	public DefaultStrategy() {
+	public ForceOperationsStrategy() {
 	}
 
 	@Override
@@ -37,7 +36,7 @@ public class DefaultStrategy implements BaseDifferencePerformStrategy {
 
 	@Override
 	public boolean performUpdateItem(Item oldItem, Item newItem) {
-		return DiffPerformerUsingStragegies.isToNewer(oldItem, newItem);
+		return true;
 	}
 
 	@Override

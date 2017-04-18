@@ -17,8 +17,6 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		super();
 	}
 
-
-
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
@@ -95,13 +93,13 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		try {
 			IT nativ = itemToNative(item);
 
-			createNativeItem(item, nativ);
+			createItemNative(item, nativ);
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot create item", e);
 		}
 	}
 
-	protected abstract void createNativeItem(Item item, IT nativ) throws Exception;
+	protected abstract void createItemNative(Item item, IT nativ) throws Exception;
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -140,13 +138,13 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		try {
 			IT nativ = itemToNative(item);
 
-			updateNativeItem(item, nativ);
+			updateItemNative(item, nativ);
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot update item", e);
 		}
 	}
 
-	protected abstract void updateNativeItem(Item item, IT nativ) throws Exception;
+	protected abstract void updateItemNative(Item item, IT nativ) throws Exception;
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -168,13 +166,41 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 		try {
 			IT nativ = itemToNative(item);
 
-			removeNativeItem(item, nativ);
+			removeItemNative(item, nativ);
 		} catch (Exception e) {
 			throw new JevernoteException("Cannot remove item", e);
 		}
 	}
 
-	protected abstract void removeNativeItem(Item item, IT nativ) throws Exception;
+	protected abstract void removeItemNative(Item item, IT nativ) throws Exception;
+
+	///////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public void backupPackage(Package pack) throws JevernoteException {
+		try {
+			PT nativ = packageToNative(pack);
+
+			backupPackageNative(pack, nativ);
+		} catch (Exception e) {
+			throw new JevernoteException("Cannot backup package", e);
+		}
+	}
+
+	protected abstract void backupPackageNative(Package pack, PT nativ) throws Exception;
+
+	@Override
+	public void backupItem(Item item) throws JevernoteException {
+		try {
+			IT nativ = itemToNative(item);
+
+			backupItemNative(item, nativ);
+		} catch (Exception e) {
+			throw new JevernoteException("Cannot backup item", e);
+		}
+	}
+
+	protected abstract void backupItemNative(Item item, IT nativ) throws Exception;
 
 	///////////////////////////////////////////////////////////////////////////
 

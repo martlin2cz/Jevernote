@@ -15,16 +15,11 @@ import cz.martlin.jevernote.storage.base.WrappingStorage;
 public class LoggingStorageWrapper extends WrappingStorage {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-	private final BaseStorage wrapped;
 
 	public LoggingStorageWrapper(BaseStorage wrapped) {
-		this.wrapped = wrapped;
+		super(wrapped);
 	}
 
-	@Override
-	public BaseStorage getWrapped() {
-		return wrapped;
-	}
 
 	@Override
 	public void initialize(String storageDesc) throws JevernoteException {
@@ -90,4 +85,19 @@ public class LoggingStorageWrapper extends WrappingStorage {
 		LOG.info("Removed item " + item.getName());
 	}
 
+	@Override
+	public void backupPackage(Package pack) throws JevernoteException {
+		LOG.debug("Backing up package " + pack.getName());
+		super.backupPackage(pack);
+		LOG.info("Backed up package " + pack.getName());
+	}
+	
+	@Override
+	public void backupItem(Item item) throws JevernoteException {
+		LOG.debug("Backing up item " + item.getName());
+		super.backupItem(item);
+		LOG.info("Backed up item " + item.getName());
+		
+	}
+	
 }

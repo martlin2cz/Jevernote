@@ -29,6 +29,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 	
 	@Override
 	public void initialize(String storageDesc) throws JevernoteException {
+		super.initialize(storageDesc);
 		initializeBindingsStorage(storageDesc);
 	}
 
