@@ -54,10 +54,8 @@ public class ConsoleDataProcessor {
 			return performer.cmdPull(data.isWeak(), data.isForce());
 
 		case "synchronize":
-			return performer.cmdSynchronize(data.isPreferLocal());
+			return performer.cmdSynchronize();
 
-		case "status":
-			return performer.cmdStatus();
 		default:
 			LOG.error("Unknown command " + data.getCommand());
 			return false;

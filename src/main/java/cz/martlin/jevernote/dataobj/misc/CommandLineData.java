@@ -6,13 +6,14 @@ public class CommandLineData {
 	private boolean verbose;
 	private boolean debug;
 	private boolean interactive;
-	private File baseDir;
-	private String command;
 	private boolean dryRun;
 	private boolean save;
+	private File baseDir;
+	private String command;
 	private boolean weak;
 	private boolean force;
 	private String remoteToken;
+	@Deprecated
 	private boolean preferLocal;
 
 	public CommandLineData() {

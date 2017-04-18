@@ -1,9 +1,6 @@
 package cz.martlin.jevernote.dataobj.cmp;
 
-public class Change<T/* extends Comparable<T> */> /*
-													 * implements Comparable<
-													 * BaseComparement<T>>
-													 */ {
+public class Change<T> {
 
 	public static enum ChangeType {
 		CREATE, RENAME, DELETE, UPDATE
@@ -25,7 +22,7 @@ public class Change<T/* extends Comparable<T> */> /*
 	public ChangeType getType() {
 		return type;
 	}
-	
+
 	public boolean is(ChangeType type) {
 		return type.equals(this.type);
 	}
@@ -74,26 +71,10 @@ public class Change<T/* extends Comparable<T> */> /*
 		return true;
 	}
 
-	// TODO it is nesccessary?
-
 	@Override
 	public String toString() {
 		return "BaseComparement [type=" + type + ", first=" + first + ", second=" + second + "]";
 	}
-
-	/*
-	 * @Override public int compareTo(BaseComparement<T> o) { int cmp;
-	 * 
-	 * cmp = this.type.compareTo(o.type); if (cmp != 0) { return cmp; }
-	 * 
-	 * if (this.first != null && o.first != null) { cmp =
-	 * this.first.compareTo(o.first); if (cmp != 0) { return cmp; } }
-	 * 
-	 * if (this.second != null && o.second != null) { cmp =
-	 * this.second.compareTo(o.second); if (cmp != 0) { return cmp; } }
-	 * 
-	 * return 0; }
-	 */
 
 	///////////////////////////////////////////////////////////////////////////
 

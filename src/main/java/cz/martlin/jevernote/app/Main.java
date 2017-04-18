@@ -68,23 +68,29 @@ public class Main {
 	public static void printUsage(PrintStream out) {
 		out.println("Usage:");
 		out.println("jevernote [COMMON FLAGS] <COMMAND> [PARAMS]");
-		out.println("jevernote -h|--help");
-		out.println("jevernote -v|--version");
+		out.println("jevernote -h|--help     (prints help)");
+		out.println("jevernote -v|--version  (prints version)");
 		out.println();
 		out.println("Common flags:");
-		out.println(" --verbose");
-		out.println(" --debug");
-		out.println(" --interactive");
+		out.println(" --base-dir <PATH>      (works with PATH instead of current dir)");
+		out.println(" --verbose              (displays info what's been done)");
+		out.println(" --debug                (displays far more info, implies --verbose)");
+		out.println(" --interactive          (before each change asks for confirm)");
+		out.println(" --dry-run              (no changes will be performed, use with --verbose)");
+		out.println(" --save                 (if possible, before each item update)");
 		out.println();
 		out.println("Initialisation commands:");
-		out.println("jevernote init <AUTH TOKEN>");
-		out.println("jevernote clone <AUTH TOKEN>");
+		out.println("jevernote init <AUTH TOKEN>             (just initializes empty local storage)");
+		out.println("jevernote clone <AUTH TOKEN>            (initializes local storage and downloads content)");
 		out.println();
-		out.println("Operations:");
-		out.println("jevernote push [--weak|--force]");
-		out.println("jevernote pull [--weak|--force]");
-		out.println("jevernote synchronize local|remote");
-		out.println("jevernote status");
+		out.println("Synchronisation commands:");
+		out.println("jevernote push [--weak|--force]         (pushes data from local to remote)");
+		out.println("jevernote pull [--weak|--force]         (pulls data from remote to local)");
+		out.println(" --weak                 (only adds, no removing, no overriding changes)");
+		out.println(" --force                (adds, removes, and overrides all changes)");
+		out.println(" (not specified)        (adds and removes, updates only newer)");
+		out.println("jevernote synchronize   (merges changes (adds, not removes, changes keeps newer))");	//FIXME
+		out.println("jevernote status                        (just displays ");	//XXX
 		out.println();
 		out.println("Working with local:");
 		out.println("jevernote ad <ITEM or PACK>              (adds existing item or package to index)");

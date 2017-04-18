@@ -23,6 +23,7 @@ public class CommandsRunner implements RequiresLoad {
 
 	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive) {
 		super();
+		// TODO save
 		// TODO dry run
 		// TODO interactive
 
@@ -32,7 +33,7 @@ public class CommandsRunner implements RequiresLoad {
 		BaseStorage local = createLocal(config, basePath, dryRun);
 		BaseStorage remote = createRemote(config, basePath, dryRun);
 
-		this.core = new JevernoteCore(local, remote);
+		this.core = new JevernoteCore(local, remote, interactive);
 	}
 
 	private BaseStorage createLocal(Config config, File basePath, boolean dryRun) {
@@ -114,22 +115,12 @@ public class CommandsRunner implements RequiresLoad {
 		}
 	}
 
-	public boolean cmdSynchronize(boolean preferLocal) {
+	public boolean cmdSynchronize() {
 		try {
-			core.synchronizeCmd(preferLocal);
+			core.synchronizeCmd();
 			return true;
 		} catch (JevernoteException e) {
 			LOG.error("Command synchronize failed", e);
-			return false;
-		}
-	}
-
-	public boolean cmdStatus() {
-		try {
-			core.statusCmd();
-			return true;
-		} catch (JevernoteException e) {
-			LOG.error("Command status failed", e);
 			return false;
 		}
 	}

@@ -3,7 +3,6 @@ package cz.martlin.jevernote.core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import cz.martlin.jevernote.app.Exporter;
 import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
 import cz.martlin.jevernote.diff.core.StoragesDifferencer;
 import cz.martlin.jevernote.misc.JevernoteException;
@@ -14,8 +13,11 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
 import cz.martlin.jevernote.strategy.base.BaseDifferencePerformStrategy;
+import cz.martlin.jevernote.strategy.impl.AndStrategy;
 import cz.martlin.jevernote.strategy.impl.DefaultStrategy;
 import cz.martlin.jevernote.strategy.impl.ForceStrategy;
+import cz.martlin.jevernote.strategy.impl.InteractiveStrategy;
+import cz.martlin.jevernote.strategy.impl.SynchronizeStrategy;
 import cz.martlin.jevernote.strategy.impl.WeakStrategy;
 
 public class JevernoteCore implements RequiresLoad {
@@ -25,10 +27,11 @@ public class JevernoteCore implements RequiresLoad {
 	protected final BaseStorage remote;
 	private final LoggingStorageWrapper loggingLocal;
 	private final LoggingStorageWrapper loggingRemote;
+	private final boolean interactive;
 
 	private boolean loaded;
 
-	public JevernoteCore(BaseStorage local, BaseStorage remote) {
+	public JevernoteCore(BaseStorage local, BaseStorage remote, boolean interactive) {
 		super();
 
 		this.local = local;
@@ -36,6 +39,8 @@ public class JevernoteCore implements RequiresLoad {
 
 		loggingLocal = new LoggingStorageWrapper(local);
 		loggingRemote = new LoggingStorageWrapper(remote);
+
+		this.interactive = interactive;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -114,22 +119,12 @@ public class JevernoteCore implements RequiresLoad {
 		LOG.debug("Command completed");
 	}
 
-	public void synchronizeCmd(boolean preferLocal) throws JevernoteException {
-		LOG.debug("Running synchronize command (prefer local? " + preferLocal + ")");
+	public void synchronizeCmd() throws JevernoteException {
+		LOG.debug("Running synchronize command");
 
-		if (preferLocal) {
-			doPull(true, false);
-			doPush(false, true);
-		} else {
-			doPush(true, false);
-			doPull(false, true);
-		}
+		doSyncrhonize();
 
 		LOG.debug("Command completed");
-	}
-
-	public void statusCmd() throws JevernoteException {
-		doStatus();
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -140,35 +135,42 @@ public class JevernoteCore implements RequiresLoad {
 	}
 
 	private void doPull(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingRemote, loggingLocal, weak, force);
+		transfer(loggingRemote, loggingLocal, weak, force, "at local");
 	}
 
 	private void doPush(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingLocal, loggingRemote, weak, force);
+		transfer(loggingLocal, loggingRemote, weak, force, "at remote");
 	}
 
-	private void doStatus() throws JevernoteException {
-		StoragesDifferencer differ = new StoragesDifferencer();
+	private void doSyncrhonize() throws JevernoteException {
+		BaseDifferencePerformStrategy strategy = new SynchronizeStrategy();
 
-		StoragesDifference diff = differ.compute(local, remote);
-		Exporter export = new Exporter();
-		LOG.info(export.exportDiff(diff));
-
+		transfer(loggingLocal, loggingRemote, strategy, "at remote");
+		transfer(loggingRemote, loggingLocal, strategy, "at local");
 	}
+
 	///////////////////////////////////////////////////////////////////////////
 
-	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force)
+	private void transfer(BaseStorage source, BaseStorage target, boolean weak, boolean force, String desc)
 			throws JevernoteException {
 
-		StoragesDifferencer differ = new StoragesDifferencer();
-
-		StoragesDifference diff = differ.compute(target, source);
-
 		BaseDifferencePerformStrategy strategy = findStrategy(weak, force);
+		transfer(source, target, strategy, desc);
+	}
+
+	private void transfer(BaseStorage source, BaseStorage target, BaseDifferencePerformStrategy strategy, String desc)
+			throws JevernoteException {
+
+		strategy = tryMakeInteractive(desc, strategy);
+
+		StoragesDifferencer differ = new StoragesDifferencer();
 		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, strategy);
 
+		StoragesDifference diff = differ.compute(target, source);
 		perf.performDifferences(diff);
 	}
+
+	///////////////////////////////////////////////////////////////////////////
 
 	private BaseDifferencePerformStrategy findStrategy(boolean weak, boolean force) {
 
@@ -181,5 +183,14 @@ public class JevernoteCore implements RequiresLoad {
 		}
 
 		return new DefaultStrategy();
+	}
+
+	private BaseDifferencePerformStrategy tryMakeInteractive(String desc, BaseDifferencePerformStrategy baseStrategy) {
+		if (interactive) {
+			BaseDifferencePerformStrategy interactiveStrategy = new InteractiveStrategy(desc);
+			return new AndStrategy(baseStrategy, interactiveStrategy);
+		} else {
+			return baseStrategy;
+		}
 	}
 }
