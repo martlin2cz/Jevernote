@@ -10,6 +10,7 @@ import org.junit.Test;
 import cz.martlin.jevernote.app.Exporter;
 import cz.martlin.jevernote.dataobj.cmp.Change;
 import cz.martlin.jevernote.dataobj.cmp.StoragesDifference;
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
@@ -37,6 +38,8 @@ public class StoragesDifferencerTest {
 	private static final String ITEM_IDb = "item-11";
 	private static final String ITEM_IDc = "item-12";
 	private static final String ITEM_IDd = "item-13";
+	
+	private static final Config CONFIG = new Config();
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -134,7 +137,8 @@ public class StoragesDifferencerTest {
 	///////////////////////////////////////////////////////////////////////////
 
 	private InMemoryStorage initSource() throws JevernoteException {
-		InMemoryStorage storage = new InMemoryStorage();
+		InMemoryStorage storage = new InMemoryStorage(CONFIG);
+		storage.installAndLoad(null);
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
 		final Package pack1 = new Package(PACK_ID1, "pack-to-remove");
@@ -185,7 +189,8 @@ public class StoragesDifferencerTest {
 	}
 
 	private InMemoryStorage initTarget() throws JevernoteException {
-		InMemoryStorage storage = new InMemoryStorage();
+		InMemoryStorage storage = new InMemoryStorage(CONFIG);
+		storage.installAndLoad(null);
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
 		// pack 1 was removed

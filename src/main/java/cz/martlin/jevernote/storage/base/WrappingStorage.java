@@ -6,92 +6,89 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.misc.RequiresLoad;
 
-public abstract class WrappingStorage implements BaseStorage, RequiresLoad {
+public abstract class WrappingStorage extends StorageRequiringLoad {
 
-	private final BaseStorage wrapped;
+	private final StorageRequiringLoad wrapped;
 
-	private boolean loaded;
+	public WrappingStorage(StorageRequiringLoad wrapped) {
+		super(wrapped.config);
 
-	public WrappingStorage(BaseStorage wrapped) {
 		this.wrapped = wrapped;
 	}
 
+	public boolean doIsInstalled() throws Exception {
+		//return true;
+		return wrapped.doIsInstalled();
+	}
+
+	@Override
+	protected void doInstallAndLoad(String installData) throws Exception {
+		wrapped.doInstallAndLoad(installData);
+	}
+
+	@Override
+	protected void doLoad() throws Exception {
+		wrapped.doLoad();
+	}
+
+	@Override
+	protected void doStore() throws Exception {
+		wrapped.doStore();
+	}
+	
+	
+
 	///////////////////////////////////////////////////////////////////////////
 
-	@Override
-	public void load() throws Exception {
-		StorageRequiringLoad.checkAndLoad(wrapped);
-		loaded = true;
+	public StorageData doList() throws JevernoteException {
+		return wrapped.doList();
 	}
 
-	@Override
-	public void store() throws Exception {
-		StorageRequiringLoad.checkAndStore(wrapped);
-		loaded = false;
+	public List<Package> doListPackages() throws JevernoteException {
+		return wrapped.doListPackages();
 	}
 
-	@Override
-	public boolean isLoaded() {
-		return loaded;
+	public List<Item> doListItems(Package pack) throws JevernoteException {
+		return wrapped.doListItems(pack);
+	}
+
+	public void doCreatePackage(Package pack) throws JevernoteException {
+		wrapped.doCreatePackage(pack);
+	}
+
+	public void doCreateItem(Item item) throws JevernoteException {
+		wrapped.doCreateItem(item);
+	}
+
+	public void doMovePackage(Package oldPack, Package newPack) throws JevernoteException {
+		wrapped.doMovePackage(oldPack, newPack);
+	}
+
+	public void doMoveItem(Item oldItem, Item newItem) throws JevernoteException {
+		wrapped.doMoveItem(oldItem, newItem);
+	}
+
+	public void doUpdateItem(Item item) throws JevernoteException {
+		wrapped.doUpdateItem(item);
+	}
+
+	public void doRemovePackage(Package pack) throws JevernoteException {
+		wrapped.doRemovePackage(pack);
+	}
+
+	public void doRemoveItem(Item item) throws JevernoteException {
+		wrapped.doRemoveItem(item);
+	}
+
+	public void doBackupPackage(Package pack) throws JevernoteException {
+		wrapped.doBackupPackage(pack);
+	}
+
+	public void doBackupItem(Item item) throws JevernoteException {
+		wrapped.doBackupItem(item);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-
-	@Override
-	public void initialize(String storageDesc) throws JevernoteException {
-		wrapped.initialize(storageDesc);
-	}
-
-	public StorageData list() throws JevernoteException {
-		return wrapped.list();
-	}
-
-	public List<Package> listPackages() throws JevernoteException {
-		return wrapped.listPackages();
-	}
-
-	public List<Item> listItems(Package pack) throws JevernoteException {
-		return wrapped.listItems(pack);
-	}
-
-	public void createPackage(Package pack) throws JevernoteException {
-		wrapped.createPackage(pack);
-	}
-
-	public void createItem(Item item) throws JevernoteException {
-		wrapped.createItem(item);
-	}
-
-	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
-		wrapped.movePackage(oldPack, newPack);
-	}
-
-	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
-		wrapped.moveItem(oldItem, newItem);
-	}
-
-	public void updateItem(Item item) throws JevernoteException {
-		wrapped.updateItem(item);
-	}
-
-	public void removePackage(Package pack) throws JevernoteException {
-		wrapped.removePackage(pack);
-	}
-
-	public void removeItem(Item item) throws JevernoteException {
-		wrapped.removeItem(item);
-	}
-
-	@Override
-	public void backupPackage(Package pack) throws JevernoteException {
-		wrapped.backupPackage(pack);
-	}
-
-	@Override
-	public void backupItem(Item item) throws JevernoteException {
-		wrapped.backupItem(item);
-	}
 
 }

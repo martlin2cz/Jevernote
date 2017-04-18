@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
@@ -27,6 +28,8 @@ public class JevernoteCoreTest {
 	private static final String ITEM_ID2 = "item-02";
 	private static final String ITEM_ID3 = "item-03";
 	private static final String ITEM_ID4 = "item-04";
+
+	private final static Config CONFIG = new Config();
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -138,13 +141,14 @@ public class JevernoteCoreTest {
 		finishCore(core);
 
 	}
-	
-	//TODO test synchronize !!!
+
+	// TODO test synchronize !!!
 
 	///////////////////////////////////////////////////////////////////////////
 
 	private static InMemoryStorage createLocalStorage() throws JevernoteException {
-		InMemoryStorage storage = new InMemoryStorage();
+		InMemoryStorage storage = new InMemoryStorage(CONFIG);
+		storage.installAndLoad(null);
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
 		final Package pack1 = new Package(PACK_ID1, "pack-only-at-local");
@@ -171,8 +175,9 @@ public class JevernoteCoreTest {
 		return storage;
 	}
 
-	private InMemoryStorage createRemoteStorage() throws JevernoteException {
-		InMemoryStorage storage = new InMemoryStorage();
+	private static InMemoryStorage createRemoteStorage() throws JevernoteException {
+		InMemoryStorage storage = new InMemoryStorage(CONFIG);
+		storage.installAndLoad(null);
 
 		final Package pack0 = new Package(PACK_ID0, "pack-to-keep");
 		// pack 1 have been removed
@@ -227,7 +232,6 @@ public class JevernoteCoreTest {
 				.get();
 	}
 
-	
 	@SuppressWarnings("unused")
 	private void printStorages(JevernoteCore core) {
 

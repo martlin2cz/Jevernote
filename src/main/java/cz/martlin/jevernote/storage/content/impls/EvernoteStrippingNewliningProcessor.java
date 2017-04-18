@@ -1,8 +1,8 @@
 package cz.martlin.jevernote.storage.content.impls;
 
-public class EvernoteStripingNewliningProcessor extends EvernoteStrippingProcessor {
+public class EvernoteStrippingNewliningProcessor extends EvernoteStrippingProcessor {
 
-	public EvernoteStripingNewliningProcessor() {
+	public EvernoteStrippingNewliningProcessor() {
 	}
 
 	@Override

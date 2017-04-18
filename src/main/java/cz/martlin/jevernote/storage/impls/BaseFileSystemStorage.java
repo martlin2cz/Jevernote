@@ -1,6 +1,7 @@
 package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -18,10 +19,9 @@ import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.FileSystemUtils;
-import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
+import cz.martlin.jevernote.storage.base.CommonStorage;
 
-public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, File> {
+public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	public static final String BACKUP_DIR_NAME = ".backup";
@@ -37,22 +37,55 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 	}
 
 	@Override
-	public void initialize(String noDescNeeded) throws JevernoteException {
-		try {
-			createBackupDir();
-		} catch (IOException e) {
-			throw new JevernoteException("Cannot create backup dir", e);
-		}
+	public final boolean doIsInstalled() throws Exception {
+		return doIsFSInstalled();
 	}
 
+	protected abstract boolean doIsFSInstalled() throws IOException;
+
 	@Override
-	protected void doLoad() throws JevernoteException {
+	protected final void doInstallAndLoad(String installData) throws Exception {
+		checkBasePathExistence();
+		createBackupDir();
+
 		this.ignores = tryToLoadIgnores();
+
+		doFSInstallAndLoad(installData);
+	}
+
+	protected abstract void doFSInstallAndLoad(String installData) throws IOException;
+
+	@Override
+	protected final void doLoad() throws Exception {
+		checkBasePathExistence();
+		this.ignores = tryToLoadIgnores();
+
+		doFSLoad();
+	}
+
+	protected abstract void doFSLoad() throws IOException;
+
+	@Override
+	protected final void doStore() throws Exception {
+		doFSStore();
+	}
+
+	protected abstract void doFSStore() throws IOException;
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void checkBasePathExistence() throws FileNotFoundException {
+		if (!basePath.isDirectory()) {
+			throw new FileNotFoundException("Base dir does not exist");
+		}
 	}
 
 	private void createBackupDir() throws IOException {
 		File backupDir = backupDir();
-		Files.createDirectory(backupDir.toPath());
+		
+		if (!backupDir.isDirectory()) {
+			Files.createDirectory(backupDir.toPath());
+		}
 	}
 
 	private Set<File> tryToLoadIgnores() {
@@ -88,6 +121,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 				map((n) -> nameToPackageFile(n)).//
 				filter((f) -> f.isDirectory()). //
 				filter((f) -> !ignores.contains(f)). //
+				filter((f) -> !f.getName().equals(BACKUP_DIR_NAME)). //
 				collect(Collectors.toList());
 	}
 

@@ -24,12 +24,12 @@ import cz.martlin.jevernote.strategy.impl.operations.InteractiveOperationsStrate
 import cz.martlin.jevernote.strategy.impl.operations.SynchronizeOperationsStrategy;
 import cz.martlin.jevernote.strategy.impl.operations.WeakOperationsStrategy;
 
-public class JevernoteCore implements RequiresLoad {
+public class JevernoteCore implements RequiresLoad<String> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private final Exporter exporter;
-	protected final BaseStorage local;
-	protected final BaseStorage remote;
+	protected final StorageRequiringLoad local;
+	protected final StorageRequiringLoad remote;
 	private final LoggingStorageWrapper loggingLocal;
 	private final LoggingStorageWrapper loggingRemote;
 	private final boolean interactive;
@@ -37,7 +37,7 @@ public class JevernoteCore implements RequiresLoad {
 
 	private boolean loaded;
 
-	public JevernoteCore(BaseStorage local, BaseStorage remote, boolean interactive, boolean save) {
+	public JevernoteCore(StorageRequiringLoad local, StorageRequiringLoad remote, boolean interactive, boolean save) {
 		super();
 
 		this.exporter = new Exporter();
@@ -53,6 +53,20 @@ public class JevernoteCore implements RequiresLoad {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
+
+	@Override
+	public boolean isInstalled() throws JevernoteException {
+		return local.isInstalled() && remote.isInstalled();
+	}
+
+	@Override
+	public void installAndLoad(String installData) throws Exception {
+		LOG.debug("Installing core");
+
+		installAndLoadStorages(installData);
+
+		LOG.debug("Installed core");
+	}
 
 	@Override
 	public void load() throws JevernoteException {
@@ -81,14 +95,32 @@ public class JevernoteCore implements RequiresLoad {
 
 	///////////////////////////////////////////////////////////////////////////
 
+	private void installAndLoadStorages(String installData) throws JevernoteException {
+		if (!local.isInstalled()) {
+			local.installAndLoad(installData);
+		}
+		if (!remote.isInstalled()) {
+			remote.installAndLoad(installData);
+		}
+	}
+
 	private void loadStorages() throws JevernoteException {
-		StorageRequiringLoad.checkAndLoad(local);
-		StorageRequiringLoad.checkAndLoad(remote);
+		//local.checkInstallAndLoad();
+		//remote.checkInstallAndLoad();
+
+		loggingLocal.installAndLoad("XXX 1");	
+		loggingRemote.installAndLoad("XXX 2"); //FIXME loggging needs install but its wrapped load
+		
+		//loggingLocal.checkInstallAndLoad();
+		//loggingRemote.checkInstallAndLoad();
 	}
 
 	private void storeStorages() throws JevernoteException {
-		StorageRequiringLoad.checkAndStore(local);
-		StorageRequiringLoad.checkAndStore(remote);
+		//local.checkInstallAndStore();
+		//remote.checkInstallAndStore();
+
+		loggingLocal.checkInstallAndStore();
+		loggingRemote.checkInstallAndStore();
 	}
 
 	///////////////////////////////////////////////////////////////////////////

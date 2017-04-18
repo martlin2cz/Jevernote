@@ -12,8 +12,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Properties;
 
-import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
-
 public class FileSystemUtils {
 
 	private FileSystemUtils() {
@@ -45,7 +43,7 @@ public class FileSystemUtils {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	public static Properties loadProperties(File file) throws JevernoteException {
+	public static Properties loadProperties(File file) throws IOException {
 
 		Properties props = new Properties();
 
@@ -54,7 +52,7 @@ public class FileSystemUtils {
 			r = new FileReader(file);
 			props.load(r);
 		} catch (IOException e) {
-			throw new JevernoteException("Cannot read index file", e);
+			throw new IOException("Cannot load properties file", e);
 		} finally {
 			FileSystemUtils.closeQuietly(r);
 		}
@@ -62,14 +60,14 @@ public class FileSystemUtils {
 		return props;
 	}
 
-	public static void saveProperties(File file, Properties props) throws JevernoteException {
+	public static void saveProperties(File file, Properties props, String comment) throws IOException {
 
 		Writer w = null;
 		try {
 			w = new FileWriter(file);
-			props.store(w, FSSWIUsingProperties.COMMENT);
+			props.store(w, comment);
 		} catch (IOException e) {
-			throw new JevernoteException("Cannot write index file", e);
+			throw new IOException("Cannot save properties file", e);
 		} finally {
 			FileSystemUtils.closeQuietly(w);
 		}

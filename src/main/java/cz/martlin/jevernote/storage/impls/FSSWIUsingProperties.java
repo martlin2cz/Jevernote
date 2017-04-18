@@ -1,13 +1,13 @@
 package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.misc.FileSystemUtils;
-import cz.martlin.jevernote.misc.JevernoteException;
 
 public class FSSWIUsingProperties extends FSstorageWithIndex {
 
@@ -19,20 +19,26 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 	}
 
 	@Override
-	protected Map<String, File> initializeBindingsStorage(String noDescNeeded) throws JevernoteException {
+	protected boolean checkBindingsExistence() {
+		File indexFile = indexFile(basePath);
+		return indexFile.isFile();
+	}
+
+	@Override
+	protected Map<String, File> initializeBindingsStorage(String noDescNeeded) throws IOException {
 		Map<String, File> bindings = new HashMap<>();
 		saveBindings(bindings);
 		return bindings;
 	}
 
 	@Override
-	protected Map<String, File> loadBindings() throws JevernoteException {
+	protected Map<String, File> loadBindings() throws IOException {
 		File file = indexFile(basePath);
 		return loadBindings(basePath, file);
 	}
 
 	@Override
-	protected void saveBindings(Map<String, File> bindings) throws JevernoteException {
+	protected void saveBindings(Map<String, File> bindings) throws IOException {
 		File file = indexFile(basePath);
 		saveBindings(file, bindings);
 	}
@@ -43,7 +49,7 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 	}
 	///////////////////////////////////////////////////////////////////////////
 
-	protected static Map<String, File> loadBindings(File basePath, File file) throws JevernoteException {
+	protected static Map<String, File> loadBindings(File basePath, File file) throws IOException {
 		Properties props = FileSystemUtils.loadProperties(file);
 		Map<String, File> map = toMap(basePath, props);
 
@@ -64,9 +70,9 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 	}
 
 	///////////////////////////////////////////////////////////////////////////
-	protected static void saveBindings(File file, Map<String, File> bindings) throws JevernoteException {
+	protected static void saveBindings(File file, Map<String, File> bindings) throws IOException {
 		Properties props = toProperties(bindings);
-		FileSystemUtils.saveProperties(file, props);
+		FileSystemUtils.saveProperties(file, props, COMMENT);
 
 	}
 

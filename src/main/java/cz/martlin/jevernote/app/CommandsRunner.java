@@ -10,40 +10,65 @@ import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
-import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
+import cz.martlin.jevernote.storage.content.base.ContentProcessor;
+import cz.martlin.jevernote.storage.content.impls.EvernoteStrippingNewliningProcessor;
+import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
-import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 import cz.martlin.jevernote.storage.impls.ReadOnlyStorage;
 
-public class CommandsRunner implements RequiresLoad {
+public class CommandsRunner implements RequiresLoad<String> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private boolean loaded;
 	private final JevernoteCore core;
 
-	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive, boolean save) {
+	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive,
+			boolean save) {
 		super();
 
 		ConsoleLoggingConfigurer.setTo(verbose, debug);
 
 		Config config = new Config();
-		BaseStorage local = createLocal(config, basePath, dryRun);
-		BaseStorage remote = createRemote(config, basePath, dryRun);
+		StorageRequiringLoad local = createLocal(config, basePath, dryRun);
+		StorageRequiringLoad remote = createRemote(config, basePath, dryRun);
 
 		this.core = new JevernoteCore(local, remote, interactive, save);
 	}
 
-	private BaseStorage createLocal(Config config, File basePath, boolean dryRun) {
-		BaseStorage storage = new FSSWIUsingProperties(config, basePath);
+	private StorageRequiringLoad createLocal(Config config, File basePath, boolean dryRun) {
+		StorageRequiringLoad storage = new FSSWIUsingProperties(config, basePath);
+		
 		return tryMakeDry(storage, dryRun);
 	}
 
-	private BaseStorage createRemote(Config config, File basePath, boolean dryRun) {
-		BaseStorage storage = new InMemoryStorage();
+	private StorageRequiringLoad createRemote(Config config, File basePath, boolean dryRun) {
+		ContentProcessor proces = new EvernoteStrippingNewliningProcessor();
+		StorageRequiringLoad storage = new EvernoteStorage(config, basePath, proces);
+
 		return tryMakeDry(storage, dryRun);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
+
+	public boolean isInstalled() {
+		try {
+			return core.isInstalled();
+		} catch (Exception e) {
+			LOG.error("Cannot find out if is installed", e);
+			return false;
+		}
+	}
+
+	public void installAndLoad(String installData) {
+		try {
+			core.installAndLoad(installData);
+			loaded = true;
+		} catch (Exception e) {
+			LOG.error("Cannot install and load.");
+		}
+
+	}
 
 	@Override
 	public void load() {
@@ -128,7 +153,7 @@ public class CommandsRunner implements RequiresLoad {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private BaseStorage tryMakeDry(BaseStorage storage, boolean dryRun) {
+	private StorageRequiringLoad tryMakeDry(StorageRequiringLoad storage, boolean dryRun) {
 		if (dryRun) {
 			return new ReadOnlyStorage(storage);
 		} else {

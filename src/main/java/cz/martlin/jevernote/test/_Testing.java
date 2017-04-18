@@ -12,8 +12,9 @@ import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
-import cz.martlin.jevernote.storage.content.impls.EvernoteStripingNewliningProcessor;
+import cz.martlin.jevernote.storage.content.impls.EvernoteStrippingNewliningProcessor;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
@@ -26,7 +27,7 @@ public class _Testing {
 		// TODO
 		testMain();
 		// testCore();
-		 
+
 		// testEvernote();
 		// testFileSystem();
 		// testInMemory();
@@ -35,29 +36,29 @@ public class _Testing {
 
 	private static void testMain() {
 		String[] args = new String[] { //
-				"--base-dir", base.getAbsolutePath(), "--verbose", "--dry-run", "push" };//
+				"--base-dir", base.getAbsolutePath(), "--debug", /*"--dry-run",*/ "push" };//
 		Main.main(args);
 	}
 
 	private static void testCore() {
-		
+
 		Config config = new Config();
 
-		BaseStorage local = new InMemoryStorage();
-		BaseStorage remote = new FSSWIUsingProperties(config, base);
+		StorageRequiringLoad local = new InMemoryStorage(config);
+		StorageRequiringLoad remote = new FSSWIUsingProperties(config, base);
 
 		boolean save = true;
 		boolean interactive = false;
 		boolean verbose = true;
 		boolean debug = false;
-		
+
 		ConsoleLoggingConfigurer.setTo(verbose, debug);
 		JevernoteCore core = new JevernoteCore(local, remote, interactive, save);
 		try {
 			core.load();
 
-			//local.createPackage(new Package("id1", "boom"));
-			
+			// local.createPackage(new Package("id1", "boom"));
+
 			core.pushCmd(false, true);
 			// other commands here
 
@@ -68,9 +69,12 @@ public class _Testing {
 	}
 
 	private static void testInMemory() {
-		InMemoryStorage storage = new InMemoryStorage();
+		Config config = new Config();
+		InMemoryStorage storage = new InMemoryStorage(config);
 
 		try {
+			storage.checkInstallAndLoad();
+			
 			Package pack1 = new Package("Whatever #1", "foo");
 			storage.createPackage(pack1);
 			Item item1 = //
@@ -90,12 +94,6 @@ public class _Testing {
 	private static void testFileSystem() {
 		Config config = new Config();
 		FSSWIUsingProperties storage = new FSSWIUsingProperties(config, base);
-		try {
-			storage.load();
-		} catch (JevernoteException e) {
-			e.printStackTrace();
-			return;
-		}
 
 		testStorage(storage);
 	}
@@ -103,24 +101,19 @@ public class _Testing {
 	private static void testEvernote() {
 		final String token = "S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f";
 
-		ContentProcessor proc = new EvernoteStripingNewliningProcessor();
+		ContentProcessor proc = new EvernoteStrippingNewliningProcessor();
 
 		Config config = new Config();
 		config.setAuthToken(token); // if cfg file does not exist
 		EvernoteStorage storage = new EvernoteStorage(config, base, proc);
 
-		try {
-			storage.load();
-		} catch (JevernoteException e) {
-			e.printStackTrace();
-			return;
-		}
-
 		testStorage(storage);
 	}
 
-	private static void testStorage(BaseStorage storage) {
+	private static void testStorage(StorageRequiringLoad storage) {
 		try {
+
+			storage.checkInstallAndLoad();
 
 			// create package
 			String name1 = "Můj šestý noteboočík";
@@ -168,6 +161,8 @@ public class _Testing {
 			// remove package
 			storage.removePackage(pack2);
 			System.out.println("Removed package. (not implemented!)");
+
+			storage.checkInstallAndStore();
 
 		} catch (JevernoteException e) {
 			e.printStackTrace();

@@ -1,6 +1,7 @@
 package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -28,10 +29,10 @@ import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
+import cz.martlin.jevernote.storage.base.CommonStorage;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 
-public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
+public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
@@ -47,7 +48,20 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	protected void doLoad() throws JevernoteException {
+	public boolean doIsInstalled() throws Exception {
+		return config.existsConfigFile(baseDir);
+	}
+
+	@Override
+	protected void doInstallAndLoad(String token) throws IOException, JevernoteException {
+		config.setAuthToken(token);
+
+		config.save(baseDir);
+
+		cli = createNoteStore(token);
+	}
+
+	protected void doLoad() throws IOException, JevernoteException {
 		config.load(baseDir);
 
 		String token = config.getAuthToken();
@@ -57,13 +71,6 @@ public class EvernoteStorage extends StorageRequiringLoad<Notebook, Note> {
 	@Override
 	protected void doStore() throws JevernoteException {
 		// nothing needed here
-	}
-
-	@Override
-	public void initialize(String token) throws JevernoteException {
-		config.setAuthToken(token);
-
-		config.save(baseDir);
 	}
 
 	///////////////////////////////////////////////////////////////////////////

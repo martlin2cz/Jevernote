@@ -306,13 +306,13 @@ public class FileSystemStorageWithIndexFileTest {
 		Config config = new Config();
 		FSSWIUsingProperties storage = new FSSWIUsingProperties(config, baseDir);
 
-		storage.load();
+		storage.checkInstallAndLoad();
 
 		return storage;
 	}
 
 	private static void finishStorage(FSSWIUsingProperties storage) throws JevernoteException {
-		storage.store();
+		storage.checkInstallAndStore();
 	}
 	///////////////////////////////////////////////////////////////////////////
 

@@ -9,95 +9,87 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.base.WrappingStorage;
 
 public class LoggingStorageWrapper extends WrappingStorage {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-
-	public LoggingStorageWrapper(BaseStorage wrapped) {
+	public LoggingStorageWrapper(StorageRequiringLoad wrapped) {
 		super(wrapped);
 	}
 
-
-	@Override
-	public void initialize(String storageDesc) throws JevernoteException {
-		super.initialize(storageDesc);
-		
-	}
-	
 	///////////////////////////////////////////////////////////////////////////
 
-	public StorageData list() throws JevernoteException {
-		return super.list();
+	public StorageData doList() throws JevernoteException {
+		return super.doList();
 	}
 
-	public List<Package> listPackages() throws JevernoteException {
-		return super.listPackages();
+	public List<Package> doListPackages() throws JevernoteException {
+		return super.doListPackages();
 	}
 
-	public List<Item> listItems(Package pack) throws JevernoteException {
-		return super.listItems(pack);
+	public List<Item> doListItems(Package pack) throws JevernoteException {
+		return super.doListItems(pack);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
-	public void createPackage(Package pack) throws JevernoteException {
+	public void doCreatePackage(Package pack) throws JevernoteException {
 		LOG.debug("Creating package " + pack.getName());
-		super.createPackage(pack);
+		super.doCreatePackage(pack);
 		LOG.info("Created package " + pack.getName());
 	}
 
-	public void createItem(Item item) throws JevernoteException {
+	public void doCreateItem(Item item) throws JevernoteException {
 		LOG.debug("Creating item " + item.getName());
-		super.createItem(item);
+		super.doCreateItem(item);
 		LOG.info("Created item " + item.getName());
 	}
 
-	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
+	public void doMovePackage(Package oldPack, Package newPack) throws JevernoteException {
 		LOG.debug("Moving package " + oldPack.getName());
-		super.movePackage(oldPack, newPack);
+		super.doMovePackage(oldPack, newPack);
 		LOG.info("Moved package " + oldPack.getName());
 	}
 
-	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
+	public void doMoveItem(Item oldItem, Item newItem) throws JevernoteException {
 		LOG.debug("Moving item " + oldItem.getName());
-		super.moveItem(oldItem, newItem);
+		super.doMoveItem(oldItem, newItem);
 		LOG.info("Moved item " + oldItem.getName());
 	}
 
-	public void updateItem(Item item) throws JevernoteException {
+	public void doUpdateItem(Item item) throws JevernoteException {
 		LOG.debug("Updating item " + item.getName());
-		super.updateItem(item);
+		super.doUpdateItem(item);
 		LOG.info("Updated item " + item.getName());
 	}
 
-	public void removePackage(Package pack) throws JevernoteException {
+	public void doRemovePackage(Package pack) throws JevernoteException {
 		LOG.debug("Removing package " + pack.getName());
-		super.removePackage(pack);
+		super.doRemovePackage(pack);
 		LOG.info("Removed package " + pack.getName());
 	}
 
-	public void removeItem(Item item) throws JevernoteException {
+	public void doRemoveItem(Item item) throws JevernoteException {
 		LOG.debug("Removing item " + item.getName());
-		super.removeItem(item);
+		super.doRemoveItem(item);
 		LOG.info("Removed item " + item.getName());
 	}
 
 	@Override
-	public void backupPackage(Package pack) throws JevernoteException {
+	public void doBackupPackage(Package pack) throws JevernoteException {
 		LOG.debug("Backing up package " + pack.getName());
-		super.backupPackage(pack);
+		super.doBackupPackage(pack);
 		LOG.info("Backed up package " + pack.getName());
 	}
-	
+
 	@Override
-	public void backupItem(Item item) throws JevernoteException {
+	public void doBackupItem(Item item) throws JevernoteException {
 		LOG.debug("Backing up item " + item.getName());
-		super.backupItem(item);
+		super.doBackupItem(item);
 		LOG.info("Backed up item " + item.getName());
-		
+
 	}
-	
+
 }

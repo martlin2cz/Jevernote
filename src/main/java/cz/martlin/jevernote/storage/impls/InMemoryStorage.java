@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
@@ -16,15 +17,15 @@ import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public class InMemoryStorage extends CommonStorage<Package, Item> {
 
-	private final Map<Package, List<Item>> storage;
+	private Map<Package, List<Item>> storage;
+	private Map<Calendar, Package> backupPackages;
+	private Map<Calendar, Item> backupItems;
 
-	private final Map<Calendar, Package> backupPackages;
-	private final Map<Calendar, Item> backupItems;
+	public InMemoryStorage(Config config) {
+		super(config);
 
-	public InMemoryStorage() {
-		this.storage = new HashMap<>();
-		this.backupPackages = new HashMap<>();
-		this.backupItems = new HashMap<>();
+		// initialization of storage (to make it more testing) let to
+		// instalation
 	}
 
 	public void initialize(StorageData data) {
@@ -33,8 +34,25 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 
 	@Override
-	public void initialize(String noDescNeeded) {
-		// no initialization needed
+	public boolean doIsInstalled() {
+		return storage != null;
+	}
+
+	@Override
+	protected void doInstallAndLoad(String noInstallDataNeeded) {
+		this.storage = new HashMap<>();
+		this.backupPackages = new HashMap<>();
+		this.backupItems = new HashMap<>();
+	}
+
+	@Override
+	protected void doLoad() {
+		// does nothing in fact
+	}
+
+	@Override
+	protected void doStore() {
+		// does nothing in fact
 	}
 
 	///////////////////////////////////////////////////////////////////////////

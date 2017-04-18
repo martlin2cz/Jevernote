@@ -6,21 +6,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
 
-public abstract class CommonStorage<PT, IT> implements BaseStorage {
+/**
+ * The base storage for most of storage implementations. Each {@link Package}
+ * and {@link Item} are converted to so-called "native" (of types PT and IT) and
+ * correspondingly created/updated/modified/moved/removed/backed up/...
+ * 
+ * @author martin
+ *
+ * @param <PT>
+ * @param <IT>
+ */
+public abstract class CommonStorage<PT, IT> extends StorageRequiringLoad {
 
-	public CommonStorage() {
-		super();
+	public CommonStorage(Config config) {
+		super(config);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public StorageData list() throws JevernoteException {
+	public StorageData doList() throws JevernoteException {
 		Map<Package, List<Item>> result = new HashMap<>();
 
 		List<Package> packages = listPackages();
@@ -33,7 +44,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	}
 
 	@Override
-	public List<Package> listPackages() throws JevernoteException {
+	public List<Package> doListPackages() throws JevernoteException {
 		try {
 			List<PT> natives = listNativePackages();
 			List<Package> packages = new ArrayList<>(natives.size());
@@ -54,7 +65,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public List<Item> listItems(Package pack) throws JevernoteException {
+	public List<Item> doListItems(Package pack) throws JevernoteException {
 		try {
 			List<IT> natives = listNativeItems(pack);
 			List<Item> items = new ArrayList<>(natives.size());
@@ -75,7 +86,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void createPackage(Package pack) throws JevernoteException {
+	public void doCreatePackage(Package pack) throws JevernoteException {
 		try {
 			PT nativ = packageToNative(pack);
 
@@ -89,7 +100,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	protected abstract void createPackageNative(Package pack, PT nativ) throws Exception;
 
 	@Override
-	public void createItem(Item item) throws JevernoteException {
+	public void doCreateItem(Item item) throws JevernoteException {
 		try {
 			IT nativ = itemToNative(item);
 
@@ -104,7 +115,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
+	public void doMovePackage(Package oldPack, Package newPack) throws JevernoteException {
 		try {
 			PT oldNativ = packageToNative(oldPack);
 			PT newNativ = packageToNative(newPack);
@@ -120,7 +131,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 			throws Exception;
 
 	@Override
-	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
+	public void doMoveItem(Item oldItem, Item newItem) throws JevernoteException {
 		try {
 			IT oldNativ = itemToNative(oldItem);
 			IT newNativ = itemToNative(newItem);
@@ -134,7 +145,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	protected abstract void moveItemNative(Item oldItem, Item newItem, IT oldNativ, IT newNativ) throws Exception;
 
 	@Override
-	public void updateItem(Item item) throws JevernoteException {
+	public void doUpdateItem(Item item) throws JevernoteException {
 		try {
 			IT nativ = itemToNative(item);
 
@@ -149,7 +160,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void removePackage(Package pack) throws JevernoteException {
+	public void doRemovePackage(Package pack) throws JevernoteException {
 		try {
 			PT nativ = packageToNative(pack);
 
@@ -162,7 +173,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	protected abstract void removePackageNative(Package pack, PT nativ) throws Exception;
 
 	@Override
-	public void removeItem(Item item) throws JevernoteException {
+	public void doRemoveItem(Item item) throws JevernoteException {
 		try {
 			IT nativ = itemToNative(item);
 
@@ -177,7 +188,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void backupPackage(Package pack) throws JevernoteException {
+	public void doBackupPackage(Package pack) throws JevernoteException {
 		try {
 			PT nativ = packageToNative(pack);
 
@@ -190,7 +201,7 @@ public abstract class CommonStorage<PT, IT> implements BaseStorage {
 	protected abstract void backupPackageNative(Package pack, PT nativ) throws Exception;
 
 	@Override
-	public void backupItem(Item item) throws JevernoteException {
+	public void doBackupItem(Item item) throws JevernoteException {
 		try {
 			IT nativ = itemToNative(item);
 

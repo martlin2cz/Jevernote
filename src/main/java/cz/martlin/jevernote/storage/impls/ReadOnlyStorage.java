@@ -6,82 +6,74 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.misc.RequiresLoad;
-import cz.martlin.jevernote.storage.base.BaseStorage;
+import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.base.WrappingStorage;
 
-public class ReadOnlyStorage //
-		extends WrappingStorage //
-		implements RequiresLoad {
+public class ReadOnlyStorage extends WrappingStorage {
 
-	public ReadOnlyStorage(BaseStorage source) {
+	public ReadOnlyStorage(StorageRequiringLoad source) {
 		super(source);
 	}
 
 	@Override
-	public void initialize(String storageDesc) throws JevernoteException {
-		// nop
+	public StorageData doList() throws JevernoteException {
+		return super.doList();
 	}
 
 	@Override
-	public StorageData list() throws JevernoteException {
-		return super.list();
+	public List<Package> doListPackages() throws JevernoteException {
+		return super.doListPackages();
 	}
 
 	@Override
-	public List<Package> listPackages() throws JevernoteException {
-		return super.listPackages();
-	}
-
-	@Override
-	public List<Item> listItems(Package pack) throws JevernoteException {
-		return super.listItems(pack);
+	public List<Item> doListItems(Package pack) throws JevernoteException {
+		return super.doListItems(pack);
 	}
 
 	// TODO at least print? LOG or stdout? or what?!
 
 	@Override
-	public void createPackage(Package pack) throws JevernoteException {
+	public void doCreatePackage(Package pack) {
 		// nop
 	}
 
 	@Override
-	public void createItem(Item item) throws JevernoteException {
+	public void doCreateItem(Item item) {
 		// nop
 	}
 
 	@Override
-	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
+	public void doMovePackage(Package oldPack, Package newPack) {
 		// nop
 	}
 
 	@Override
-	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
+	public void doMoveItem(Item oldItem, Item newItem) {
 		// nop
 	}
 
 	@Override
-	public void updateItem(Item item) throws JevernoteException {
+	public void doUpdateItem(Item item) {
 		// nop
 	}
 
 	@Override
-	public void removePackage(Package pack) throws JevernoteException {
+	public void doRemovePackage(Package pack) {
 		// nop
 	}
 
 	@Override
-	public void removeItem(Item item) throws JevernoteException {
+	public void doRemoveItem(Item item) {
 		// nop
 	}
 
 	@Override
-	public void backupPackage(Package pack) throws JevernoteException {
+	public void doBackupPackage(Package pack) {
 		// nop
 	}
 
 	@Override
-	public void backupItem(Item item) throws JevernoteException {
+	public void doBackupItem(Item item) {
 		// nop
 	}
 

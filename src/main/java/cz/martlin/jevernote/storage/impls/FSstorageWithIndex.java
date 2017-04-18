@@ -1,6 +1,7 @@
 package cz.martlin.jevernote.storage.impls;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -15,7 +16,7 @@ import cz.martlin.jevernote.misc.JevernoteException;
 public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
-	
+
 	private Map<String, File> bindings;
 	private boolean indexChanged;
 
@@ -26,85 +27,100 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 	public Map<String, File> getBindings() {
 		return bindings;
 	}
-	
-	@Override
-	public void initialize(String storageDesc) throws JevernoteException {
-		super.initialize(storageDesc);
-		initializeBindingsStorage(storageDesc);
-	}
 
-	protected abstract Map<String, File> initializeBindingsStorage(String storageDesc) throws JevernoteException;
-
-	
 	///////////////////////////////////////////////////////////////////////////
 
-	
 	@Override
-	protected void doLoad() throws JevernoteException {
-		super.doLoad();
-		this.bindings = loadBindings();
+	public boolean doIsFSInstalled() throws IOException {
+		return checkBindingsExistence();
 	}
 
-	protected abstract Map<String, File> loadBindings() throws JevernoteException;
+	@Override
+	protected void doFSInstallAndLoad(String installData) throws IOException {
+		bindings = initializeBindingsStorage(installData);
+	}
 
 	@Override
-	protected void doStore() throws JevernoteException {
+	protected void doFSLoad() throws IOException {
+		bindings = loadBindings();
+	}
+
+	@Override
+	protected void doFSStore() throws IOException {
 		if (requiresSave()) {
 			saveBindings(bindings);
 		}
 	}
 
-	protected abstract void saveBindings(Map<String, File> bindings) throws JevernoteException;
+	protected abstract boolean checkBindingsExistence();
+
+	protected abstract Map<String, File> initializeBindingsStorage(String storageDesc) throws IOException;
+
+	protected abstract Map<String, File> loadBindings() throws IOException;
+
+	protected abstract void saveBindings(Map<String, File> bindings) throws IOException;
 
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
-	public void createPackage(Package pack) throws JevernoteException {
-		super.createPackage(pack);
+	public void doCreatePackage(Package pack) throws JevernoteException {
+		super.doCreatePackage(pack);
 
 		createPackageInIndex(pack);
 	}
 
 	@Override
-	public void createItem(Item item) throws JevernoteException {
-		super.createItem(item);
+	public void doCreateItem(Item item) throws JevernoteException {
+		super.doCreateItem(item);
 
 		createItemInIndex(item);
 	}
 
 	@Override
-	public void movePackage(Package oldPack, Package newPack) throws JevernoteException {
-		super.movePackage(oldPack, newPack);
+	public void doMovePackage(Package oldPack, Package newPack) throws JevernoteException {
+		super.doMovePackage(oldPack, newPack);
 
 		movePackageInIndex(oldPack, newPack);
 	}
 
 	@Override
-	public void moveItem(Item oldItem, Item newItem) throws JevernoteException {
-		super.moveItem(oldItem, newItem);
+	public void doMoveItem(Item oldItem, Item newItem) throws JevernoteException {
+		super.doMoveItem(oldItem, newItem);
 
 		moveItemInIndex(newItem);
 	}
 
 	@Override
-	public void updateItem(Item item) throws JevernoteException {
-		super.updateItem(item);
+	public void doUpdateItem(Item item) throws JevernoteException {
+		super.doUpdateItem(item);
 
 		// nothing needed here
 	}
 
 	@Override
-	public void removePackage(Package pack) throws JevernoteException {
-		super.removePackage(pack);
+	public void doRemovePackage(Package pack) throws JevernoteException {
+		super.doRemovePackage(pack);
 
 		removePackageFromIndex(pack);
 	}
 
 	@Override
-	public void removeItem(Item item) throws JevernoteException {
-		super.removeItem(item);
+	public void doRemoveItem(Item item) throws JevernoteException {
+		super.doRemoveItem(item);
 
 		removeItemFromIndex(item);
+	}
+
+	@Override
+	public void doBackupPackage(Package pack) throws JevernoteException {
+		super.doBackupPackage(pack);
+		// okay
+	}
+
+	@Override
+	public void doBackupItem(Item item) throws JevernoteException {
+		super.doBackupItem(item);
+		// okay
 	}
 
 	///////////////////////////////////////////////////////////////////////////

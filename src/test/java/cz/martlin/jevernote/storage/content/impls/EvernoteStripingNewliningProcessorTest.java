@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class EvernoteStripingNewliningProcessorTest {
 
-	private final EvernoteStripingNewliningProcessor proc = new EvernoteStripingNewliningProcessor();
+	private final EvernoteStrippingNewliningProcessor proc = new EvernoteStrippingNewliningProcessor();
 
 	public EvernoteStripingNewliningProcessorTest() {
 	}

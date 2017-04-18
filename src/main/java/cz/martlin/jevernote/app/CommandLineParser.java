@@ -101,7 +101,6 @@ public class CommandLineParser {
 		case "push":
 		case "pull":
 		case "synchronize":
-		case "status":
 			// TODO mv, ad, rm ...
 			return command;
 		case "easter":
@@ -121,9 +120,7 @@ public class CommandLineParser {
 		case "pull":
 			return parsePushPullFlags(params, data);
 		case "synchronize":
-			return true;
-		case "status":
-			return true;
+			return params.isEmpty();
 		default:
 			throw new IllegalArgumentException("Unknown command:" + command);
 		}

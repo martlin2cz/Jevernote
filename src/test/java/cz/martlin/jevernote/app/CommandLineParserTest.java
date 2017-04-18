@@ -40,15 +40,13 @@ public class CommandLineParserTest {
 	@Test
 	public void testOtherOkays() {
 		check(true, "--verbose", "--debug", "--interactive", "push", "--weak", "--force");
-		check(true, "status");
 		check(true, "--verbose", "push", "--weak");
-		check(true, "synchronize", "local");
+		check(true, "synchronize");
 	}
 	
 	@Test
 	public void testWithWarning() {
 		check(true, "--undefined", "push", "--weak", "--force", "--dunno");
-		check(true, "status", "--nothing");
 		check(true, "init", "123", "456");
 		check(true, "-verbose", "push", "-force");
 	}
