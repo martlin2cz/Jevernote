@@ -3,7 +3,7 @@
 
 	<Appenders>
 		<Console name="Console" target="SYSTEM_OUT">
-			<PatternLayout pattern="%-5level %msg%n" />
+			<PatternLayout pattern="%-5level %msg %throwable{short.message}%n" />
 		</Console>
 		
 		<File name="InFile" filename="logs.log">

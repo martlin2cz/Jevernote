@@ -5,9 +5,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
@@ -17,9 +22,14 @@ import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 
 public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, File> {
+	private final Logger LOG = LoggerFactory.getLogger(getClass());
+
 	public static final String BACKUP_DIR_NAME = ".backup";
+	public static final String IGNORE_FILE_NAME = ".jevernoteignore";
 
 	protected final File basePath;
+
+	private Set<File> ignores;
 
 	public BaseFileSystemStorage(Config config, File basePath) {
 		super(config);
@@ -35,9 +45,37 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 		}
 	}
 
+	@Override
+	protected void doLoad() throws JevernoteException {
+		this.ignores = tryToLoadIgnores();
+	}
+
 	private void createBackupDir() throws IOException {
 		File backupDir = backupDir();
 		Files.createDirectory(backupDir.toPath());
+	}
+
+	private Set<File> tryToLoadIgnores() {
+		LOG.debug("Trying to load ignore file");
+
+		File ignoreFile = new File(basePath, IGNORE_FILE_NAME);
+		if (ignoreFile.exists() && ignoreFile.isFile()) {
+			LOG.debug("Ignore file does not exist");
+			return Collections.emptySet();
+		}
+
+		List<String> lines = null;
+		try {
+			lines = FileSystemUtils.loadLines(ignoreFile);
+		} catch (IOException e) {
+			LOG.warn("Ingore file could not be loaded", e);
+			return Collections.emptySet();
+		}
+
+		return lines //
+				.stream() //
+				.map((f) -> new File(basePath, f)) //
+				.collect(Collectors.toSet());
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -49,6 +87,7 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 		return Arrays.stream(names).//
 				map((n) -> nameToPackageFile(n)).//
 				filter((f) -> f.isDirectory()). //
+				filter((f) -> !ignores.contains(f)). //
 				collect(Collectors.toList());
 	}
 
@@ -59,9 +98,9 @@ public abstract class BaseFileSystemStorage extends StorageRequiringLoad<File, F
 
 		return Arrays.stream(names).//
 				map((n) -> nameToItemFile(pack, n)).//
-				filter((f) -> !f.isDirectory()). // //TODO crash if folder?
-													// //TODO .jevernoteignore
-				collect(Collectors.toList());
+				filter((f) -> f.isFile()). // //TODO crash if folder?
+				filter((f) -> !ignores.contains(f)). //
+				collect(Collectors.toList()); //
 
 	}
 

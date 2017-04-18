@@ -20,12 +20,12 @@ import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class _Testing {
 
-	private static final File base = new File("/home/martin/tmp/jevernote/");
+	private static final File base = new File("/home/martin/tmp/jevernote2/");
 
 	public static void main(String[] args) {
 		// TODO
-		//testMain();
-		 testCore();
+		testMain();
+		// testCore();
 		 
 		// testEvernote();
 		// testFileSystem();

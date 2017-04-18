@@ -41,6 +41,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 	
 	@Override
 	protected void doLoad() throws JevernoteException {
+		super.doLoad();
 		this.bindings = loadBindings();
 	}
 

@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.strategy.impl;
+package cz.martlin.jevernote.strategy.impl.misc;
 
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;

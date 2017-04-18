@@ -9,6 +9,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Properties;
 
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
@@ -34,6 +35,12 @@ public class FileSystemUtils {
 
 		return new String(bytes);
 
+	}
+
+	public static List<String> loadLines(File file) throws IOException {
+		Path path = file.toPath();
+
+		return Files.readAllLines(path);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
