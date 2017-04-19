@@ -88,8 +88,8 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 	@Override
 	public final void store() throws JevernoteException {
 		if (!loaded) {
-			Exception e = new IllegalStateException("Not loaded");
-			throw new JevernoteException(e);
+//			Exception e = new IllegalStateException("Not loaded");
+//			throw new JevernoteException(e);
 		}
 
 		try {

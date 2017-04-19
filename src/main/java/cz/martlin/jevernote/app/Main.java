@@ -34,7 +34,7 @@ public class Main {
 		return false;
 	}
 
-	private static void runCommand(String[] args) {
+	public static void runCommand(String[] args) {
 		CommandLineParser parser = new CommandLineParser();
 
 		CommandLineData data = parser.parse(args);

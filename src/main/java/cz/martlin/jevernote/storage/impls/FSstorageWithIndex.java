@@ -217,7 +217,7 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		return id;
 	}
 
-	private String createId() {
+	public static String createId() {
 		return "Undefined-identifier-" + System.currentTimeMillis() + "-" + System.nanoTime();
 	}
 

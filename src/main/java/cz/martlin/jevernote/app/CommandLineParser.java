@@ -102,7 +102,11 @@ public class CommandLineParser {
 		case "pull":
 		case "synchronize":
 		case "status":
-			// TODO mv, ad, rm ...
+			return command;
+		case "ad":
+		case "mk":
+		case "mv":
+		case "rm":
 			return command;
 		case "easter":
 			System.out.println("Happy easter!");
@@ -124,12 +128,57 @@ public class CommandLineParser {
 		case "synchronize":
 		case "status":
 			return params.isEmpty();
+		case "ad":
+		case "mk":
+		case "mv":
+		case "rm":
+			return parseLocalCommandFlags(command, params, data);
 		default:
 			throw new IllegalArgumentException("Unknown command:" + command);
 		}
 	}
 
 	///////////////////////////////////////////////////////////////////////////
+
+	private boolean parseLocalCommandFlags(String command, Queue<String> params, CommandLineData data) {
+		if (params.isEmpty()) {
+			LOG.error("Missing item or pack");
+			return false;
+		}
+		String firstItemOrPack = params.poll();
+		data.setFirstItemOrPack(firstItemOrPack);
+		switch (command) {
+		case "mk":
+			if (!params.isEmpty()) {
+				String content = params.poll();
+				data.setInitialText(content);
+			}
+			if (!params.isEmpty()) {
+				LOG.warn("Uneccessary params after intial content, ignoring");
+			}
+			return true;
+		case "mv":
+			if (params.isEmpty()) {
+				LOG.error("Missing second item or pack");
+				return false;
+			}
+			String secondItemOrPack = params.poll();
+			data.setSecondItemOrPack(secondItemOrPack);
+			
+			if (!params.isEmpty()) {
+				LOG.warn("Uneccessary params after second item/pack, ignoring");
+			}
+			return true;
+		case "ad":
+		case "rm":
+			if (!params.isEmpty()) {
+				LOG.warn("Uneccessary params after item/pack, ignoring");
+			}
+			return true;
+		default:
+			throw new IllegalArgumentException("Unknown local command:" + command);
+		}
+	}
 
 	private boolean parseInitCloneFlags(Queue<String> params, CommandLineData data) {
 		if (params.size() < 1) {

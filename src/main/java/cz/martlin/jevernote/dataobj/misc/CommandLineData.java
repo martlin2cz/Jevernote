@@ -8,13 +8,17 @@ public class CommandLineData {
 	private boolean interactive;
 	private boolean dryRun;
 	private boolean save;
+
 	private File baseDir;
 	private String command;
+
 	private boolean weak;
 	private boolean force;
 	private String remoteToken;
-	@Deprecated
-	private boolean preferLocal;
+
+	private String firstItemOrPack;
+	private String secondItemOrPack;
+	private String initialText;
 
 	public CommandLineData() {
 	}
@@ -99,19 +103,36 @@ public class CommandLineData {
 		return remoteToken;
 	}
 
-	public boolean isPreferLocal() {
-		return preferLocal;
+	public String getFirstItemOrPack() {
+		return firstItemOrPack;
 	}
 
-	public void setPreferLocal(boolean preferLocal) {
-		this.preferLocal = preferLocal;
+	public void setFirstItemOrPack(String firstItemOrPack) {
+		this.firstItemOrPack = firstItemOrPack;
+	}
+
+	public String getSecondItemOrPack() {
+		return secondItemOrPack;
+	}
+
+	public void setSecondItemOrPack(String secondItemOrPack) {
+		this.secondItemOrPack = secondItemOrPack;
+	}
+
+	public String getInitialText() {
+		return initialText;
+	}
+
+	public void setInitialText(String initialText) {
+		this.initialText = initialText;
 	}
 
 	@Override
 	public String toString() {
-		return "CommandLineData [verbose=" + verbose + ", debug=" + debug + ", interactive=" + interactive
-				+ ", baseDir=" + baseDir + ", command=" + command + ", dryRun=" + dryRun + ", save=" + save + ", weak="
-				+ weak + ", force=" + force + ", remoteToken=" + remoteToken + ", preferLocal=" + preferLocal + "]";
+		return "CommandLineData [verbose=" + verbose + ", debug=" + debug + ", interactive=" + interactive + ", dryRun="
+				+ dryRun + ", save=" + save + ", baseDir=" + baseDir + ", command=" + command + ", weak=" + weak
+				+ ", force=" + force + ", remoteToken=" + remoteToken + ", firstItemOrPack=" + firstItemOrPack
+				+ ", secondItemOrPack=" + secondItemOrPack + ", initialText=" + initialText + "]";
 	}
 
 }

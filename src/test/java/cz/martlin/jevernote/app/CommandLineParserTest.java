@@ -61,6 +61,15 @@ public class CommandLineParserTest {
 	}
 	
 	
+	@Test
+	public void testLocals() {
+		check(true,  "ad", "the-existing-item");
+		check(true,  "mk", "the-new-item");
+		check(true,  "mk", "the-new-item", "This is the content.");
+		check(true,  "mv", "the-old-item", "the-new-item");
+		check(true,  "rm", "the-item-to-remove");
+	}
+	
 
 	private void check(boolean isOk, String... input) {
 		CommandLineData data = parser.parse(input);

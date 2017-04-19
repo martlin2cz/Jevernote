@@ -6,47 +6,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import cz.martlin.jevernote.core.JevernoteCore;
-import cz.martlin.jevernote.dataobj.misc.Config;
-import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.misc.RequiresLoad;
 import cz.martlin.jevernote.storage.base.BaseStorage;
-import cz.martlin.jevernote.storage.content.base.ContentProcessor;
-import cz.martlin.jevernote.storage.content.impls.EvernoteStrippingNewliningProcessor;
-import cz.martlin.jevernote.storage.impls.EvernoteStorage;
-import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 
-public class CommandsRunner implements RequiresLoad<String> {
+public class SyncCommandsRunner implements RequiresLoad<String> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private boolean loaded;
 	private final JevernoteCore core;
 
-	public CommandsRunner(File basePath, boolean verbose, boolean debug, boolean dryRun, boolean interactive,
-			boolean save) {
+	public SyncCommandsRunner(BaseStorage local, BaseStorage remote, File basePath, boolean dryRun,
+			boolean interactive, boolean save) {
 		super();
 
-		ConsoleLoggingConfigurer.setTo(verbose, debug);
-
-		Config config = new Config();
-		
-		BaseStorage local = createLocal(config, basePath);
-		BaseStorage remote = createRemote(config, basePath);
-
 		this.core = new JevernoteCore(local, remote, interactive, save, dryRun);
-	}
-
-	private BaseStorage createLocal(Config config, File basePath) {
-		BaseStorage storage = new FSSWIUsingProperties(config, basePath);
-
-		return storage;
-	}
-
-	private BaseStorage createRemote(Config config, File basePath) {
-		ContentProcessor proces = new EvernoteStrippingNewliningProcessor();
-		BaseStorage storage = new EvernoteStorage(config, basePath, proces);
-
-		return storage;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -147,7 +121,6 @@ public class CommandsRunner implements RequiresLoad<String> {
 		}
 	}
 
-
 	public boolean cmdStatus() {
 		try {
 			core.statusCmd();
@@ -158,7 +131,6 @@ public class CommandsRunner implements RequiresLoad<String> {
 		}
 	}
 
-	
 	///////////////////////////////////////////////////////////////////////////
 
 	// TODO mv, ad, rm, ...
