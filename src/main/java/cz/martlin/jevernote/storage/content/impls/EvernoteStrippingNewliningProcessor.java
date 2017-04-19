@@ -20,10 +20,10 @@ public class EvernoteStrippingNewliningProcessor extends EvernoteStrippingProces
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static String replaceBRsByNewlines(String stripped) {
-		return stripped.replaceAll("\\<br/\\>", "\n");
+		return stripped.replaceAll("\\<br /\\>", "\n");
 	}
 
 	protected static String replaceNewlinesByBRs(String content) {
-		return content.replaceAll("\n", "<br/>");
+		return content.replaceAll("\n", "<br />");
 	}
 }

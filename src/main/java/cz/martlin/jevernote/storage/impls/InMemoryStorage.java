@@ -24,7 +24,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	public InMemoryStorage(Config config) {
 		super(config);
 
-		// initialization of storage (to make it more testing) let to
+		// initialization of storage (to make it more tested) let to
 		// instalation
 	}
 

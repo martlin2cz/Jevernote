@@ -33,7 +33,8 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 		try {
 			return doIsInstalled();
 		} catch (Exception e) {
-			throw new JevernoteException("Cannot find out if is storage installed", e);
+			throw new JevernoteException(
+					"Cannot find out if is storage " + this.getClass().getSimpleName() + " installed", e);
 		}
 	}
 
@@ -60,7 +61,7 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 		try {
 			doLoad();
 		} catch (Exception e) {
-			throw new JevernoteException("Cannot load", e);
+			throw new JevernoteException("Cannot load " + this.getClass().getSimpleName(), e);
 		}
 
 		loaded = true;
@@ -94,7 +95,7 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 		try {
 			doStore();
 		} catch (Exception e) {
-			throw new JevernoteException("Cannot store", e);
+			throw new JevernoteException("Cannot store " + this.getClass().getSimpleName(), e);
 		}
 
 		loaded = false;
@@ -129,7 +130,7 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 			doInstallAndLoad(installData);
 			loaded = true;
 		} catch (Exception e) {
-			throw new JevernoteException("Cannot install/load", e);
+			throw new JevernoteException("Cannot install/load " + this.getClass().getSimpleName(), e);
 		}
 	}
 
@@ -148,6 +149,10 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 	 * @throws JevernoteException
 	 */
 	private void check() throws JevernoteException {
+		if (!isInstalled()) {
+			Exception e = new IllegalStateException(getClass().getSimpleName() + " requires installation");
+			throw new JevernoteException("Not yet installed", e);
+		}
 		if (!isLoaded()) {
 			Exception e = new IllegalStateException(getClass().getSimpleName() + " requires load");
 			throw new JevernoteException("Not yet loaded", e);
@@ -261,4 +266,26 @@ public abstract class StorageRequiringLoad implements BaseStorage, RequiresLoad<
 
 	///////////////////////////////////////////////////////////////////////////
 
+	public static boolean isInstalled(BaseStorage storage) throws JevernoteException {
+		if (storage instanceof StorageRequiringLoad) {
+			StorageRequiringLoad srl = (StorageRequiringLoad) storage;
+			return srl.isInstalled();
+		}
+
+		return true;
+	}
+
+	public static void loadIfRequired(BaseStorage storage) throws JevernoteException {
+		if (storage instanceof StorageRequiringLoad) {
+			StorageRequiringLoad srl = (StorageRequiringLoad) storage;
+			srl.load();
+		}
+	}
+
+	public static void storeIfRequired(BaseStorage storage) throws JevernoteException {
+		if (storage instanceof StorageRequiringLoad) {
+			StorageRequiringLoad srl = (StorageRequiringLoad) storage;
+			srl.store();
+		}
+	}
 }

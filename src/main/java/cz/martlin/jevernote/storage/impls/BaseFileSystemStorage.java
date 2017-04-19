@@ -92,7 +92,7 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 		LOG.debug("Trying to load ignore file");
 
 		File ignoreFile = new File(basePath, IGNORE_FILE_NAME);
-		if (ignoreFile.exists() && ignoreFile.isFile()) {
+		if (!(ignoreFile.exists() && ignoreFile.isFile())) {
 			LOG.debug("Ignore file does not exist");
 			return Collections.emptySet();
 		}

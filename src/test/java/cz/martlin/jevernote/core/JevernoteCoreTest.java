@@ -245,7 +245,7 @@ public class JevernoteCoreTest {
 		InMemoryStorage local = createLocalStorage();
 		InMemoryStorage remote = createRemoteStorage();
 
-		JevernoteCore core = new JevernoteCore(local, remote, false, true);
+		JevernoteCore core = new JevernoteCore(local, remote, false, true, false);
 
 		core.load();
 

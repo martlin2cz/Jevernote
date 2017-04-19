@@ -35,9 +35,19 @@ public class _Testing {
 	}
 
 	private static void testMain() {
-		String[] args = new String[] { //
-				"--base-dir", base.getAbsolutePath(), "--debug", /*"--dry-run",*/ "push" };//
-		Main.main(args);
+		
+//		String[] args1 = new String[] { //
+//				"--base-dir", base.getAbsolutePath(), "--debug", "init",  "\"S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f\""};//
+//		Main.main(args1);
+
+		String[] args3 = new String[] { //
+				"--base-dir", base.getAbsolutePath(), "--debug", "status" };//
+		Main.main(args3);
+
+		
+		String[] args2 = new String[] { //
+				"--base-dir", base.getAbsolutePath(), "--debug", "--dry-run", "push" };//
+		Main.main(args2);
 	}
 
 	private static void testCore() {
@@ -51,9 +61,10 @@ public class _Testing {
 		boolean interactive = false;
 		boolean verbose = true;
 		boolean debug = false;
+		boolean dry = false;
 
 		ConsoleLoggingConfigurer.setTo(verbose, debug);
-		JevernoteCore core = new JevernoteCore(local, remote, interactive, save);
+		JevernoteCore core = new JevernoteCore(local, remote, interactive, save, dry);
 		try {
 			core.load();
 
@@ -74,7 +85,7 @@ public class _Testing {
 
 		try {
 			storage.checkInstallAndLoad();
-			
+
 			Package pack1 = new Package("Whatever #1", "foo");
 			storage.createPackage(pack1);
 			Item item1 = //

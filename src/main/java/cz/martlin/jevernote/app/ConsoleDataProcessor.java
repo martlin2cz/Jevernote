@@ -56,6 +56,9 @@ public class ConsoleDataProcessor {
 		case "synchronize":
 			return performer.cmdSynchronize();
 
+		case "status":
+			return performer.cmdStatus();
+			
 		default:
 			LOG.error("Unknown command " + data.getCommand());
 			return false;

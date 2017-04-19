@@ -20,8 +20,8 @@ public class EvernoteStripingNewliningProcessorTest {
 				+ "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">" //
 				+ "<en-note>" //
 				+ "<span>" //
-				+ "Hello,<br/>" //
-				+ "World!<br/>" //
+				+ "Hello,<br />" //
+				+ "World!<br />" //
 				+ "</span>" //
 				+ "</en-note>"; //
 
@@ -51,8 +51,8 @@ public class EvernoteStripingNewliningProcessorTest {
 				+ "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">" //
 				+ "<en-note>" //
 				+ "<span>" //
-				+ "Hello,<br/>" //
-				+ "World!<br/>" //
+				+ "Hello,<br />" //
+				+ "World!<br />" //
 				+ "</span>" //
 				+ "</en-note>"; //
 

@@ -101,10 +101,12 @@ public class CommandLineParser {
 		case "push":
 		case "pull":
 		case "synchronize":
+		case "status":
 			// TODO mv, ad, rm ...
 			return command;
 		case "easter":
 			System.out.println("Happy easter!");
+			return null;
 		default:
 			LOG.error("Uknown command: " + command);
 			return null;
@@ -120,6 +122,7 @@ public class CommandLineParser {
 		case "pull":
 			return parsePushPullFlags(params, data);
 		case "synchronize":
+		case "status":
 			return params.isEmpty();
 		default:
 			throw new IllegalArgumentException("Unknown command:" + command);

@@ -13,6 +13,7 @@ import cz.martlin.jevernote.perf.impl.DiffPerformerUsingStragegies;
 import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.impls.LoggingStorageWrapper;
+import cz.martlin.jevernote.storage.impls.ReadOnlyStorage;
 import cz.martlin.jevernote.strategy.base.BaseOperationsStrategy;
 import cz.martlin.jevernote.strategy.impl.backup.NoBackupStrategy;
 import cz.martlin.jevernote.strategy.impl.backup.StrongBackupStrategy;
@@ -28,16 +29,16 @@ public class JevernoteCore implements RequiresLoad<String> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
 	private final Exporter exporter;
-	protected final StorageRequiringLoad local;
-	protected final StorageRequiringLoad remote;
-	private final LoggingStorageWrapper loggingLocal;
-	private final LoggingStorageWrapper loggingRemote;
+	protected final BaseStorage local;
+	protected final BaseStorage remote;
+	private final BaseStorage wrappedLocal;
+	private final BaseStorage wrappedRemote;
 	private final boolean interactive;
 	private final boolean save;
 
 	private boolean loaded;
 
-	public JevernoteCore(StorageRequiringLoad local, StorageRequiringLoad remote, boolean interactive, boolean save) {
+	public JevernoteCore(BaseStorage local, BaseStorage remote, boolean interactive, boolean save, boolean dryRun) {
 		super();
 
 		this.exporter = new Exporter();
@@ -45,8 +46,8 @@ public class JevernoteCore implements RequiresLoad<String> {
 		this.local = local;
 		this.remote = remote;
 
-		loggingLocal = new LoggingStorageWrapper(local);
-		loggingRemote = new LoggingStorageWrapper(remote);
+		wrappedLocal = wrapStorage(local, dryRun);
+		wrappedRemote = wrapStorage(remote, dryRun);
 
 		this.interactive = interactive;
 		this.save = save;
@@ -56,16 +57,12 @@ public class JevernoteCore implements RequiresLoad<String> {
 
 	@Override
 	public boolean isInstalled() throws JevernoteException {
-		return local.isInstalled() && remote.isInstalled();
+		return StorageRequiringLoad.isInstalled(local) && StorageRequiringLoad.isInstalled(remote);
 	}
 
 	@Override
 	public void installAndLoad(String installData) throws Exception {
-		LOG.debug("Installing core");
-
-		installAndLoadStorages(installData);
-
-		LOG.debug("Installed core");
+		throw new UnsupportedOperationException("Cannot directly install core, use initCmd instead");
 	}
 
 	@Override
@@ -95,32 +92,14 @@ public class JevernoteCore implements RequiresLoad<String> {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private void installAndLoadStorages(String installData) throws JevernoteException {
-		if (!local.isInstalled()) {
-			local.installAndLoad(installData);
-		}
-		if (!remote.isInstalled()) {
-			remote.installAndLoad(installData);
-		}
-	}
-
 	private void loadStorages() throws JevernoteException {
-		//local.checkInstallAndLoad();
-		//remote.checkInstallAndLoad();
-
-		loggingLocal.installAndLoad("XXX 1");	
-		loggingRemote.installAndLoad("XXX 2"); //FIXME loggging needs install but its wrapped load
-		
-		//loggingLocal.checkInstallAndLoad();
-		//loggingRemote.checkInstallAndLoad();
+		StorageRequiringLoad.loadIfRequired(local);
+		StorageRequiringLoad.loadIfRequired(remote);
 	}
 
 	private void storeStorages() throws JevernoteException {
-		//local.checkInstallAndStore();
-		//remote.checkInstallAndStore();
-
-		loggingLocal.checkInstallAndStore();
-		loggingRemote.checkInstallAndStore();
+		StorageRequiringLoad.storeIfRequired(local);
+		StorageRequiringLoad.storeIfRequired(remote);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -163,7 +142,15 @@ public class JevernoteCore implements RequiresLoad<String> {
 	public void synchronizeCmd() throws JevernoteException {
 		LOG.debug("Running synchronize command");
 
-		doSyncrhonize();
+		doSynchronize();
+
+		LOG.debug("Command completed");
+	}
+
+	public void statusCmd() throws JevernoteException {
+		LOG.debug("Running status command");
+
+		doStatus();
 
 		LOG.debug("Command completed");
 	}
@@ -171,24 +158,31 @@ public class JevernoteCore implements RequiresLoad<String> {
 	///////////////////////////////////////////////////////////////////////////
 
 	private void doInit(String localSpecifier, String remoteSpecifier) throws JevernoteException {
-		loggingLocal.initialize(localSpecifier);
-		loggingRemote.initialize(remoteSpecifier);
+		wrappedLocal.initialize(localSpecifier);
+		wrappedRemote.initialize(remoteSpecifier);
 	}
 
 	private void doPull(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingRemote, loggingLocal, weak, force, save, false, "at local");
+		transfer(wrappedRemote, wrappedLocal, weak, force, save, false, "at local");
 	}
 
 	private void doPush(boolean weak, boolean force) throws JevernoteException {
-		transfer(loggingLocal, loggingRemote, weak, force, save, false, "at remote");
+		transfer(wrappedLocal, wrappedRemote, weak, force, save, false, "at remote");
 	}
 
-	private void doSyncrhonize() throws JevernoteException {
+	private void doSynchronize() throws JevernoteException {
 		BaseOperationsStrategy operationsStrategy = new SynchronizeOperationsStrategy();
 		BaseOperationsStrategy backupStrategy = findBackupStrategy(save, false);
 
-		transfer(loggingLocal, loggingRemote, operationsStrategy, backupStrategy, "at remote");
-		transfer(loggingRemote, loggingLocal, operationsStrategy, backupStrategy, "at local");
+		transfer(wrappedLocal, wrappedRemote, operationsStrategy, backupStrategy, "at remote");
+		transfer(wrappedRemote, wrappedLocal, operationsStrategy, backupStrategy, "at local");
+	}
+
+	private void doStatus() throws JevernoteException {
+		StoragesDifferencer differ = new StoragesDifferencer();
+		StoragesDifference changes = differ.compute(wrappedRemote, wrappedLocal);
+
+		LOG.info("Changes between local and remote:\n" + exporter.exportDiff(changes));
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -210,14 +204,27 @@ public class JevernoteCore implements RequiresLoad<String> {
 		StoragesDifferencer differ = new StoragesDifferencer();
 		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, operationsStrategy, backupStrategy);
 
-		StoragesDifference changes = differ.compute(source, target);
-		LOG.info("To make local synced with remote should be done\n" + exporter.exportDiff(changes));
+		//StoragesDifference changes = differ.compute(source, target);
+		
 
 		StoragesDifference diffToPerform = differ.compute(target, source);
+		LOG.info("Has to be done (" + desc + "):\n" + exporter.exportDiff(diffToPerform));
 		perf.performDifferences(diffToPerform);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
+
+	private BaseStorage wrapStorage(BaseStorage storage, boolean dryRun) {
+
+		storage = new LoggingStorageWrapper(storage);
+
+		if (dryRun) {
+			storage = new ReadOnlyStorage(storage); // TODO should'nt be
+													// replaced by NoopStrategy?
+		}
+
+		return storage;
+	}
 
 	private BaseOperationsStrategy findOperationsStrategy(boolean weak, boolean force) {
 
@@ -248,6 +255,7 @@ public class JevernoteCore implements RequiresLoad<String> {
 		if (interactive) {
 			BaseOperationsStrategy interactiveStrategy = new InteractiveOperationsStrategy(desc);
 			return new AndStrategy(baseStrategy, interactiveStrategy);
+
 		} else {
 			return baseStrategy;
 		}

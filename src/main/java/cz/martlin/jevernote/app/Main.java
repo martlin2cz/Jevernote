@@ -89,8 +89,8 @@ public class Main {
 		out.println(" --weak                 (only adds, no removing, no overriding changes)");
 		out.println(" --force                (adds, removes, and overrides all changes)");
 		out.println(" (not specified)        (adds and removes, updates only newer)");
-		out.println("jevernote synchronize   (merges changes (adds, not removes, changes keeps newer))");	//FIXME
-		out.println("jevernote status                        (just displays ");	//XXX
+		out.println("jevernote synchronize   (merges changes (adds, not removes, changes keeps newer))");
+		out.println("jevernote status                        (just displays differences, use with --verbose)");
 		out.println();
 		out.println("Working with local:");
 		out.println("jevernote ad <ITEM or PACK>              (adds existing item or package to index)");
