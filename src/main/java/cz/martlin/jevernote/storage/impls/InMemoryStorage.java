@@ -4,20 +4,23 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cz.martlin.jevernote.dataobj.cmp.Change;
+import cz.martlin.jevernote.dataobj.cmp.Change.ChangeType;
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
+import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public class InMemoryStorage extends CommonStorage<Package, Item> {
 
-	private Map<Package, List<Item>> storage;
+	private Map<Package, Set<Item>> storage;
 	private Map<Calendar, Package> backupPackages;
 	private Map<Calendar, Item> backupItems;
 
@@ -30,7 +33,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	public void initialize(StorageData data) {
 		this.storage.clear();
-		this.storage.putAll(data.getData());
+		//FIXME this.storage.putAll(data.getData());
 	}
 
 	@Override
@@ -65,21 +68,22 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	@Override
 	protected List<Item> listNativeItems(Package pack) throws Exception {
-		return storage.get(pack);
+		return new ArrayList<>(storage.get(pack));
 	}
 
 	///////////////////////////////////////////////////////////////////////////
 
 	@Override
 	protected void createPackageNative(Package pack, Package nativ) throws Exception {
-		List<Item> list = new LinkedList<>();
+		//FIXME Set<Item> list = new LinkedList<>();
+		Set<Item> list = new HashSet<>();
 		storage.put(nativ, list);
 	}
 
 	@Override
 	protected void createItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
-		List<Item> items = storage.get(pack);
+		Set<Item> items = storage.get(pack);
 		items.add(nativ);
 	}
 	//
@@ -99,24 +103,24 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	protected void movePackageNative(Package oldPack, Package newPack, Package oldNativ, Package newNativ)
 			throws Exception {
 
-		List<Item> items = storage.remove(oldNativ);
+		Set<Item> items = storage.remove(oldNativ);
 		storage.put(newNativ, items);
 	}
 
 	@Override
 	protected void moveItemNative(Item oldItem, Item newItem, Item oldNativ, Item newNativ) throws Exception {
 
-		List<Item> oldItems = storage.get(oldNativ.getPack());
+		Set<Item> oldItems = storage.get(oldNativ.getPack());
 		oldItems.remove(oldNativ);
 
-		List<Item> newItems = storage.get(newNativ.getPack());
+		Set<Item> newItems = storage.get(newNativ.getPack());
 		newItems.add(newNativ);
 
 	}
 
 	@Override
 	protected void updateItemNative(Item item, Item nativ) throws Exception {
-		List<Item> items = storage.get(nativ.getPack());
+		Set<Item> items = storage.get(nativ.getPack());
 
 		items.remove(nativ);
 		items.add(item);
@@ -130,7 +134,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	@Override
 	protected void removeItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
-		List<Item> items = storage.get(pack);
+		Set<Item> items = storage.get(pack);
 		items.remove(nativ);
 	}
 
@@ -168,13 +172,62 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		return nativ;
 	}
 
+	@Override
+	public void donePackChangeOnAnother(Change<Package> change) throws JevernoteException {
+		if (change.is(ChangeType.CREATE)) {
+			Package newPack = change.getFirst();
+			replacePackWithCreatedId(newPack);
+		}
+	}
+
+	@Override
+	public void doneItemChangeOnAnother(Change<Item> change) throws JevernoteException {
+		if (change.is(ChangeType.CREATE)) {
+			Item newItem = change.getFirst();
+			replaceItemWithCreatedId(newItem);
+		}
+	}
+
+	///////////////////////////////////////////////////////////////////////////
+
+	private void replacePackWithCreatedId(Package newPack) {
+		Package oldPack = findPackByName(newPack.getName());
+		Set<Item> items = storage.remove(oldPack);
+		storage.put(newPack, items);
+	}
+
+	private void replaceItemWithCreatedId(Item newItem) {
+		Item oldItem = findItemByName(newItem.getPack(), newItem.getName());
+		Package oldPack = oldItem.getPack();
+
+		Set<Item> oldItems = storage.get(oldPack);
+		oldItems.remove(oldItem);
+		oldItems.add(newItem);
+	}
+
+	private Package findPackByName(String name) {
+		return storage.keySet().stream() //
+				.filter((p) -> p.getName().equals(name)) //
+				.findAny() //
+				.get(); //
+	}
+
+	private Item findItemByName(Package pack, String name) {
+		Set<Item> items = storage.get(pack);
+
+		return items.stream() //
+				.filter((p) -> p.getName().equals(name)) //
+				.findAny() //
+				.get(); //
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 
 	public void print(PrintStream out) {
 		for (Package pack : storage.keySet()) {
 			out.println(pack.getName() + " (" + pack.getId() + "):");
 
-			List<Item> items = storage.get(pack);
+			Set<Item> items = storage.get(pack);
 			for (Item item : items) {
 				out.println(" - " + item.getName() + " (" + item.getId() + "), " + item.getLastModifiedAt().getTime()
 						+ ":");

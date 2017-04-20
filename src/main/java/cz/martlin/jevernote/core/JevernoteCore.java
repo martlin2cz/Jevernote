@@ -46,8 +46,8 @@ public class JevernoteCore implements RequiresLoad<String> {
 		this.local = local;
 		this.remote = remote;
 
-		wrappedLocal = wrapStorage(local, dryRun);
-		wrappedRemote = wrapStorage(remote, dryRun);
+		wrappedLocal = wrapStorage(local, "in local", dryRun);
+		wrappedRemote = wrapStorage(remote, "in remote", dryRun);
 
 		this.interactive = interactive;
 		this.save = save;
@@ -202,10 +202,10 @@ public class JevernoteCore implements RequiresLoad<String> {
 		BaseOperationsStrategy operationsStrategy = tryMakeInteractive(desc, baseOperationsStrategy);
 
 		StoragesDifferencer differ = new StoragesDifferencer();
-		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(target, operationsStrategy, backupStrategy);
+		BaseDifferencesPerformer perf = new DiffPerformerUsingStragegies(source, target, operationsStrategy,
+				backupStrategy);
 
-		//StoragesDifference changes = differ.compute(source, target);
-		
+		// StoragesDifference changes = differ.compute(source, target);
 
 		StoragesDifference diffToPerform = differ.compute(target, source);
 		LOG.info("Has to be done (" + desc + "):\n" + exporter.exportDiff(diffToPerform));
@@ -214,9 +214,9 @@ public class JevernoteCore implements RequiresLoad<String> {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	private BaseStorage wrapStorage(BaseStorage storage, boolean dryRun) {
+	private BaseStorage wrapStorage(BaseStorage storage, String desc, boolean dryRun) {
 
-		storage = new LoggingStorageWrapper(storage);
+		storage = new LoggingStorageWrapper(storage, desc);
 
 		if (dryRun) {
 			storage = new ReadOnlyStorage(storage); // TODO should'nt be

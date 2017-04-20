@@ -1,4 +1,4 @@
-package cz.martlin.jevernote.storage.impls;
+package cz.martlin.jevernote.storage.base;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -19,7 +19,6 @@ import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.FileSystemUtils;
-import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 	private final Logger LOG = LoggerFactory.getLogger(getClass());

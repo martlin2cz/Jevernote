@@ -21,7 +21,7 @@ import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class _Testing {
 
-	private static final File base = new File("/home/martin/tmp/jevernote2/");
+	private static final File base = new File("/home/martin/tmp/jevernote3/");
 
 	public static void main(String[] args) {
 		// TODO
@@ -35,23 +35,30 @@ public class _Testing {
 	}
 
 	private static void testMain() {
-		
-//		String[] args1 = new String[] { //
-//				"--base-dir", base.getAbsolutePath(), "--debug", "init",  "\"S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f\""};//
-//		Main.main(args1);
 
-//		String[] args3 = new String[] { //
-//				"--base-dir", base.getAbsolutePath(), "--debug", "status" };//
-//		Main.runCommand(args3);
+		// String[] args1 = new String[] { //
+		// "--base-dir", base.getAbsolutePath(), "--debug", "init",
+		// "\"S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f\""};//
+		// Main.main(args1);
 
-		String[] args4 = new String[] { //
-				"--base-dir", base.getAbsolutePath(), "--debug", "ad", "something" };//
-		Main.runCommand(args4);
-		
-		
-//		String[] args2 = new String[] { //
-//				"--base-dir", base.getAbsolutePath(), "--debug", "--dry-run", "push" };//
-//		Main.runCommand(args2);
+		// String[] args3 = new String[] { //
+		// "--base-dir", base.getAbsolutePath(), "--debug", "status" };//
+		// Main.runCommand(args3);
+
+//		 String[] args = new String[] { //
+//		 "--base-dir", base.getAbsolutePath(), "--debug", "ad", "bar/bar-phoenix"
+//		 };//
+
+		String[] args = new String[] { //
+				"--base-dir", base.getAbsolutePath(), "--debug", "push", "--weak" //
+		}; //
+
+		// String[] args2 = new String[] { //
+		// "--base-dir", base.getAbsolutePath(), "--debug", "--dry-run", "push"
+		// };//
+		// Main.runCommand(args2);
+
+		Main.runCommand(args);
 	}
 
 	private static void testCore() {

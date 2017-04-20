@@ -35,7 +35,7 @@ public class LocalCommandsRunner implements RequiresLoad<String> {
 	}
 
 	private BaseStorage wrapStorage(BaseStorage storage) {
-		storage = new LoggingStorageWrapper(storage);
+		storage = new LoggingStorageWrapper(storage, "in local");
 
 		return storage;
 	}
@@ -86,13 +86,20 @@ public class LocalCommandsRunner implements RequiresLoad<String> {
 	public boolean adCmd(String packOrItem) {
 		LOG.debug("Running command ad with " + packOrItem);
 		try {
-			doMk(packOrItem, null);
+			String content = null;
+			if (isItem(packOrItem)) {
+				content = tryGetItemsContent(packOrItem);
+			}
+			
+			doMk(packOrItem, content);
 			return true;
 		} catch (JevernoteException e) {
 			LOG.error("Command ad failed.", e);
 			return false;
 		}
 	}
+
+
 
 	public boolean mkCmd(String packOrItem, String content) {
 		LOG.debug("Running command mk with " + packOrItem + " and initial content " + content);
@@ -296,17 +303,11 @@ public class LocalCommandsRunner implements RequiresLoad<String> {
 		}
 
 		return map;
-
-		// return data.getItems()//
-		// .stream()//
-		// .collect(Collectors.toMap(//
-		// (i) -> i.getPack().getName(), //
-		// (i) -> (data.getItems()//
-		// .stream()//
-		// .filter((j) -> j.getPack().equals(i.getPack()))//
-		// .collect(Collectors.toMap(//
-		// (j) -> j.getName(), //
-		// Function.identity())))));
-
+}
+	
+	private String tryGetItemsContent(String itemSpec) throws JevernoteException {
+		Item item = createExistingItem(itemSpec);
+		
+		return item.getContent();
 	}
 }

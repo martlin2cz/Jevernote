@@ -2,6 +2,7 @@ package cz.martlin.jevernote.storage.base;
 
 import java.util.List;
 
+import cz.martlin.jevernote.dataobj.cmp.Change;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
@@ -132,4 +133,19 @@ public interface BaseStorage {
 	 */
 	void backupItem(Item item) throws JevernoteException;
 
+	/**
+	 * Handles change done one the other storage.
+	 * 
+	 * @param change
+	 * @throws JevernoteException
+	 */
+	void donePackChangeOnAnother(Change<Package> change) throws JevernoteException;
+
+	/**
+	 * Handles change done one the other storage.
+	 * 
+	 * @param change
+	 * @throws JevernoteException
+	 */
+	void doneItemChangeOnAnother(Change<Item> change) throws JevernoteException;
 }

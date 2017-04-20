@@ -57,7 +57,7 @@ And the note Hello with text "Hello world!" should occur in notebook "foo" onlin
  - alike the git, `.jevernoteignore` file
  - `--save` (with backup before override)
 
-To see other possibilities of jevernote, run with `--help` flag or take a look
+To see other possibilities of jevernote, run with `--help` flag.
 
 ## For developpers
 
@@ -67,10 +67,11 @@ By implementing your custom `BaseStorage` (take a look into some existing base i
 
 Well, exactly. There is still lot of work to be done. For example
 
- -[ ] more precise logging, dry run and save
- -[ ] add more commands (like local one's)
- -[ ] SOLVE epicfail with items pulled from remote (no ID assigned to them, looks like mysteriously created whole new items)
- -[ ] make it more familliar (error messages)
- -[ ] production release
- -[ ] conflict resolver?
- -[ ] __TEST IT!!!__
+ - [ ] more precise logging, dry run and save
+ - [ ] add more commands (alike local one's)
+ - [x] SOLVE epicfail with items pulled from remote (no ID assigned to them, looks like mysteriously created whole new items)
+ - [ ] make it more familliar (error messages)
+ - [ ] production release (add OAuth)
+ - [ ] conflict resolver?
+ - [ ] avoid using index in FileSystem...
+ - [ ] __TEST IT!!!__

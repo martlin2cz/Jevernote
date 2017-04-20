@@ -136,6 +136,9 @@ public class JevernoteCoreTest {
 		assertEquals("something #3 UPDATED-AT-LOCAL", findItem(remoteItems, ITEM_ID3).getContent());
 		assertEquals("something #4", findItem(remoteItems, ITEM_ID4).getContent());
 
+		// printStorages(core);
+		// assertEquals(core.local.toString(), core.remote.toString());
+
 		assertEquals(core.local, core.remote);
 
 		finishCore(core);
@@ -234,9 +237,11 @@ public class JevernoteCoreTest {
 
 	@SuppressWarnings("unused")
 	private void printStorages(JevernoteCore core) {
-
+		System.out.println("Local:");
 		((InMemoryStorage) core.local).print(System.out);
 		System.out.println();
+
+		System.out.println("Remote:");
 		((InMemoryStorage) core.remote).print(System.out);
 		System.out.println();
 	}

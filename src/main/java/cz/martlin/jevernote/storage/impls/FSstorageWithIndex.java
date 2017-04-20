@@ -8,10 +8,13 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import cz.martlin.jevernote.dataobj.cmp.Change;
+import cz.martlin.jevernote.dataobj.cmp.Change.ChangeType;
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.JevernoteException;
+import cz.martlin.jevernote.storage.base.BaseFileSystemStorage;
 
 public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 
@@ -123,6 +126,32 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		// okay
 	}
 
+	@Override
+	public void donePackChangeOnAnother(Change<Package> change) throws JevernoteException {
+		if (change.is(ChangeType.CREATE)) {
+			try {
+				Package newPackage = change.getFirst();
+				Package oldPackage = findPackageByName(newPackage.getName());
+				updatePackageInIndex(oldPackage, newPackage);
+			} catch (Exception e) {
+				throw new JevernoteException("Cannot update package in index.", e);
+			}
+		}
+	}
+
+	@Override
+	public void doneItemChangeOnAnother(Change<Item> change) throws JevernoteException {
+		if (change.is(ChangeType.CREATE)) {
+			try {
+				Item newItem = change.getFirst();
+				Item oldItem = findItemByName(newItem.getPack(), newItem.getName());
+				updateItemInIndex(oldItem, newItem);
+			} catch (Exception e) {
+				throw new JevernoteException("Cannot update item in index.", e);
+			}
+		}
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 
 	private void createPackageInIndex(Package pack) {
@@ -189,6 +218,28 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 				bindings.put(id, newFile);
 			}
 		});
+	}
+
+	protected void updatePackageInIndex(Package oldPackage, Package newPackage) {
+		File oldDir = packageToNative(oldPackage);
+		File newDir = packageToNative(newPackage);
+
+		String newId = newPackage.getId();
+
+		bindings.remove(oldDir);
+		bindings.put(newId, newDir);
+
+		markChanged();
+	}
+
+	protected void updateItemInIndex(Item oldItem, Item newItem) {
+		String oldId = oldItem.getId();
+		String newId = newItem.getId();
+
+		File file = bindings.remove(oldId);
+		bindings.put(newId, file);
+
+		markChanged();
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -263,6 +314,16 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		} else {
 			throw new IllegalArgumentException("Item with id " + id + " seems does not exist");
 		}
+	}
+
+	private Package findPackageByName(String name) throws IOException {
+		File dir = nameToPackageFile(name);
+		return nativeToPackage(dir);
+	}
+
+	private Item findItemByName(Package pack, String name) throws IOException {
+		File file = nameToItemFile(pack, name);
+		return nativeToItem(pack, file);
 	}
 
 	///////////////////////////////////////////////////////////////////////////

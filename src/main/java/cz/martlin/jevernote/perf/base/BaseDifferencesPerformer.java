@@ -13,9 +13,11 @@ import cz.martlin.jevernote.storage.base.BaseStorage;
 
 public abstract class BaseDifferencesPerformer {
 
+	protected final BaseStorage source;
 	protected final BaseStorage target;
 
-	public BaseDifferencesPerformer(BaseStorage target) {
+	public BaseDifferencesPerformer(BaseStorage source, BaseStorage target) {
+		this.source = source;
 		this.target = target;
 	}
 
@@ -91,6 +93,8 @@ public abstract class BaseDifferencesPerformer {
 		default:
 			throw new IllegalArgumentException("Unknown change type " + change.getType());
 		}
+		
+		source.doneItemChangeOnAnother(change);
 	}
 
 	private void performPackageChange(Change<Package> change) throws JevernoteException {
@@ -109,6 +113,8 @@ public abstract class BaseDifferencesPerformer {
 		default:
 			throw new IllegalArgumentException("Unknown change type " + change.getType());
 		}
+		
+		source.donePackChangeOnAnother(change);
 	}
 
 	///////////////////////////////////////////////////////////////////////////

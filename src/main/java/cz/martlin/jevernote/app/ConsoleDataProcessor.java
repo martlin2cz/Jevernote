@@ -84,7 +84,7 @@ public class ConsoleDataProcessor {
 
 		syncs.store();
 		locals.store();
-		if (!(syncs.isLoaded() && locals.isLoaded())) {
+		if (syncs.isLoaded() || locals.isLoaded()) {
 			return false;
 		}
 

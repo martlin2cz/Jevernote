@@ -12,9 +12,9 @@ public class DiffPerformerUsingStragegies extends BaseDifferencesPerformer {
 	private final BaseOperationsStrategy operationStrategy;
 	private final BaseOperationsStrategy backupStrategy;
 
-	public DiffPerformerUsingStragegies(BaseStorage target, BaseOperationsStrategy operationStrategy,
+	public DiffPerformerUsingStragegies(BaseStorage source, BaseStorage target, BaseOperationsStrategy operationStrategy,
 			BaseOperationsStrategy backupStrategy) {
-		super(target);
+		super(source, target);
 
 		this.operationStrategy = operationStrategy;
 		this.backupStrategy = backupStrategy;

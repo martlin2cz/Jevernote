@@ -25,6 +25,7 @@ import com.evernote.edam.type.Note;
 import com.evernote.edam.type.Notebook;
 import com.evernote.thrift.TException;
 
+import cz.martlin.jevernote.dataobj.cmp.Change;
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
@@ -170,6 +171,17 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	@Override
 	protected void backupPackageNative(Package pack, Notebook nativ) throws Exception {
 		LOG.warn("Backup not supported by evernote, package " + pack.getName() + " will not be backed up");
+	}
+
+	@Override
+	public void donePackChangeOnAnother(Change<Package> change) throws JevernoteException {
+		// nothing?
+
+	}
+
+	@Override
+	public void doneItemChangeOnAnother(Change<Item> change) throws JevernoteException {
+		// nothing?
 	}
 
 	///////////////////////////////////////////////////////////////////////////

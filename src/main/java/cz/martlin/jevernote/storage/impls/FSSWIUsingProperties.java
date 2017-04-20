@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.misc.FileSystemUtils;
+import cz.martlin.jevernote.storage.base.BaseFileSystemStorage;
 
 public class FSSWIUsingProperties extends FSstorageWithIndex {
 
@@ -47,6 +48,7 @@ public class FSSWIUsingProperties extends FSstorageWithIndex {
 		File file = indexFile(basePath);
 		return file.exists();
 	}
+
 	///////////////////////////////////////////////////////////////////////////
 
 	protected static Map<String, File> loadBindings(File basePath, File file) throws IOException {

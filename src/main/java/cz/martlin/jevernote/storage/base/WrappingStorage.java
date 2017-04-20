@@ -2,6 +2,7 @@ package cz.martlin.jevernote.storage.base;
 
 import java.util.List;
 
+import cz.martlin.jevernote.dataobj.cmp.Change;
 import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.dataobj.storage.StorageData;
@@ -80,6 +81,16 @@ public abstract class WrappingStorage implements BaseStorage {
 	@Override
 	public void backupItem(Item item) throws JevernoteException {
 		wrapped.backupItem(item);
+	}
+
+	@Override
+	public void donePackChangeOnAnother(Change<Package> change) throws JevernoteException {
+		wrapped.donePackChangeOnAnother(change);
+	}
+
+	@Override
+	public void doneItemChangeOnAnother(Change<Item> change) throws JevernoteException {
+		wrapped.doneItemChangeOnAnother(change);
 	}
 
 	///////////////////////////////////////////////////////////////////////////
