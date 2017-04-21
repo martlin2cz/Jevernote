@@ -3,6 +3,9 @@ package cz.martlin.jevernote.test;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
+
+import com.evernote.auth.EvernoteService;
 
 import cz.martlin.jevernote.app.Main;
 import cz.martlin.jevernote.core.JevernoteCore;
@@ -11,26 +14,43 @@ import cz.martlin.jevernote.dataobj.storage.Item;
 import cz.martlin.jevernote.dataobj.storage.Package;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
 import cz.martlin.jevernote.misc.JevernoteException;
-import cz.martlin.jevernote.storage.base.BaseStorage;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 import cz.martlin.jevernote.storage.content.impls.EvernoteStrippingNewliningProcessor;
+import cz.martlin.jevernote.storage.content.impls.NoopContentProcessor;
+import cz.martlin.jevernote.storage.impls.EvernoteOAuth;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
 
 public class _Testing {
 
-	private static final File base = new File("/home/martin/tmp/jevernote3/");
+	public static final File base = new File("/home/martin/tmp/jevernote3/");
 
 	public static void main(String[] args) {
 		// TODO
-		testMain();
+		// testMain();
 		// testCore();
 
 		// testEvernote();
 		// testFileSystem();
 		// testInMemory();
+
+		EvernoteOAuth auth = new EvernoteOAuth();
+
+		String token = auth.authorise();
+		System.out.println("Token: " + token);
+		try {
+			ContentProcessor proces = new NoopContentProcessor();
+			Config config = new Config();
+			EvernoteStorage storage = new EvernoteStorage(config, _Testing.base, EvernoteService.SANDBOX, proces);
+
+			storage.initialize(token);
+
+			System.out.println(storage.list());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -45,9 +65,10 @@ public class _Testing {
 		// "--base-dir", base.getAbsolutePath(), "--debug", "status" };//
 		// Main.runCommand(args3);
 
-//		 String[] args = new String[] { //
-//		 "--base-dir", base.getAbsolutePath(), "--debug", "ad", "bar/bar-phoenix"
-//		 };//
+		// String[] args = new String[] { //
+		// "--base-dir", base.getAbsolutePath(), "--debug", "ad",
+		// "bar/bar-phoenix"
+		// };//
 
 		String[] args = new String[] { //
 				"--base-dir", base.getAbsolutePath(), "--debug", "push", "--weak" //
@@ -121,13 +142,13 @@ public class _Testing {
 	}
 
 	private static void testEvernote() {
-		final String token = "S=s1:U=93877:E=1629b5a6d92:C=15b43a93f68:P=1cd:A=en-devtoken:V=2:H=e06e49dec02990357292a7928d19624f";
+		final String token = "S=s1:U=93877:E=162e58938fc:C=15b8dd80bf0:P=1cd:A=en-devtoken:V=2:H=0f3d2a86e3416766425690997c715370";
 
 		ContentProcessor proc = new EvernoteStrippingNewliningProcessor();
 
 		Config config = new Config();
 		config.setAuthToken(token); // if cfg file does not exist
-		EvernoteStorage storage = new EvernoteStorage(config, base, proc);
+		EvernoteStorage storage = new EvernoteStorage(config, base, EvernoteService.SANDBOX, proc);
 
 		testStorage(storage);
 	}

@@ -37,14 +37,18 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
 
+	private final EvernoteService service;
 	private final ContentProcessor proces;
 	private final File baseDir;
+	
 	private NoteStoreClient cli;
 
-	public EvernoteStorage(Config config, File baseDir, ContentProcessor proces) {
+	public EvernoteStorage(Config config, File baseDir, EvernoteService service, ContentProcessor proces) {
 		super(config);
-		this.baseDir = baseDir;
+		
+		this.service = service;
 		this.proces = proces;
+		this.baseDir = baseDir;
 	}
 
 	///////////////////////////////////////////////////////////////////////////
@@ -59,14 +63,14 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 
 		config.save(baseDir);
 
-		cli = createNoteStore(token);
+		cli = createNoteStore(service, token);
 	}
 
 	protected void doLoad() throws IOException, JevernoteException {
 		config.load(baseDir);
 
 		String token = config.getAuthToken();
-		cli = createNoteStore(token);
+		cli = createNoteStore(service, token);
 	}
 
 	@Override
@@ -244,10 +248,10 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	 * @return
 	 * @throws JevernoteException
 	 */
-	private NoteStoreClient createNoteStore(String token) throws JevernoteException {
+	private NoteStoreClient createNoteStore(EvernoteService service, String token) throws JevernoteException {
 		try {
 			// https://github.com/evernote/evernote-sdk-java/blob/master/sample/client/EDAMDemo.java
-			EvernoteAuth evernoteAuth = new EvernoteAuth(EvernoteService.SANDBOX, token);
+			EvernoteAuth evernoteAuth = new EvernoteAuth(service, token);
 			ClientFactory factory = new ClientFactory(evernoteAuth);
 			UserStoreClient userStore = factory.createUserStoreClient();
 

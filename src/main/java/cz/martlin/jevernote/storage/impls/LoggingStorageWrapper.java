@@ -27,9 +27,9 @@ public class LoggingStorageWrapper extends WrappingStorage {
 	///////////////////////////////////////////////////////////////////////////
 	@Override
 	public StorageData list() throws JevernoteException {
-		LOG.debug("Listing data " + suffix);
+		LOG.info("Listing data " + suffix);
 		StorageData data = super.list();
-		LOG.info("Listed data, found " + data.getItems().size() + " items in " + data.getPackages().size()
+		LOG.debug("Listed data, found " + data.getItems().size() + " items in " + data.getPackages().size()
 				+ " packages " + suffix);
 		return data;
 	}

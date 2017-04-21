@@ -5,6 +5,8 @@ import java.io.File;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.evernote.auth.EvernoteService;
+
 import cz.martlin.jevernote.dataobj.misc.CommandLineData;
 import cz.martlin.jevernote.dataobj.misc.Config;
 import cz.martlin.jevernote.misc.ConsoleLoggingConfigurer;
@@ -23,6 +25,7 @@ import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 public class ConsoleDataProcessor {
 
 	private final Logger LOG = LoggerFactory.getLogger(getClass());
+	private static final EvernoteService SERVICE = EvernoteService.PRODUCTION;
 
 	public ConsoleDataProcessor() {
 	}
@@ -49,7 +52,8 @@ public class ConsoleDataProcessor {
 	 */
 	private BaseStorage createRemote(Config config, File basePath) {
 		ContentProcessor proces = new EvernoteStrippingNewliningProcessor();
-		BaseStorage storage = new EvernoteStorage(config, basePath, proces);
+		
+		BaseStorage storage = new EvernoteStorage(config, basePath, SERVICE, proces);
 
 		return storage;
 	}

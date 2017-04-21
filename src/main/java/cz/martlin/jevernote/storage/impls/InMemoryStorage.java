@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,7 +20,7 @@ import cz.martlin.jevernote.storage.base.CommonStorage;
 
 public class InMemoryStorage extends CommonStorage<Package, Item> {
 
-	private Map<Package, Set<Item>> storage;
+	private Map<Package, List<Item>> storage;
 	private Map<Calendar, Package> backupPackages;
 	private Map<Calendar, Item> backupItems;
 
@@ -33,7 +33,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	public void initialize(StorageData data) {
 		this.storage.clear();
-		//FIXME this.storage.putAll(data.getData());
+		this.storage.putAll(data.getData());
 	}
 
 	@Override
@@ -75,15 +75,14 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	@Override
 	protected void createPackageNative(Package pack, Package nativ) throws Exception {
-		//FIXME Set<Item> list = new LinkedList<>();
-		Set<Item> list = new HashSet<>();
+		List<Item> list = new LinkedList<>();
 		storage.put(nativ, list);
 	}
 
 	@Override
 	protected void createItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
-		Set<Item> items = storage.get(pack);
+		List<Item> items = storage.get(pack);
 		items.add(nativ);
 	}
 	//
@@ -103,24 +102,24 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	protected void movePackageNative(Package oldPack, Package newPack, Package oldNativ, Package newNativ)
 			throws Exception {
 
-		Set<Item> items = storage.remove(oldNativ);
+		List<Item> items = storage.remove(oldNativ);
 		storage.put(newNativ, items);
 	}
 
 	@Override
 	protected void moveItemNative(Item oldItem, Item newItem, Item oldNativ, Item newNativ) throws Exception {
 
-		Set<Item> oldItems = storage.get(oldNativ.getPack());
+		List<Item> oldItems = storage.get(oldNativ.getPack());
 		oldItems.remove(oldNativ);
 
-		Set<Item> newItems = storage.get(newNativ.getPack());
+		List<Item> newItems = storage.get(newNativ.getPack());
 		newItems.add(newNativ);
 
 	}
 
 	@Override
 	protected void updateItemNative(Item item, Item nativ) throws Exception {
-		Set<Item> items = storage.get(nativ.getPack());
+		List<Item> items = storage.get(nativ.getPack());
 
 		items.remove(nativ);
 		items.add(item);
@@ -134,7 +133,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	@Override
 	protected void removeItemNative(Item item, Item nativ) throws Exception {
 		Package pack = item.getPack();
-		Set<Item> items = storage.get(pack);
+		List<Item> items = storage.get(pack);
 		items.remove(nativ);
 	}
 
@@ -192,7 +191,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 
 	private void replacePackWithCreatedId(Package newPack) {
 		Package oldPack = findPackByName(newPack.getName());
-		Set<Item> items = storage.remove(oldPack);
+		List<Item> items = storage.remove(oldPack);
 		storage.put(newPack, items);
 	}
 
@@ -200,9 +199,9 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		Item oldItem = findItemByName(newItem.getPack(), newItem.getName());
 		Package oldPack = oldItem.getPack();
 
-		Set<Item> oldItems = storage.get(oldPack);
-		oldItems.remove(oldItem);
-		oldItems.add(newItem);
+		List<Item> oldItems = storage.get(oldPack);
+		int index = oldItems.indexOf(oldItem);
+		oldItems.set(index, newItem);
 	}
 
 	private Package findPackByName(String name) {
@@ -213,7 +212,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 	}
 
 	private Item findItemByName(Package pack, String name) {
-		Set<Item> items = storage.get(pack);
+		List<Item> items = storage.get(pack);
 
 		return items.stream() //
 				.filter((p) -> p.getName().equals(name)) //
@@ -227,7 +226,7 @@ public class InMemoryStorage extends CommonStorage<Package, Item> {
 		for (Package pack : storage.keySet()) {
 			out.println(pack.getName() + " (" + pack.getId() + "):");
 
-			Set<Item> items = storage.get(pack);
+			List<Item> items = storage.get(pack);
 			for (Item item : items) {
 				out.println(" - " + item.getName() + " (" + item.getId() + "), " + item.getLastModifiedAt().getTime()
 						+ ":");
