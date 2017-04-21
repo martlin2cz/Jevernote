@@ -3,7 +3,6 @@ package cz.martlin.jevernote.test;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Scanner;
 
 import com.evernote.auth.EvernoteService;
 
@@ -17,8 +16,6 @@ import cz.martlin.jevernote.misc.JevernoteException;
 import cz.martlin.jevernote.storage.base.StorageRequiringLoad;
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 import cz.martlin.jevernote.storage.content.impls.EvernoteStrippingNewliningProcessor;
-import cz.martlin.jevernote.storage.content.impls.NoopContentProcessor;
-import cz.martlin.jevernote.storage.impls.EvernoteOAuth;
 import cz.martlin.jevernote.storage.impls.EvernoteStorage;
 import cz.martlin.jevernote.storage.impls.FSSWIUsingProperties;
 import cz.martlin.jevernote.storage.impls.InMemoryStorage;
@@ -29,29 +26,14 @@ public class _Testing {
 
 	public static void main(String[] args) {
 		// TODO
-		// testMain();
+		 testMain();
 		// testCore();
 
 		// testEvernote();
 		// testFileSystem();
 		// testInMemory();
 
-		EvernoteOAuth auth = new EvernoteOAuth();
-
-		String token = auth.authorise();
-		System.out.println("Token: " + token);
-		try {
-			ContentProcessor proces = new NoopContentProcessor();
-			Config config = new Config();
-			EvernoteStorage storage = new EvernoteStorage(config, _Testing.base, EvernoteService.SANDBOX, proces);
-
-			storage.initialize(token);
-
-			System.out.println(storage.list());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+	
 	}
 
 	private static void testMain() {

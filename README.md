@@ -13,10 +13,10 @@ To build, simply clone, build (using maven) and, set up an alias (not required, 
     $ clone https://github.com/martlin2cz/Jevernote
     $ cd jevernote
     $ mvn clean package
-    $ alias jevernote="java -jar target/Jevernote-0.2-jar-with-dependencies.jar"
+    $ alias jevernote="java -jar target/Jevernote-0.3-jar-with-dependencies.jar"
 
 ## Sample usage
-To run jevernote you need __evernote authorisation token__. It is some string containing key-valued informations and for developpers can be found [here](https://sandbox.evernote.com/api/DeveloperToken.action). Access to app for real users is in progress.
+To run jevernote you need __evernote authorisation token__. It is some string containing key-valued informations and for developpers can be found [here](https://www.evernote.com/api/DeveloperToken.action). Access to app for real users is in progress.
 
 Once you have generated token, you can clone your notebooks (assuming having notebooks `foo` and `bar` and note `Lorem Ipsum` in `foo`):
 
