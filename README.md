@@ -13,10 +13,10 @@ To build, simply clone, build (using maven) and, set up an alias (not required, 
     $ clone https://github.com/martlin2cz/Jevernote
     $ cd jevernote
     $ mvn clean package
-    $ alias jevernote="java -jar target/Jevernote-0.3-jar-with-dependencies.jar"
+    $ alias jevernote="java -jar target/Jevernote-0.4-jar-with-dependencies.jar"
 
 ## Sample usage
-To run jevernote you need __evernote authorisation token__. It is some string containing key-valued informations and for developpers can be found [here](https://www.evernote.com/api/DeveloperToken.action). Access to app for real users is in progress.
+To run jevernote you need __evernote authorisation token__. It is some string containing key-valued informations and can be found (generated) (for production use) [here](https://www.evernote.com/api/DeveloperToken.action). More reading about developper tokens is avaible [here](https://dev.evernote.com/doc/articles/dev_tokens.php). 
 
 Once you have generated token, you can clone your notebooks (assuming having notebooks `foo` and `bar` and note `Lorem Ipsum` in `foo`):
 
@@ -46,7 +46,11 @@ When you create new item (note), you can push it to the evernote:
     
     INFO  Created item Hello 
       
-And the note Hello with text "Hello world!" should occur in notebook "foo" online.
+And the note Hello with text "Hello world!" should occur in notebook "foo" online. When you modify note "Hello" online, use `pull` do download it back:
+
+    $ jevernote pull
+    $ cat foo/Hello
+    Lorem ipsum!
 
 
 ## Other features

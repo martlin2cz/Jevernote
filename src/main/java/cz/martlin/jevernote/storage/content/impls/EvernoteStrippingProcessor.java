@@ -1,5 +1,8 @@
 package cz.martlin.jevernote.storage.content.impls;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import cz.martlin.jevernote.storage.content.base.ContentProcessor;
 
 public class EvernoteStrippingProcessor implements ContentProcessor {
@@ -19,11 +22,14 @@ public class EvernoteStrippingProcessor implements ContentProcessor {
 
 	@Override
 	public String fromStorage(String content) {
-		final String noteStartTag = "<en-note>";
+		final String noteStartTagRegex = "<en-note([^>]*)>";
 		final String noteEndTag = "</en-note>";
 
-		int startIndex = content.indexOf(noteStartTag);
-		int startCut = startIndex + noteStartTag.length();
+		Pattern startTagPattern = Pattern.compile(noteStartTagRegex);
+		Matcher startTagMatcher = startTagPattern.matcher(content);
+		
+		startTagMatcher.find();
+		int startCut = startTagMatcher.end();
 
 		int endIndex = content.lastIndexOf(noteEndTag);
 		int endCut = endIndex;

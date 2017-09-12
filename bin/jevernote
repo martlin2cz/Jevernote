@@ -1,0 +1,9 @@
+#!/bin/bash
+# runs the Jevernote, built by maven inside of $JEVERNOTE_HOME
+# m@rtlin, 5. 5. 2017
+
+JEVERNOTE_HOME=$(pwd)
+VERSION=0.4
+FLAGS="--debug --save"
+
+java -jar $JEVERNOTE_HOME"/target/Jevernote-"$VERSION"-jar-with-dependencies.jar" $FLAGS $@
