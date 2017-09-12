@@ -236,7 +236,11 @@ public abstract class FSstorageWithIndex extends BaseFileSystemStorage {
 		String oldId = oldItem.getId();
 		String newId = newItem.getId();
 
-		File file = bindings.remove(oldId);
+		//XXX //File file = bindings.remove(oldId); 
+		// if item not in index before app starts, won't be found using generated oldId
+		File file = itemToNative(newItem);
+		
+		bindings.remove(oldId);	//just for case if exists
 		bindings.put(newId, file);
 
 		markChanged();

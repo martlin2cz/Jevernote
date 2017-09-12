@@ -276,19 +276,19 @@ public abstract class BaseFileSystemStorage extends CommonStorage<File, File> {
 
 	///////////////////////////////////////////////////////////////////////////
 
-	protected static String packOrItemToPath(File fileorDir) {
-		if (fileorDir.isDirectory()) {
-			return fileorDir.getName();
+	protected static String packOrItemToPath(File fileOrDir) {
+		if (fileOrDir.isDirectory()) {
+			return fileOrDir.getName();
 
-		} else if (fileorDir.isFile()) {
-			String dirname = fileorDir.getParentFile().getName();
-			String filename = fileorDir.getName();
+		} else if (fileOrDir.isFile()) {
+			String dirname = fileOrDir.getParentFile().getName();
+			String filename = fileOrDir.getName();
 
 			return dirname + File.separatorChar + filename;
-		} else if (!fileorDir.exists()) {
+		} else if (!fileOrDir.exists()) {
 			return null;
 		} else {
-			throw new IllegalArgumentException("Invalid file " + fileorDir + " type");
+			throw new IllegalArgumentException("Invalid file " + fileOrDir + " type");
 		}
 	}
 

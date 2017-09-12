@@ -54,7 +54,7 @@ public class EvernoteStorage extends CommonStorage<Notebook, Note> {
 	///////////////////////////////////////////////////////////////////////////
 
 	public boolean doIsInstalled() throws Exception {
-		return config.existsConfigFile(baseDir);
+		return config.existsConfigFile(baseDir);	//TODO report nonexisting folder
 	}
 
 	@Override

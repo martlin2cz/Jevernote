@@ -7,6 +7,8 @@ import cz.martlin.jevernote.dataobj.misc.CommandLineData;
 public class Main {
 
 	public static void main(String[] args) {
+		args = new String[]{"--base-dir", "/home/martin/jevernote-2", "--debug", "synchronize"};
+		
 		boolean yep = checkHelpAndVersion(args);
 		if (yep) {
 			return;

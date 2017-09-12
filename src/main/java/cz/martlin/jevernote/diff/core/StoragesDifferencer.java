@@ -28,14 +28,14 @@ public class StoragesDifferencer {
 		try {
 			sourceData = source.list();
 		} catch (JevernoteException e) {
-			throw new JevernoteException("Cannot load data of source storage", e);
+			throw new JevernoteException("Cannot load data of source (in fact target) storage", e);	//TODO UX naming: this is target!
 		}
 
 		StorageData targetData;
 		try {
 			targetData = target.list();
 		} catch (JevernoteException e) {
-			throw new JevernoteException("Cannot load data of target storage", e);
+			throw new JevernoteException("Cannot load data of target (in fact source)  storage", e); //TODO UX naming: this is source!
 		}
 
 		return compute(sourceData, targetData);

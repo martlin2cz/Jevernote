@@ -93,6 +93,13 @@ public abstract class WrappingStorage implements BaseStorage {
 		wrapped.doneItemChangeOnAnother(change);
 	}
 
+	@Override
+	public String toString() {
+		return "WrappingStorage [wrapped=" + wrapped + "]";
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 
+	
+	
 }
