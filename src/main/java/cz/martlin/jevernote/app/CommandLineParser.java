@@ -69,7 +69,9 @@ public class CommandLineParser {
 		case "--interactive":
 			data.setInteractive(true);
 			break;
-
+		case "--safe":
+			data.setSave(true);
+			break;
 		case "--base-dir":
 			String dirName = params.poll();
 			if (dirName == null) {

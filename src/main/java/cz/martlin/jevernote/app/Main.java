@@ -7,8 +7,9 @@ import cz.martlin.jevernote.dataobj.misc.CommandLineData;
 public class Main {
 
 	public static void main(String[] args) {
-		args = new String[]{"--base-dir", "/home/martin/jevernote-2", "--debug", "synchronize"};
-		
+		// args = new String[]{"--base-dir", "/home/martin/jevernote-2",
+		// "--debug", "synchronize"};
+
 		boolean yep = checkHelpAndVersion(args);
 		if (yep) {
 			return;
@@ -47,7 +48,7 @@ public class Main {
 
 		ConsoleDataProcessor performer = new ConsoleDataProcessor();
 		boolean succ = performer.process(data);
-		
+
 		if (!succ) {
 			System.exit(2);
 			return;
@@ -79,7 +80,7 @@ public class Main {
 		out.println(" --debug                (displays far more info, implies --verbose)");
 		out.println(" --interactive          (before each change asks for confirm)");
 		out.println(" --dry-run              (no changes will be performed, use with --verbose)");
-		out.println(" --save                 (if possible, before each item update)");
+		out.println(" --safe                 (if possible, before each item update)");
 		out.println();
 		out.println("Initialisation commands:");
 		out.println("jevernote init <AUTH TOKEN>             (just initializes empty local storage)");
@@ -109,7 +110,7 @@ public class Main {
 		if (version != null) {
 			return version;
 		} else {
-			return "1.0?";
+			return "1.0??";
 		}
 	}
 
